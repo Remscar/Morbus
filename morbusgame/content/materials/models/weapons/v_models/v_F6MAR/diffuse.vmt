@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$basetexture"	"models\weapons\v_models\v_F6MAR\diffuse"
+	"$bumpmap"	"models\weapons\v_models\v_F6MAR\normal"
+        "$selfillum" "1"
+	"$nocull" "1"
+	"$normalmapalphaenvmapmask" "1"
+ 	"$phong" "1"
+	"$phongexponent" "30"
+	"$phongboost" "1.7"
+	"$phongfresnelranges" "[0.2 2 2]"
+	"$phongalbedotint" "1"
+
+
+}

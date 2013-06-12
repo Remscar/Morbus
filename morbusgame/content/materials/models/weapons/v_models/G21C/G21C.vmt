@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\weapons\v_models\G21C\Body"
+	"$bumpmap"     "models\weapons\v_models\G21C\Body_normal"
+	"$normalmapalphaenvmapmask" "1"
+
+	"$phong" "1"
+	"$phongboost" "1"
+                "$phongexponent" "10"
+	"$phongfresnelranges""[1 9 6]"
+	"$halflambert" "1"
+	"$phongalbedotint" "1"
+
+}

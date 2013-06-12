@@ -1,0 +1,71 @@
+
+--ENT.Base = "base_entity"
+ENT.Type = "brush"
+
+/*---------------------------------------------------------
+   Name: Initialize
+---------------------------------------------------------*/
+function ENT:Initialize()
+--self.Entity:SetCollisionGroup(COLLISION_GROUP_WORLD)
+self.Entity:SetSolid( SOLID_BBOX )
+self.Entity:SetMoveType( MOVETYPE_NONE )
+self.Entity:SetModel("models/hunter/blocks/cube1x2x1.mdl")
+self.Entity:SetColor(Color(0,0,0,255))
+end
+
+/*---------------------------------------------------------
+   Name: StartTouch
+---------------------------------------------------------*/
+function ENT:StartTouch( entity )
+   if entity:IsPlayer() then
+      --entity:PrintMessage( HUD_PRINTCENTER, "SHOWER" )
+      entity.Touching = MISSION_CLEAN
+   end
+end
+
+/*---------------------------------------------------------
+   Name: EndTouch
+---------------------------------------------------------*/
+function ENT:EndTouch( entity )
+   if entity:IsPlayer() then
+      entity.Touching = MISSION_NONE
+   end
+end
+
+/*---------------------------------------------------------
+   Name: Touch
+---------------------------------------------------------*/
+function ENT:Touch( entity )
+end
+
+/*---------------------------------------------------------
+   Name: PassesTriggerFilters
+   Desc: Return true if this object should trigger us
+---------------------------------------------------------*/
+function ENT:PassesTriggerFilters( entity )
+	return true
+end
+
+/*---------------------------------------------------------
+   Name: KeyValue
+   Desc: Called when a keyvalue is added to us
+---------------------------------------------------------*/
+function ENT:KeyValue( key, value )
+end
+
+/*---------------------------------------------------------
+   Name: Think
+   Desc: Entity's think function.
+---------------------------------------------------------*/
+function ENT:Think()
+self.Entity:SetColor(Color(0,0,0,255))
+
+
+end
+
+/*---------------------------------------------------------
+   Name: OnRemove
+   Desc: Called just before entity is deleted
+---------------------------------------------------------*/
+function ENT:OnRemove()
+end

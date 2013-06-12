@@ -1,0 +1,23 @@
+"Unlittwotexture"
+{
+	"$baseTexture"	"models/weapons/v_models/Binachi/sight"
+	"$texture2"	"models\weapons\v_models\Binachi\noise"
+	"$additive" 1
+	"$model" 1
+	"$nocull" 1
+
+
+"Proxies"
+	{
+
+		"TextureScroll"
+		{
+			"texturescrollvar" "$texture2transform"
+			"texturescrollrate" 4
+			"texturescrollangle" -50
+		}
+	
+	}
+
+
+}

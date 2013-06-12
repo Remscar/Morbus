@@ -1,0 +1,13 @@
+"morbusgame"
+{
+	"base"		"base"
+	"title"		"MORBUS"
+	"maps"		"^mor_"
+	"menusystem"	"1"
+	"workshopid"		"139263490"
+
+	"settings"
+	{
+		// TODO: put some settings here
+	}
+}

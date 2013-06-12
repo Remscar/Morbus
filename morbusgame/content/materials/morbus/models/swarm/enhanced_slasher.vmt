@@ -1,0 +1,23 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "morbus/models/swarm/enhanced_slasher"
+	"$bumpmap" "morbus/models/swarm/enhanced_slasher_Norm"
+
+	"$selfillum" "1"
+	"$phong" "1"
+	"$phongexponent" "3"
+	"$phongboost" "0.4"
+	"$phongfresnelranges" "[0 0.2 0.5]"
+	
+	"$rimlight" "1"
+	"$rimlightexponent" "5"
+	"$rimlightboost" "0.01"
+	
+	Proxies
+	{
+		PlayerColor
+		{
+			resultVar	$selfillumtint
+		}
+	}
+}
