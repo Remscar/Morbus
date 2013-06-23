@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 /*--------------------------------------------
 MORBUS WEAPON SYSTEM
@@ -72,15 +64,7 @@ local function GetLoadoutWeapons(r)
 
    table.insert(tbl[ROLE_SWARM], "weapon_mor_swarm")
 
-   if GAMEMODE.Nightmare then
-      --table.insert(tbl[ROLE_BROOD],"weapon_glowstick_special")
-      --table.insert(tbl[ROLE_HUMAN],"weapon_glowstick_special")
-   end
-
    local loadout_weapons = tbl
-   
-
-
 
    return loadout_weapons[r]
 end
@@ -170,12 +154,6 @@ function WEPS.DropNotifiedWeapon(ply, wep)
       if wep.PreDrop then
          wep:PreDrop()
       end
-
-      -- PreDrop might destroy weapon
-      --if not IsValid(wep) then return end
-
-      -- Tag this weapon as dropped, so that if it's a special weapon we do not
-      -- auto-pickup when nearby.
       wep.IsDropped = true
 
       ply:DropWeapon(wep)

@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*------------------------------------------------
 BASE HUD_DEBUG STUFF
 -------------------------------------------------*/
@@ -67,14 +59,7 @@ function GM:HUDPaint()
       if HUD_DEBUG[9] then
          RoundAlert(client)
       end
-      if ((client:IsSwarm()) || (client:GetNWBool("alienform",false) == true)) && client:Alive() then
-         if HUD_DEBUG[10] then
-
-            if (client.NightVision == true) || (client:GetNWBool("alienform",false) == true) then
-               NightVision()
-            end
-         end
-      end
+      
 
    else
 
@@ -98,9 +83,7 @@ function GM:HUDPaint()
 
       end
 
-      if (client.NightVision == true) then
-         NightVision()
-      end
+      
 
 
    end

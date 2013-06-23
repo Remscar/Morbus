@@ -1,29 +1,16 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 local plymeta = FindMetaTable( "Player" )
 if not plymeta then return end
 
 
-function plymeta:KillFlashlight()
-
-   //LIGHT.TurnOff(self)
-end
 
 
 function plymeta:StripAll(reset_everything)
    -- standard stuff
    self:StripAmmo()
-   //self:StripWeapons()
    if (reset_everything) then
       self:ResetStatus()
    end
@@ -33,7 +20,6 @@ function plymeta:MakeSpec(temp)
    self:LightReset()
    self:StripAmmo()
    self:StripWeapons()
-   self:KillFlashlight()
    self:SetMoveType(MOVETYPE_NOCLIP)
    self:SpectateEntity(nil)
    self:SetTeam(TEAM_SPEC)
@@ -51,9 +37,7 @@ function plymeta:LightReset()
    self:Freeze(false)
    self.FreeKill = 0
    self.Invisible = false
-   //self.TempSpec = false
    self.AlienForm = false
-   self:KillFlashlight()
    self.Mission = 0
    self.Battery = LIGHT_BATTERY
    self.Touching = MISSION_NONE
@@ -62,7 +46,7 @@ function plymeta:LightReset()
    self.Mission_End = 0
    self.Mission_Complete = 0
    self:ResetMission()
-   self.Mission_Next = CurTime() + math.random(60,90)-- math.random(30,60)
+   self.Mission_Next = CurTime() + math.random(GetConVar("morbus_mission_next_time_min"):GetInt(),GetConVar("morbus_mission_next_time_max"):GetInt())
    self.Moving = false
    self.Moved = false
    self.Cloaked = 0
@@ -107,7 +91,6 @@ function plymeta:ResetStatus()
    self.WantsSpec = false
    self.TempSpec = false
    self.Mission = 0
-   self:KillFlashlight()
    self.NightVision = false
    self.Mission_End = 0
    self.Mission_Doing = false
@@ -138,13 +121,45 @@ function plymeta:ResetStatus()
    self.CanTransform = true
 end
 
-function plymeta:SetBaseSanity(k)
-   self:SetNWFloat("sanity", k)
+/*-------------------------------------------
+WEIGHT AND SPEED
+-------------------------------------------*/
+
+
+function plymeta:SendWeight()
+   SendPlayerWeight(self.Weight,self) //networking
+end
+
+function plymeta:CalcWeight()
+   if self:IsSwarm() then return end
+   local Weight = 0
+   for k,v in pairs(self:GetWeapons()) do
+      Weight = Weight + (v.KGWeight*2.3)
+   end
+
+   self.Weight = Weight // Transfer to global
+   local m_speed = HUMAN_SPEED - self.Weight // Set speed
+   if m_speed < 50 then m_speed = 50 end // Set the bottom limit
+
+   GAMEMODE:SetPlayerSpeed(self,m_speed,m_speed) // Set the speed
+   self:SetMaxSpeed(m_speed)
 end
 
 
-AccessorFunc(plymeta, "live_sanity", "LiveSanity", FORCE_NUMBER)
+function plymeta:SetSpeed()
+   if self:IsSwarm() then
+      GAMEMODE:SetPlayerSpeed(self,SWARM_SPEED,SWARM_SPEED)
 
+   end
+   if self:IsHuman() || self:IsBrood() then
+      self:CalcWeight()
+   end
+
+end
+
+/*------------------------------------------------
+SOUNDS
+---------------------------------------------------*/
 
 function plymeta:DeathSound() -- TO DO
    if not ValidEntity(self) then return end
@@ -164,12 +179,23 @@ end
 
 function plymeta:KilledAlien()
    if self.Gender == GENDER_FEMALE then
-      self:EmitSound(table.Random(Response.Female.KillAlien),100,100)
+      self:EmitSound(table.Random(Sounds.Female.KillAlien),100,100)
    else
-      self:EmitSound(table.Random(Response.Male.KillAlien),100,100)
+      self:EmitSound(table.Random(Sounds.Male.KillAlien),100,100)
    end
 end
 
+
+/*------------------------------------------------
+SANITY
+---------------------------------------------------*/
+
+
+AccessorFunc(plymeta, "live_sanity", "LiveSanity", FORCE_NUMBER)
+
+function plymeta:SetBaseSanity(k)
+   self:SetNWFloat("sanity", k)
+end
 
 function plymeta:InitSanity()
    SANITY.InitPlayer(self)
@@ -204,42 +230,11 @@ end
 MODEL STUFF + SETUP
 -------------------------------------------*/
 
-function plymeta:SetSpeed()
-   if self:IsSwarm() then
-      GAMEMODE:SetPlayerSpeed(self,SWARM_SPEED,SWARM_SPEED)
-
-   end
-   if self:IsHuman() || self:IsBrood() then
-      self:CalcWeight()
-   end
-
-end
-
-function plymeta:SetupPlayer()
-   self.Gender = self:SelectGender()
-   self:SetNWString("fakename",self:SelectName())
-   self.WantedModel = self:SelectModel()
-end
-
-function plymeta:SelectModel()
-	local gender = self.Gender
-
-	if (self:IsSwarm()) then return Models.Swarm end
-
-	if (gender == GENDER_MALE) then
-		return table.Random(Models.Male)
-	else
-		return table.Random(Models.Female)
-	end
-
-end
-
-
 function plymeta:SelectGender()
-	local gen = math.random(GENDER_FEMALE,GENDER_MALE)
+   local gen = math.random(GENDER_FEMALE,GENDER_MALE)
 
    if self.ForceGender then gen = self.ForceGender end
-	return gen
+   return gen
 end
 
 function plymeta:SelectName()
@@ -261,32 +256,40 @@ function plymeta:SelectName()
    return name
 end
 
-/*-------------------------------------------
-WEIGHT STUFF
--------------------------------------------*/
+function plymeta:SelectModel()
+   local gender = self.Gender
 
+   if (self:IsSwarm()) then return Models.Swarm end
 
-function plymeta:SendWeight()
-   SendPlayerWeight(self.Weight,self)
+   if (gender == GENDER_MALE) then
+      return table.Random(Models.Male)
+   else
+      return table.Random(Models.Female)
+   end
+
 end
 
-function plymeta:CalcWeight()
-   CalcWeight(self)
+function plymeta:SetupPlayer()
+   self.Gender = self:SelectGender()
+   self:SetNWString("fakename",self:SelectName())
+   self.WantedModel = self:SelectModel()
 end
+
+
+
+
 
 /*-------------------------------------------
 UTIL
 -------------------------------------------*/
 function plymeta:ShouldReset()
    if self.WantsSpec then return false end
-
    return true
 end
 
 
 function plymeta:ShouldSpawn()
 	if not self.IsGame() then return false end
-
 	return true
 end
 
@@ -317,6 +320,16 @@ function plymeta:SpawnForRound(dead)
 	return true
 end
 
+function plymeta:GetTierPoints(tree,tier)
+   local c = 0
 
+   for k,v in pairs(UPGRADES) do
+      if (v.Tier==tier) && (v.Tree==tree) then
+         if self.Upgrades[k] then
+            c = c + self.Upgrades[k]
+         end
+      end
+   end
 
-    
+   return c
+end    

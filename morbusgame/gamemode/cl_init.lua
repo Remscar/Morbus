@@ -1,7 +1,7 @@
-/*----------------------------------------------------
-MORBUS DEVELOPED BY REMSCAR
-----------------------------------------------------*/
 
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 ----------------------------------INCLUDES
@@ -61,8 +61,27 @@ function GM:InitPostEntity()
 	
 end
 
+GMNextThink = 0
 function GM:Think()
+	if GMNextThink >= CurTime() then return end
+
+	local client = LocalPlayer()
 	WSWITCH:Think()
+
+
+	if (client.NightVision == true) then
+		NightVision()
+	end
+
+	if ((client:IsSwarm()) || (client:GetNWBool("alienform",false) == true)) && client:Alive() then
+		if HUD_DEBUG[10] then
+			if (client.NightVision == true) || (client:GetNWBool("alienform",false) == true) then
+				NightVision()
+			end
+		end
+	end
+	GMNextThink = CurTime() + 0.08
+
 end
 
 

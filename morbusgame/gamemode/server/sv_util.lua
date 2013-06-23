@@ -22,3 +22,12 @@ function WhoIsPlayer(name)
 	end
 	if !match then return false end
 end
+
+function util.AverageSanity()
+	local cnt = #player.GetAll()
+	local sanity = 0
+	for k,v in pairs(player.GetAll()) do
+		sanity = sanity + v:GetBaseSanity()
+	end
+	return sanity / cnt
+end

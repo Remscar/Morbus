@@ -47,8 +47,14 @@ function plymeta:GetWeight()
 end
 
 function plymeta:GetFName(fake)
-   --just fake
    if !ValidEntity(self) then return "disconnected" end
+
+   if CLIENT then // Players may want to disable the rp names
+      if GetConVar("morbus_hide_rpnames"):GetBool() && GetGlobalBool("morbus_rpnames_optional",false) then
+         return self:Nick()
+      end
+   end
+
    if fake then
       return "("..self:Nick().. ") "..self:GetNWString("fakename","")
    else
@@ -78,63 +84,6 @@ function plymeta:CanCarryType(t)
 end
 
 GM.Author = "Remscar"
-
-if CLIENT then
-
-function plymeta:GetTierPoints(tree,tier)
-   local c = 0
-
-   for k,v in pairs(UPGRADES) do
-      if (v.Tier==tier) && (v.Tree==tree) then
-         if Morbus.Upgrades[k] then
-            c = c + Morbus.Upgrades[k]
-         end
-      end
-   end
-
-   return c
-end
-
-else
-
-function plymeta:GetTierPoints(tree,tier)
-   local c = 0
-
-   for k,v in pairs(UPGRADES) do
-      if (v.Tier==tier) && (v.Tree==tree) then
-         if self.Upgrades[k] then
-            c = c + self.Upgrades[k]
-         end
-      end
-   end
-
-   return c
-end
-
-end
-
-
-if CLIENT then
-   -- Server has this, but isn't shared for some reason
-   function plymeta:HasWeapon(cls)
-      for _, wep in pairs(self:GetWeapons()) do
-         if IsValid(wep) and wep:GetClass() == cls then
-            return true
-         end
-      end
-
-      return false
-   end
-
-   local gmod_GetWeapons = plymeta.GetWeapons
-   function plymeta:GetWeapons()
-      if self != LocalPlayer() then
-         return {}
-      else
-         return gmod_GetWeapons(self)
-      end
-   end
-end
 
 
 function plymeta:GetEyeTrace(mask)

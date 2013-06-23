@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*------------------------------------------------
 PLAYER EXTENSION CLIENT SIDE
 -------------------------------------------------*/
@@ -56,4 +48,38 @@ end
 
 function plymeta:GetRoleName()
 	return GetRoleName(self:GetRole())
+end
+
+function plymeta:GetTierPoints(tree,tier)
+   local c = 0
+
+   for k,v in pairs(UPGRADES) do
+      if (v.Tier==tier) && (v.Tree==tree) then
+         if Morbus.Upgrades[k] then
+            c = c + Morbus.Upgrades[k]
+         end
+      end
+   end
+
+   return c
+end
+
+
+function plymeta:HasWeapon(cls)
+  for _, wep in pairs(self:GetWeapons()) do
+     if IsValid(wep) and wep:GetClass() == cls then
+        return true
+     end
+  end
+
+  return false
+end
+
+local gmod_GetWeapons = plymeta.GetWeapons
+function plymeta:GetWeapons()
+  if self != LocalPlayer() then
+     return {}
+  else
+     return gmod_GetWeapons(self)
+  end
 end

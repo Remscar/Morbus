@@ -1,7 +1,9 @@
-/*----------------------------------------------------
-MORBUS DEVELOPED BY REMSCAR
-----------------------------------------------------*/
-GM.Name = "MORBUS" //VERSION 1.5.1C
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
+
+
+GM.Name = "MORBUS" //VERSION 1.5.2Dev
 GM.Author = "Remscar"
 GM.Email = "zachary@remscar.com"
 GM.Website = "http://www.remscar.com"
@@ -13,17 +15,9 @@ GM_VERSION_SHORT = 152
 local folder = GM.Folder
 FOLDER_NAME = folder:gsub("gamemodes/", "")
 
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 _G.ValidEntity = _G.IsValid
 

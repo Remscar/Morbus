@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 function GM:HUDDrawTargetID()
@@ -28,7 +20,9 @@ function GM:HUDDrawTargetID()
 		local distance = trace.HitPos:Distance(trace.StartPos)
 
 		if ent:GetNWBool("HumanBody",false) && distance < 140 then
-			local text = ent:GetNWString("Name","").."'s Corpse"
+			local ply = ent:GetNWEntity("Player",nil)
+			if !ply then return end
+			local text = ply:GetFName().."'s Corpse"
 
 			surface.SetFont( font )
 			local w, h = surface.GetTextSize( text )

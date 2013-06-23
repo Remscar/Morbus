@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*------------------------------------------------
 PLAYER HUD
 -------------------------------------------------*/
@@ -124,7 +116,7 @@ function MainPlayerHud()
 
          //------------ BATTERY
 
-         if GetGlobalInt("nightmare",0) == 0 && !ply:IsSwarm() then
+         if !GetGlobalBool("mutator_nightmare",false) && !ply:IsSwarm() then
 
             surface.SetDrawColor( 0, 240, 240, ftrans );
             surface.SetTexture( tex );

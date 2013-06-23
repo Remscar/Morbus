@@ -1,2 +1,6 @@
-Morbus Dev GitHub
-Do not release to public
+Morbus GitHub
+
+BRANCHES:
+Master - Current Release
+Dev - Current Development
+RC - Release Candidate

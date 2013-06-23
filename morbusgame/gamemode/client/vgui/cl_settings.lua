@@ -2,10 +2,11 @@
 
 CreateClientConVar("morbus_hide_rolehint","0",true)
 CreateClientConVar("morbus_hide_distortion","0",true)
+CreateClientConVar("morbus_hide_rpnames", "0",true)
 
 function CreateSettingsMenu()
 	local pnl = vgui.Create("DFrame")
-	pnl:SetSize(180,180)
+	pnl:SetSize(180,190)
 	pnl:Center()
 	pnl:MakePopup()
 	pnl:SetTitle("Settings")
@@ -24,8 +25,15 @@ function CreateSettingsMenu()
 	s1a:SetValue(GetConVar("morbus_hide_distortion"):GetBool())
 	s1a:SizeToContents()
 
+	local s1b = vgui.Create("DCheckBoxLabel",pnl)
+	s1b:SetPos(4,70)
+	s1b:SetText("Hide RP Names")
+	s1b:SetConVar("morbus_hide_rpnames")
+	s1b:SetValue(GetConVar("morbus_hide_rpnames"):GetBool())
+	s1b:SizeToContents()
+
 	local s2 = vgui.Create("DButton",pnl)
-	s2:SetPos(4,70)
+	s2:SetPos(4,90)
 	s2:SetText("Toggle Spectator Mode")
 	s2:SetSize(120,20)
 	function s2:DoClick()
@@ -33,12 +41,12 @@ function CreateSettingsMenu()
 	end
 
 	local s3 = vgui.Create("DLabel",pnl)
-	s3:SetPos(4,95)
+	s3:SetPos(4,115)
 	s3:SetText("CONSOLE COMMANDS:")
 	s3:SizeToContents()
 
 	local s4 = vgui.Create("DLabel",pnl)
-	s4:SetPos(4,110)
+	s4:SetPos(4,130)
 	s4:SetText("morbus_toggle_hud\nmorbus_toggle_chat\nmorbus_mute_status")
 	s4:SizeToContents()
 

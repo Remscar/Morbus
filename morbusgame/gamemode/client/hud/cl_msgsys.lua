@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*--------------------------------------------
 MORBUS MESSAGE SYSTEM
 --------------------------------------------*/
@@ -52,10 +44,10 @@ local fadeout = 0.05
 local movespeed = 2
 
 local msg_colors = {
-	alien_bg = Color(255,0,0,255),
+	alien_bg = Color(255,0,0,150),
 	generic_text = Color(205,205,205,255),
 
-	generic_bg = Color(40, 220, 235,200)
+	generic_bg = Color(40, 220, 235,150)
 }
 
 MSYS.width = msg_width + margin

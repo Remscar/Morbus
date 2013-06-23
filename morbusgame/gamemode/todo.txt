@@ -8,3 +8,12 @@ TODO
 -Remake Brood Alien upgrades
 -Organize and clean all function names
 -Consolidate all sounds into a single manifest (sv_sounds.lua?)
+-Sticky glowstick
+-Cyro grenade
+-Pulse SMG
+-DNA tester
+-Fix evac
+-Vomit effect
+-Ensure bodies are removed
+-Insane people see ghosts
+-Screams, and other sound effects for insane people

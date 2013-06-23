@@ -22,6 +22,8 @@ function EndRound(type)
 	STATS.Send()
 
 	SetRoundState(ROUND_POST)
+	
+	EndMutators()
 
 	local ptime = GetConVar("morbus_round_post"):GetInt()
 	timer.Create("end2prep", ptime, 1, PrepareRound)

@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 
@@ -22,29 +14,7 @@ local function CreateDeathEffect(ent)
 
 end
 
-local function CreateCorpse(ply, attacker, dmginfo)
-   if not IsValid(ply) then return end
 
-   local rag = ents.Create("prop_ragdoll")
-   if not IsValid(rag) then return nil end
-   rag.ragdoll = true
-   ply.Body = rag
-
-   rag:SetPos(ply:GetPos())
-   rag:SetModel(ply:GetModel())
-   rag:SetAngles(ply:GetAngles())
-   rag:SetNWBool("HumanBody",!ply:GetSwarm())
-   rag:SetNWString("Name",ply:GetFName())
-   rag:SetNWEntity("Player",ply)
-
-   rag:Spawn()
-   rag:Activate()
-
-   -- nonsolid to players, but can be picked up and shot
-   rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-
-
-end
 
 
 function GM:PlayerDeathThink(ply)
@@ -208,7 +178,7 @@ function GM:PlayerDeath(victim, weapon, killer)
     // The player was a Swarm Alien & died
 
     LogKill(victim,killer,"Swarm Killed")
-    Round_Swarm_Kills = Round_Kills + 1
+    Round_Swarm_Kills = Round_Swarm_Kills + 1
     Death_Swarm(victim,weapon,killer)
 
   elseif killer:GetActiveWeapon():GetClass() ==  "weapon_mor_brood" && !victim:IsAlien() then

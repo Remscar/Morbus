@@ -170,7 +170,11 @@ function PANEL:UpdatePlayerData()
    self.nick:SizeToContents()
    self.nick:SetTextColor(ColorForPlayer(ply))
 
-   self.name:SetText(ply:GetFName())
+   if GetConVar("morbus_hide_rpnames"):GetBool() && GetGlobalBool("morbus_rpnames_optional",false) then
+      self.name:SetText("")
+   else
+      self.name:SetText(ply:GetFName())
+   end
    self.name:SizeToContents()
    self.name:SetTextColor(COLOR_WHITE)
 

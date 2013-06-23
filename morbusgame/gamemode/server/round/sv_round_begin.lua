@@ -45,9 +45,10 @@ function BeginRound()
 
 	SetRoundState(ROUND_ACTIVE)
 	GameMsg("The round has begun. Extraction inbound.")
-	if GAMEMODE.Nightmare then
-		GameMsg("This is your nightmare")
-	end
+
+	CheckMutators()
+	StartMutators()
+	
 	print("ROUND_ACTIVE\n")
 
 	Round_RDMs = 0

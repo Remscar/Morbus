@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 /*----------------------------------------------------
 SEND ALIENS
@@ -54,7 +46,7 @@ function NewAlien(ply,role)
       ply:SetPos(GAMEMODE:PlayerSelectSpawn(ply):GetPos())
       ply:Spawn()
    else
-      AlienMsg(AlienFilter(),ply:GetFName().." is now a "..GetRoleName(role))
+      AlienMsg(AlienFilter(),ply:GetFName(true).." is now a "..GetRoleName(role))
    end
 
    if role then

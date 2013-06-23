@@ -64,14 +64,9 @@ function PrepareRound()
 	SANITY.RoundBegin()
 
 	if CheckForAbort() then return end
-
-	if GetConVar("morbus_nightmare"):GetInt() == 1 then
-		GAMEMODE.Nightmare = true
-		SetGlobalInt("nightmare",1)
-	else
-		GAMEMODE.Nightmare = false
-		SetGlobalInt("nightmare",0)
-	end
+	
+	CheckMutators()
+	PrepMutators()
 
 	local ptime = GetConVar("morbus_round_prep"):GetInt()
 	if GAMEMODE.FirstRound then

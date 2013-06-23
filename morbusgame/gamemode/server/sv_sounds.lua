@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*---------------------------------
 SOUNDS
 -------------------------------------*/
@@ -205,27 +197,6 @@ Response.Female.Yes = {
 "vo/npc/female01/answer39.wav",
 "vo/npc/female01/answer40.wav"
 }
-Response.Female.KillAlien = {
-"vo/npc/female01/yeah02.wav",
-"vo/npc/female01/wetrustedyou01.wav",
-"vo/npc/female01/thislldonicely01.wav",
-"vo/npc/female01/likethat.wav",
-"vo/npc/female01/gotone01.wav",
-"vo/npc/female01/gotone02.wav",
-"vo/npc/female01/answer40.wav",
-}
-
-Response.Male.KillAlien = {
-"vo/npc/male01/yeah02.wav",
-"vo/npc/male01/nice.wav",
-"vo/npc/male01/wetrustedyou01.wav",
-"vo/npc/male01/likethat.wav",
-"vo/npc/male01/gotone01.wav",
-"vo/npc/male01/gotone02.wav",
-"vo/npc/male01/vanswer04.wav",
-"vo/npc/male01/answer39.wav",
-"vo/npc/male01/answer40.wav",
-}
 
 
 
@@ -298,6 +269,34 @@ for k,v in pairs(mpain) do
 	table.insert(Sounds.Male.Pain,Sound("male_pain"..k))
 end
 
+// =======================================================================
+// MALE KILL ALIEN
+// =======================================================================
+
+Sounds.Male.KillAlien = {
+}
+
+local mkalien = {
+"vo/npc/male01/yeah02.wav",
+"vo/npc/male01/nice.wav",
+"vo/npc/male01/wetrustedyou01.wav",
+"vo/npc/male01/likethat.wav",
+"vo/npc/male01/gotone01.wav",
+"vo/npc/male01/gotone02.wav",
+"vo/npc/male01/vanswer04.wav",
+"vo/npc/male01/answer39.wav",
+"vo/npc/male01/answer40.wav",
+}
+
+for k,v in pairs(mkalien) do
+    sound.Add({
+    name =          "male_kill_alien."..k,
+    channel =       CHAN_USER_BASE+2,
+    volume =        0.7,
+    sound =             v
+    })
+    table.insert(Sounds.Male.KillAlien,Sound("male_kill_alien."..k))
+end
 
 
 // =======================================================================
@@ -378,6 +377,32 @@ for k,v in pairs(fpain) do
 	table.insert(Sounds.Female.Pain,Sound("female_pain"..k))
 end
 
+// =======================================================================
+// FEMALE KILL ALIEN
+// =======================================================================
+
+Sounds.Female.KillAlien = {
+}
+
+local fkalien = {
+"vo/npc/female01/yeah02.wav",
+"vo/npc/female01/wetrustedyou01.wav",
+"vo/npc/female01/thislldonicely01.wav",
+"vo/npc/female01/likethat.wav",
+"vo/npc/female01/gotone01.wav",
+"vo/npc/female01/gotone02.wav",
+"vo/npc/female01/answer40.wav",
+}
+
+for k,v in pairs(fkalien) do
+    sound.Add({
+    name =          "female_kill_alien."..k,
+    channel =       CHAN_USER_BASE+2,
+    volume =        0.7,
+    sound =             v
+    })
+    table.insert(Sounds.Female.KillAlien,Sound("female_kill_alien."..k))
+end
 
 
 // =======================================================================

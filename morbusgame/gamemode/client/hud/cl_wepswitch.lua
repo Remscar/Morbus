@@ -2,17 +2,9 @@
 WEAPON SWITCH INTERFACE
 ----------------------------------------------------*/
 
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 local tex = surface.GetTextureID("vgui/morbus/HPBar")
 

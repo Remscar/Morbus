@@ -8,17 +8,9 @@ Random Code Snippets: BadKingUrgrain (with permission)
 
 
 
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 //lua_run for k,v in pairs(player.GetAll()) do print(v:Nick().."-"..tostring(v:IsSpec()).."\n") end
@@ -225,43 +217,6 @@ function GM:PlayerDisconnected(ply)
       ply:SetRole(ROLE_NONE)
    end
 end
-
-function CalcWeight(ply)
-   if ply:IsSwarm() then return end
-   local Weight = 0
-   for k,v in pairs(ply:GetWeapons()) do
-      Weight = Weight + (v.KGWeight*2.3)
-   end
-   local ow = ply.Weight
-
-   --if ow == Weight then return end
-
-   ply.Weight = Weight // Transfer to global
-   local m_speed = HUMAN_SPEED - ply.Weight // Set speed
-   if m_speed < 50 then m_speed = 50 end // Set the bottom limit
-
-   GAMEMODE:SetPlayerSpeed(ply,m_speed,m_speed) // Set the speed
-   ply:SetMaxSpeed( m_speed)
-   --ply:SendWeight() // Tell the player how much they weigh
-
-end
-
-function FoundBody()
-   local pos = net.ReadVector()
-   local ply = net.ReadEntity()
-   if !ply || !IsValid(ply) then return end
-
-   for k,v in pairs(player.GetAll()) do
-      if v:IsGame() && !v:IsSwarm() && v:GetPos():Distance(pos) < 200 then
-         net.Start("ReceivedBody")
-         net.WriteEntity(ply)
-         net.Send(v)
-      end
-   end
-end
-net.Receive("FoundBody",FoundBody)
-
-
 
 
 local tm = nil

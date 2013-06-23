@@ -13,22 +13,15 @@ Gmod4Ever
 M4RK
 Sonoran Warrior
 Demonkush
+017
 LauScript (schu)
 ----------------------------------------------------*/
 
 
 
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 
@@ -36,9 +29,12 @@ local file = file
 include("shared.lua")
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/shared/*.lua","LUA")) do include("shared/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/*.lua","LUA")) do include("server/" .. v) end
+
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/alien/*.lua","LUA")) do include("server/alien/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/player/*.lua","LUA")) do include("server/player/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/round/*.lua","LUA")) do include("server/round/" .. v) end
+for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/impulse/*.lua","LUA")) do include("server/impulse/" .. v) end
+for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/server/mutators/*.lua","LUA")) do include("server/mutators/" .. v) end
 -------------------------------------------
 
 
@@ -67,33 +63,35 @@ CreateConVar("morbus_evactime", "3", FCVAR_NOTIFY)
 CreateConVar("morbus_rounds", "8", FCVAR_NOTIFY)
 CreateConVar("morbus_round_prep", "20", FCVAR_NOTIFY)
 CreateConVar("morbus_round_post", "20", FCVAR_NOTIFY)
-CreateConVar("morbus_nightmare", "0", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_time_max", "220", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_time_min", "120", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_next_time_max", "80", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_next_time_min", "220", FCVAR_NOTIFY)
+
+
+CreateConVar("morbus_rpnames_optional", "0", FCVAR_NOTIFY)
 -----------------------------------------------
 
 util.AddNetworkString("RoundLog")
 util.AddNetworkString("RoundHistory")
 util.AddNetworkString("ReceivedBody")
 util.AddNetworkString("FoundBody")
-util.AddNetworkString("OOCChat")
-util.AddNetworkString("LocalChat")
-util.AddNetworkString("SpecChat")
-util.AddNetworkString("SelfRole")
-util.AddNetworkString("PlayerRole")
-util.AddNetworkString("RoundState")
-util.AddNetworkString("Weight")
-util.AddNetworkString("ClearClient")
-util.AddNetworkString("MissionInfo")
-util.AddNetworkString("MissionUpdate")
-util.AddNetworkString("MissionComplete")
-util.AddNetworkString("MissionReset")
-util.AddNetworkString("UpgradePoints")
-util.AddNetworkString("UpgradeData")
-util.AddNetworkString("ClearUpgrades")
-util.AddNetworkString("AlienChat")
+-- util.AddNetworkString("OOCChat")
+-- util.AddNetworkString("LocalChat")
+-- util.AddNetworkString("SpecChat")
+-- util.AddNetworkString("SelfRole")
+-- util.AddNetworkString("PlayerRole")
+-- util.AddNetworkString("RoundState")
+-- util.AddNetworkString("Weight")
+-- util.AddNetworkString("ClearClient")
+-- util.AddNetworkString("MissionInfo")
+-- util.AddNetworkString("MissionUpdate")
+-- util.AddNetworkString("MissionComplete")
+-- util.AddNetworkString("MissionReset")
+-- util.AddNetworkString("UpgradePoints")
+-- util.AddNetworkString("UpgradeData")
+-- util.AddNetworkString("ClearUpgrades")
+-- util.AddNetworkString("AlienChat")
 
 --------------------------------INITIALIZE GAMEMODE
 function GM:Initialize()
@@ -109,14 +107,12 @@ function GM:Initialize()
 	GAMEMODE.Round_State = ROUND_WAIT
 	GAMEMODE.Round_Winner = WIN_NONE
 	GAMEMODE.FirstRound = true
-	GAMEMODE.Nightmare = false
 	GAMEMODE.STOP = false
 	Round_RDMs = 0
 	Round_Brood_Infects = 0
 	Round_Brood_Kills = 0
 	Round_Swarm_Infects = 0
 	Round_Swarm_Kills = 0
-	SetGlobalInt("nightmare",0)
 	RoundHistory = {}
 	Round_Log = {}
 	Round_IDs = {}
@@ -130,31 +126,17 @@ function GM:Initialize()
 	SetGlobalInt("morbus_rounds_left", GetConVar("morbus_rounds"):GetInt())
 	SetGlobalFloat("morbus_round_time", GetConVar("morbus_roundtime"):GetInt())
 
+	SetGlobalBool("morbus_rpnames_optional", GetConVar("morbus_rpnames_optional"):GetBool())
 	WaitForPlayers()
 
 	CAN_RTV = CurTime() + 120
 
-	if GetConVar("morbus_nightmare"):GetInt() == 1 then
-		GAMEMODE.Nightmare = true
-		SetGlobalInt("nightmare",1)
-	end
+	PrepMutators()
 
 	MsgN("Morbus Server Loaded!\n")
 end
 
-function ChangeNightmare(ply)
-	if ply:IsAdmin() then
-		if !GAMEMODE.Nightmare then
-			--SetGlobalInt("nightmare",1)
-			SendAll("Nightmare mode is now on")
-			RunConsoleCommand("morbus_nightmare","1")
-		else
-			--SetGlobalInt("nightmare",0)
-			SendAll("Nightmare mode is now off")
-			RunConsoleCommand("morbus_nightmare","0")
-		end
-	end
-end
+
 
 timer.Create( "TagCheck", 1, 0, function()
 	if not GetConVar( "sv_tags" ) then CreateConVar("sv_tags","") end
