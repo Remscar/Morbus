@@ -1,13 +1,21 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+---------------------------------LOCALIZATION
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
+---------------------------------------------
 
 /*-----------------------------
 ROLE SELECTION
 ------------------------------*/
 
 local function GetBroodCount(ply_count)
-	local count = math.Round(ply_count * 0.11)
+	local count = math.Round(ply_count * 0.12)
 	if count > 0 then
 		return count
 	else
@@ -22,6 +30,8 @@ local function SendRoles()
       end
    end
 end
+
+
 
 
 LAST_ALIEN = {}

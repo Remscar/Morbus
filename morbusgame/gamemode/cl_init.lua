@@ -1,16 +1,13 @@
+/*----------------------------------------------------
+MORBUS DEVELOPED BY REMSCAR
+----------------------------------------------------*/
 
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
 
 
 ----------------------------------INCLUDES
 include("shared.lua")
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/shared/*.lua","LUA")) do include("shared/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/vgui/*.lua","LUA")) do include("client/vgui/" .. v) end
-for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/hud/*.lua","LUA")) do include("client/hud/" .. v) end
-for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/sb/*.lua","LUA")) do include("client/sb/" .. v) end
-for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/fx/*.lua","LUA")) do include("client/fx/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/*.lua","LUA")) do include("client/" .. v) end
 ------------------------------------------
 
@@ -61,27 +58,8 @@ function GM:InitPostEntity()
 	
 end
 
-GMNextThink = 0
 function GM:Think()
-	if GMNextThink >= CurTime() then return end
-
-	local client = LocalPlayer()
 	WSWITCH:Think()
-
-
-	if (client.NightVision == true) then
-		NightVision()
-	end
-
-	if ((client:IsSwarm()) || (client:GetNWBool("alienform",false) == true)) && client:Alive() then
-		if HUD_DEBUG[10] then
-			if (client.NightVision == true) || (client:GetNWBool("alienform",false) == true) then
-				NightVision()
-			end
-		end
-	end
-	GMNextThink = CurTime() + 0.08
-
 end
 
 
@@ -176,7 +154,6 @@ function NoHudMode(ply,cmd,args)
 		MsgN("11 - Voice Windows")
 		MsgN("12 - Spectator stuff")
 		MsgN("13 - Alien Scent")
-		MsgN("14 - Voice Indicators")
 		MsgN("1001 - Show all HUD")
 		MsgN("1002 - Hude all HUD")
 		MsgN("Also morbus_mute_status for muting")

@@ -267,7 +267,7 @@ function SWEP:Reload()
 	timer.Simple(waitdammit + .1, 
 		function() 
 		if self.Weapon == nil then return end
-		if !IsValid(self.Owner) then return end
+		if self.Owner == nil then return end
 		self.Weapon:SetNetworkedBool("Reloading", false)
 		if self.Owner:KeyDown(IN_ATTACK2) and self.Weapon:GetClass() == self.Gun then 
 			if CLIENT then return end

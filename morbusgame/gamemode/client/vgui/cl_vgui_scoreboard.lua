@@ -1,5 +1,13 @@
 ---------------------------------LOCALIZATION
- 
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
 
 local tex = surface.GetTextureID( "vgui/morbus/screen" )
 local tex2 = surface.GetTextureID( "vgui/gradvr" )

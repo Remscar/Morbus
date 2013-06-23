@@ -10,14 +10,15 @@ function ENT:Initialize()
 	self:SetGravity(0.2)
 	self:SetSolid( SOLID_VPHYSICS )
 	self:DrawShadow( false )
-	--self:SetNoDraw(true)
 
 	self:SetCollisionGroup( COLLISION_GROUP_PROJECTILE )
 	
 	
-	if SERVER then
-		util.SpriteTrail(self.Entity, 0, Color(25, 155, 0, 255), false, 25, 1, 0.3, 45, "trails/plasma.vmt")
-    end
+		if SERVER then
+			util.SpriteTrail(self.Entity, 0, Color(25, 155, 0, 255), false, 25, 1, 0.3, 45, "trails/plasma.vmt")
+			
+
+    		end
 
 	if SERVER then
 		local phys = self:GetPhysicsObject()
@@ -25,17 +26,16 @@ function ENT:Initialize()
 			phys:Wake()
 		end
 	end
-
-	-- .pcf particle trail
-	ParticleEffectAttach( "spit_trail", 1, self.Entity, self.Entity:LookupAttachment( "0" ) )
+	if CLIENT then
+	local vOffset = self:LocalToWorld( Vector(0, 0, self:OBBMins().z) )
+	self.Emitter = ParticleEmitter( vOffset )
+	end
+	
 	self.Created = CurTime()
 end
 
-
 function ENT:Think()
-
 end
-
 
 function ENT:Explode()
 
@@ -50,11 +50,13 @@ function ENT:Explode()
     dmg = dmg + mult
     dmg = math.Round(dmg)
 	
-	-- SFX
-	ParticleEffect( "spit_blast", self:GetPos(), Angle(0, 0, 0), nil )
-	self.Entity:EmitSound( "alien/acid_hit.wav", 100, math.random(95,125) );
+	local effectdata = EffectData()
+	effectdata:SetNormal( Vector(0,0,1) )
+	effectdata:SetOrigin( self:GetPos() )
+	util.Effect( "SpitBlast", effectdata  )
 
-	-- Damage in sphere
+	
+	
 	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 105 )) do
 		local dmginfo = DamageInfo()
 		dmginfo:SetAttacker( self:GetOwner() )
@@ -62,17 +64,20 @@ function ENT:Explode()
 		dmginfo:SetDamage( math.Round(dmg*0.75) )
 		v:TakeDamageInfo( dmginfo )
 	end
+	
+
+
+
+
 
 end
 
 
 function ENT:PhysicsCollide( data, phys )
-
 	self:Explode()
 	self:Remove()
 
 end
-
 
 function ENT:OnRemove()
 

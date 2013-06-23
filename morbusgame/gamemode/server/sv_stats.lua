@@ -5,14 +5,13 @@ STATS = {}
 
 
 STATS.RoundStart = 0
-STATS.Version = 3
+STATS.Version = 2
 
 STATS.URL = "http://www.remscar.com/morbus/stats.php"
 
 /* Parameters
 rln = Round Length
 trt = Total Round Time
-asn = Average Sanity
 swl = Swarm Lives
 nsw = Number of Swarms Alive
 nbr = Number of Broods Alive
@@ -37,7 +36,6 @@ function STATS.Send()
 	local tab = {}
 	tab["rln"] = CurTime() - STATS.RoundStart
 	tab["trt"] = GetConVar("morbus_roundtime"):GetInt() * 60
-	tab["asn"] = util.AverageSanity()
 	tab["swl"] = Swarm_Respawns
 	tab["nsw"] = #GetSwarmList()
 	tab["nbr"] = #GetBroodList()

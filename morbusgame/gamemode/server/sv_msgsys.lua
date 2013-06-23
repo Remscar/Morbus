@@ -2,9 +2,17 @@
 MORBUS MESSAGE SYSTEM
 --------------------------------------------*/
 
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+---------------------------------LOCALIZATION
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
+---------------------------------------------
 
 
 /*--------------------------------------------
@@ -41,7 +49,5 @@ end
 function AlienMsg(filter,str)
 	PlayerMsg(filter,str,true)
 end
-
-
 
 

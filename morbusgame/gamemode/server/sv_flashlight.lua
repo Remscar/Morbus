@@ -1,6 +1,14 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+---------------------------------LOCALIZATION
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
+---------------------------------------------
 /*-------------------------
 JEsus a whole file!
 -------------------------*/
@@ -12,7 +20,8 @@ function GM:PlayerSwitchFlashlight(ply, on)
    	LIGHT.SendNightVision(ply)
    	return false
    end
-   if !ply:IsSwarm() && ply:IsGame() && ply:Alive() && !ply:GetNWBool("alienform",false) && !GetGlobalBool("mutator_nightmare", false) then
+   
+   if !ply:IsSwarm() && ply:IsGame() && ply:Alive() && !ply:GetNWBool("alienform",false) && !GAMEMODE.Nightmare then
       if !ply.Light && (ply.Battery > 1) then
          --ply:AddEffects(EF_DIMLIGHT)
          ply:EmitSound( "items/flashlight1.wav", 50, 110 )
@@ -38,7 +47,6 @@ function LIGHT.TurnOn(ply)
 	LIGHT.SendStatus(ply)
 	LIGHT.SendBattery(ply)
 	ply.FakeLight = true
-	ply.Battery = ply.Battery - 1
 
 	local c = Color( 255, 255, 200 ) 
 	local b = 1

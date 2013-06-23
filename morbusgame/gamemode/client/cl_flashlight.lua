@@ -1,6 +1,14 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+---------------------------------LOCALIZATION
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
+---------------------------------------------
 
 function GM:RenderScreenspaceEffects()
 	GAMEMODE:DrawLights()
@@ -75,7 +83,7 @@ timer.Create("SecondQImpulse",1,0,function() LIGHT.Think(LocalPlayer()) end)
 
 
 function LIGHT.Draw(ply)
-	if !GetGlobalBool("mutator_nightmare",false) then
+	if GetGlobalInt("nightmare",0) == 0 then
   		local tall = 16
   		local wide = 70
   		local border = 3

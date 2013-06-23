@@ -1,6 +1,14 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+---------------------------------LOCALIZATION
+local math = math
+local table = table
+local umsg = umsg
+local player = player
+local timer = timer
+local pairs = pairs
+local umsg = umsg
+local usermessage = usermessage
+local file = file
+---------------------------------------------
 
 
 /* Running this function is VERY laggy and takes a LOT of time to run
@@ -39,12 +47,11 @@ end
 
 
 
-if !ResourcesProcessed then 
+if true then 
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/models/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/materials/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/resource/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/sound/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/scripts/')
-	ResourcesProcessed = true
 end
 
