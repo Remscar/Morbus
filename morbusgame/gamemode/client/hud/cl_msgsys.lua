@@ -6,6 +6,16 @@
 
 -- MORBUS MESSAGE SYSTEM
 local tex = surface.GetTextureID("vgui/morbus/HPBar")
+MSYS = {}
+MSYS.MESSAGES = {}
+MSYS.last = 0
+
+surface.CreateFont("MSGFont", {
+	font = "Verdana",
+	size = 16,
+	weight = 500,
+})
+
 -- Localization
 local table = table
 local surface = surface
@@ -24,27 +34,19 @@ local max_items = 4
 local fadein = 0.05
 local fadeout = 0.05
 local movespeed = 2
+local msg_sound = Sound("Hud.Hint")
 local msg_colors = {
 	alien_bg = Color(255,0,0,150),
 	generic_text = Color(205,205,205,255),
-	generic_bg = Color(40, 220, 235,150)
+	generic_bg = Color(40, 220, 235,150),
 }
-local msg_sound = Sound("Hud.Hint")
 local base_spec = {
 	font = msg_font,
 	xalign = TEXT_ALIGN_CENTER,
-	yalign = TEXT_ALIGN_TOP
+	yalign = TEXT_ALIGN_TOP,
 }
 
-MSYS = {}
-MSYS.MESSAGES = {}
-MSYS.last = 0
 MSYS.width = msg_width + margin
-surface.CreateFont("MSGFont", {
-	font = "Verdana",
-	size = 16,
-	weight = 500,
-})
 
 function MSYS:AddColoredMessage(text, clr)
 	local item = {}
@@ -119,8 +121,6 @@ function MSYS:WrapText(text, width)
 	end
 	return lines
 end
-
-
 
 function MSYS:Draw(client)
 	if next(self.MESSAGES) == nil then return end -- fast empty check
