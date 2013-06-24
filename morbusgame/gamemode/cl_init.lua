@@ -1,10 +1,10 @@
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-
-
-----------------------------------INCLUDES
+-- INCLUDES
 include("shared.lua")
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/shared/*.lua","LUA")) do include("shared/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/vgui/*.lua","LUA")) do include("client/vgui/" .. v) end
@@ -12,11 +12,8 @@ for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/hud/*.lua","LUA")) 
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/sb/*.lua","LUA")) do include("client/sb/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/fx/*.lua","LUA")) do include("client/fx/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/*.lua","LUA")) do include("client/" .. v) end
-------------------------------------------
 
-
-
-----------------------------------DEFAULT VARIABLES
+-- DEFAULT VARIABLES
 Morbus = {}
 Morbus.Role = ROLE_NONE
 Morbus.Weight = 0
@@ -27,20 +24,15 @@ Morbus.Mission_Complete = 0
 Morbus.Evo_Points = 0
 Morbus.Upgrades = {}
 Morbus.CanTransform = true
-
 Round_Log = {}
-
----------------------------------------------------
+GMNextThink = 0
+DChat = true
 
 ents.Create = ents.CreateClientProp
 
-
-/*-----------------------------
-INIT
-------------------------------*/
+-- INIT
 function GM:Initialize()
 	MsgN("Morbus Client Loading...\n")
-
 	ResetLog()
 	GAMEMODE.Round_State = ROUND_WAIT
 	SetupRoundHistory()
@@ -48,31 +40,23 @@ function GM:Initialize()
 	CreateConVar("morbus_no_blood",0)
 end
 
-
 function GM:InitPostEntity()
-	MsgN("Morbus Client Post Init...\n")
-
-
-	RunConsoleCommand("myinfo_bytes", "1024")
-
-
 	local ply = LocalPlayer()
+
+	MsgN("Morbus Client Post Init...\n")
+	RunConsoleCommand("myinfo_bytes", "1024")
 	ply:ResetPlayer()
-	
 end
 
-GMNextThink = 0
 function GM:Think()
 	if GMNextThink >= CurTime() then return end
 
 	local client = LocalPlayer()
 	WSWITCH:Think()
 
-
 	if (client.NightVision == true) then
 		NightVision()
 	end
-
 	if ((client:IsSwarm()) || (client:GetNWBool("alienform",false) == true)) && client:Alive() then
 		if HUD_DEBUG[10] then
 			if (client.NightVision == true) || (client:GetNWBool("alienform",false) == true) then
@@ -81,14 +65,9 @@ function GM:Think()
 		end
 	end
 	GMNextThink = CurTime() + 0.08
-
 end
 
-
-
-/*-----------------------------
-ROUND INFO
-------------------------------*/
+-- ROUND INFO
 function GetRoundState()
 	return GAMEMODE.Round_State
 end
@@ -99,9 +78,6 @@ function SetupRoundHistory()
 	RoundHistory["Kill"] = {}
 	RoundHistory["First"] = {}
 end
-
-
-
 
 function RoundStateChanged(old,new)
 	if (new == ROUND_PREP) then
@@ -120,7 +96,6 @@ function RoundStateChanged(old,new)
 		EndSound()
 		hook.Call("MorbusEndRound", GAMEMODE)
 	end
-
 end
 
 function ActiveSound()
@@ -135,10 +110,7 @@ function EndSound()
 	end
 end
 
-
-/*-----------------------------
-Clean Up Map
-------------------------------*/
+-- Clean Up Map
 function GM:CleanUpMap()
 	game.CleanUpMap()
 end
@@ -146,13 +118,14 @@ end
 function NoHudMode(ply,cmd,args)
 	if #args == 1 then
 		local a = tonumber(args[1])
+
 		if a == 1001 then
 			for i=1,20 do
-   				HUD_DEBUG[i] = true
+				HUD_DEBUG[i] = true
 			end
 		elseif a == 1002 then
 			for i=1,20 do
-   				HUD_DEBUG[i] = false
+				HUD_DEBUG[i] = false
 			end
 		else
 			HUD_DEBUG[a] = !HUD_DEBUG[a]
@@ -182,12 +155,9 @@ function NoHudMode(ply,cmd,args)
 		MsgN("Also morbus_mute_status for muting")
 		MsgN("and morbus_toggle_chat")
 	end
-
 end
 concommand.Add("morbus_toggle_hud",NoHudMode)
 
-
-DChat = true
 function TogChat()
 	if DChat then
 		hook.Add("StartChat", "StartChat", function() return true end)
@@ -201,8 +171,3 @@ function TogChat()
 	end
 end
 concommand.Add("morbus_toggle_chat",TogChat)
-
-
-/*-----------------------------
-TEST
-------------------------------*/
