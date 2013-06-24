@@ -1,14 +1,17 @@
-// Mutator system
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
+-- Mutator system
 Mutators = {}
-
-
-
 
 function RegisterMutator(tab,name)
 	tab.Active = false
+
 	CreateConVar("morbus_mutator_"..string.lower(name), "0", FCVAR_NOTIFY)
+
 	if !tab.Check then
 		function tab:Check()
 			if GetConVar("morbus_mutator_"..string.lower(name)):GetBool() then
@@ -20,22 +23,19 @@ function RegisterMutator(tab,name)
 			end
 		end
 	end
-
 	for k,v in pairs(tab.Hooks) do
 		local func = function(...)
 			if GetGlobalBool("mutator_"..string.lower(name),0) then
 				v(...)
 			end
 		end
-		hook.Add(k,name.."_"..k,func)	
+		hook.Add(k,name.."_"..k,func)
 	end
-
 	Mutators[name] = tab
 	Mutators[name]:Check()
 end
 
-// Mutator Control
-
+-- Mutator Control
 function EnableMutator(name)
 	if Mutators[name] then
 		Mutators[name].Active = true
@@ -61,8 +61,7 @@ function MutatorStatus(name)
 	return false
 end
 
-// Mutator functions
-
+-- Mutator functions
 function CheckMutators()
 	for k,v in pairs(Mutators) do
 		if v.Check then
