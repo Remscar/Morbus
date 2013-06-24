@@ -1,16 +1,19 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
+
+local plymeta = FindMetaTable( "Player" )
 
 function GetEvolutionPoints(ply)
-   return ply.Evo_Points or 0
+	return ply.Evo_Points or 0
 end
 
 function GetTotalEvolutionPoints()
-   return Total_Evolution_Points
+	return Total_Evolution_Points
 end
 
-local plymeta = FindMetaTable( "Player" )
 if not plymeta then return end
 
 function plymeta:GetEvoPoints()
@@ -33,14 +36,13 @@ end
 
 function Send_Upgrades(ply)
 	Clear_Upgrades(ply)
-	
+
 	for k,v in pairs(ply.Upgrades) do
 		umsg.Start("SendUpgrade",ply)
 		umsg.Char(k)
 		umsg.Char(v)
 		umsg.End()
 	end
-	
 end
 
 function Send_Upgrade(ply,up)
@@ -49,7 +51,6 @@ function Send_Upgrade(ply,up)
 	umsg.Char(ply.Upgrades[up])
 	umsg.End()
 end
-
 
 function Clear_Upgrades(ply)
 	umsg.Start("ClearUpgrades",ply)
@@ -78,20 +79,18 @@ function Increase_Upgrade(ply,cmd,args)
 	else
 		ply:SendUpgrades()
 	end
-
-
 end
 concommand.Add("morbus_upgrade",Increase_Upgrade)
 
 function Hack_Points(ply,cmd,args)
 	local num = tonumber(args[1])
+
 	if ply:IsSuperAdmin() then
 		ply.Evo_Points = ply.Evo_Points + num
 		ply:SendEvoPoints()
 	end
 end
 concommand.Add("give_points",Hack_Points)
---RunConsoleCommand("alien_increase_level_upgrade",self.Upgrade)
 
 function CalcUpgrade()
 	return POINTS_PER_KILL + math.Round(#player.GetAll()*POINTS_PER_KILL2)
