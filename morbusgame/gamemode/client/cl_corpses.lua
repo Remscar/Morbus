@@ -1,6 +1,10 @@
-// Player Bodies
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
+-- Player Bodies
 function CheckBody()
 	if !LocalPlayer():IsGame() || LocalPlayer():IsSwarm() then return end
 
@@ -16,23 +20,21 @@ function CheckBody()
 			local ply = ent:GetNWEntity("Player",nil)
 			if !ply || !IsValid(ply) then return end
 			if ply == LocalPlayer() then return end
-			
+
 			net.Start("FoundBody")
 			net.WriteVector(ent:GetPos())
 			net.WriteEntity(ply)
 			net.SendToServer()
-
 		end
-
-
 	end
-
 end
 
 function FoundBody()
 	local ply = net.ReadEntity()
+
 	if ply == LocalPlayer() then return end
-	if ply.sb_tag and ply.sb_tag.txt != "Alien" then //no more beep spam
+
+	if ply.sb_tag and ply.sb_tag.txt != "Alien" then -- no more beep spam
 		ply.sb_tag = {}
 		ply.sb_tag.txt = "Alien"
 		ply.sb_tag.color = COLOR_RED
