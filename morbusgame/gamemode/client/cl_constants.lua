@@ -9,35 +9,35 @@ Mission = {}
 Mission = {
 	{
 		"None",
-		"You have nothing to do right now".
+		"You have nothing to do right now",
 	},
 	{
 		"Sleep",
 		"If you don't sleep your going to passout",
 		"Sleep is vital to your survival",
-		"You need to sleep".
+		"You need to sleep",
 	},
 	{
 		"Eat",
 		"If you don't eat your going to starve",
 		"Your stromach is rumbling",
-		"Your getting pretty hungry".
+		"Your getting pretty hungry",
 	},
 	{
 		"Clean",
 		"Clean this shit off",
 		"Your covered in shit",
-		"You look like a mud monster".
+		"You look like a mud monster",
 	},
 	{
 		"Piss",
 		"Your bowels yearn for a toilet",
 		"The dam needs to be broken",
-		"Brown bomb ready!".
+		"Brown bomb ready!",
 	},
 	{
 		"Kill",
-		"Hunt down the humans and infect or kill them".
+		"Hunt down the humans and infect or kill them",
 	}
 }
 -- VGUI ELEMENTS

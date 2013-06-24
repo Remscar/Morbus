@@ -7,11 +7,11 @@
 -- INCLUDES
 include("shared.lua")
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/shared/*.lua","LUA")) do include("shared/" .. v) end
+for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/*.lua","LUA")) do include("client/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/vgui/*.lua","LUA")) do include("client/vgui/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/hud/*.lua","LUA")) do include("client/hud/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/sb/*.lua","LUA")) do include("client/sb/" .. v) end
 for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/fx/*.lua","LUA")) do include("client/fx/" .. v) end
-for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/*.lua","LUA")) do include("client/" .. v) end
 
 -- DEFAULT VARIABLES
 Morbus = {}
