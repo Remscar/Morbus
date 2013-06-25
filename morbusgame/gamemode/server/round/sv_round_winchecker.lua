@@ -1,6 +1,10 @@
-/*----------------------------------------------------
-WIN CHECKER
-----------------------------------------------------*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
+
+-- WIN CHECKER
 function WinChecker()
 	if GetRoundState() == ROUND_ACTIVE then
 		if CurTime() > GetGlobalFloat("morbus_round_end", 0) then
@@ -27,6 +31,7 @@ function WinChecker()
 			end
 		else
 			local win = CheckForWin()
+
 			if win != WIN_NONE then
 				if Human_Evacuated then
 					Msg(WIN_HUMAN.." Won @ "..CurTime().."\n")
@@ -42,8 +47,6 @@ function WinChecker()
 end
 
 function CheckForWin()
-	-- return WIN_NONE //Dubug
-
 	local brood_alive = false
 	local human_alive = false
 
@@ -60,18 +63,13 @@ function CheckForWin()
 		if brood_alive and human_alive then
 			return WIN_NONE -- Nobody is a winner yet
 		end
-
-	end -- end the loop
-
+	end
 	if brood_alive and not human_alive then
 		return WIN_ALIEN
 	elseif not brood_alive and human_alive then
 		return WIN_HUMAN
-	elseif not human_alive then
-		--If everyone is dead then the infeciton doesnt spread then humans win
+	elseif not human_alive then --If everyone is dead then the infeciton doesnt spread then humans win
 		return WIN_HUMAN
 	end
-
-
 	return WIN_NONE
 end

@@ -1,28 +1,26 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
-GM.Name = "MORBUS" //VERSION 1.5.2Dev
+GM.Name = "MORBUS"
 GM.Author = "Remscar"
 GM.Email = "zachary@remscar.com"
 GM.Website = "http://www.remscar.com"
-GM.TeamBased  = false;
+GM.TeamBased	= false;
 
-GM_VERSION = "1.5.2"
+GM_VERSION = "1.5.2-dev"
 GM_VERSION_SHORT = 152
------------------------------------------------------
+
+DEBUG_MORBUS = false
+
 local folder = GM.Folder
 FOLDER_NAME = folder:gsub("gamemodes/", "")
 
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-
 _G.ValidEntity = _G.IsValid
 
----------------------------------------ENUMERATIONS
-
+-- ENUMERATIONS
 ROUND_WAIT = 1
 ROUND_PREP = 2
 ROUND_ACTIVE = 3
@@ -68,7 +66,6 @@ WEAPON_HEAVY = 4
 WEAPON_MISC = 5
 WEAPON_ROLE = 6
 
-
 DEFAULT_JUMP = 200
 
 STARTING_EVOLUTION_QUEEN = 5
@@ -87,80 +84,61 @@ TRANSFORM_TIME = 10
 STARTING_SWARM_SPAWNS = 5
 SWARM_SPAWNS_BONUS = 3
 
-
-
-
-
-----------------------------------------------------
 NEED_ENTS = {}
 NEED_ENTS[MISSION_SLEEP] = {"need_bed","need_bedroom"}
 NEED_ENTS[MISSION_EAT] = {"need_food","need_restaurant"}
 NEED_ENTS[MISSION_CLEAN] = {"need_wash","need_shower"}
 NEED_ENTS[MISSION_BATHROOM] = {"need_piss","need_toilet"}
 
-/*-----------------------------
-COSNTANTS
-------------------------------*/
+-- CONSTANTS
 BROOD_SPEED = 330
 BROOD_SPRINT = 390
 SWARM_SPEED = 250
 HUMAN_SPEED = 270
 
-TTC_MISSION = 8
+TTC_MISSION = 8 -- Time To Complete
 --FIRST_SPAWN = true
 
-
-
-/*-------------------------------------------------
-Random Shared Models
-aka humanss
----------------------------------------------------*/
+-- Random Shared Models (Humans & Aliens)
 Models = {}
 Models.Male = {
-"models/player/group01/male_01.mdl",
-"models/player/group01/male_02.mdl",
-"models/player/group01/male_03.mdl",
-"models/player/group01/male_04.mdl",
-"models/player/group01/male_05.mdl",
-"models/player/group01/male_06.mdl",
-"models/player/group01/male_07.mdl",
-"models/player/group01/male_08.mdl",
-"models/player/group01/male_09.mdl",
-"models/player/monk.mdl",
-"models/player/odessa.mdl",
-"models/player/Kleiner.mdl",
-"models/player/breen.mdl",
-"models/player/Barney.mdl",
-"models/player/Hostage/hostage_01.mdl",
-"models/player/Hostage/hostage_02.mdl",
-"models/player/Hostage/hostage_03.mdl",
-"models/player/Hostage/hostage_04.mdl",
+	"models/player/group01/male_01.mdl",
+	"models/player/group01/male_02.mdl",
+	"models/player/group01/male_03.mdl",
+	"models/player/group01/male_04.mdl",
+	"models/player/group01/male_05.mdl",
+	"models/player/group01/male_06.mdl",
+	"models/player/group01/male_07.mdl",
+	"models/player/group01/male_08.mdl",
+	"models/player/group01/male_09.mdl",
+	"models/player/monk.mdl",
+	"models/player/odessa.mdl",
+	"models/player/Kleiner.mdl",
+	"models/player/breen.mdl",
+	"models/player/Barney.mdl",
+	"models/player/Hostage/hostage_01.mdl",
+	"models/player/Hostage/hostage_02.mdl",
+	"models/player/Hostage/hostage_03.mdl",
+	"models/player/Hostage/hostage_04.mdl",
 }
-
-
 Models.Female = {
-"models/player/group01/female_01.mdl",
-"models/player/group01/female_02.mdl",
-"models/player/group01/female_03.mdl",
-"models/player/group01/female_04.mdl",
-"models/player/group01/female_06.mdl",
-"models/player/alyx.mdl",
-"models/player/mossman.mdl",
+	"models/player/group01/female_01.mdl",
+	"models/player/group01/female_02.mdl",
+	"models/player/group01/female_03.mdl",
+	"models/player/group01/female_04.mdl",
+	"models/player/group01/female_06.mdl",
+	"models/player/alyx.mdl",
+	"models/player/mossman.mdl",
 }
-
-
 Models.Brood = "models/player/verdugo/verdugo.mdl"
 Models.Swarm = "models/morbus/swarm/enhancedslasher.mdl"
-util.PrecacheModel(Models.Brood)
-util.PrecacheModel(Models.Swarm)
 
 local function LoadModels(tab)
-  for k,v in pairs(tab) do
-    util.PrecacheModel(v)
-  end
+	for k,v in pairs(tab) do
+		util.PrecacheModel(v)
+	end
 end
 LoadModels(Models.Male)
 LoadModels(Models.Female)
-
-
-//I removed my little monologue here because it was pretty dumb
+util.PrecacheModel(Models.Brood)
+util.PrecacheModel(Models.Swarm)

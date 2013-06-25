@@ -1,8 +1,10 @@
-/*------------------------------------------------
-SO MANY UPGRADES BITCHES
--------------------------------------------------*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
+-- SO MANY UPGRADES BITCHES
 UPGRADE = {} --To be used as ENUM
 UPGRADES = {} -- Used to store upgrade data
 UPGRADE_TREES = {} -- Used to store upgrade tree
@@ -26,9 +28,8 @@ UPGRADES[1] = {
 	Desc="Increases attack damage by "..UPGRADE.CLAW_AMOUNT.." per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=8,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.CARAPACE = 2
 UPGRADE.CARAPACE_AMOUNT = 5
@@ -38,9 +39,8 @@ UPGRADES[2] = {
 	Desc="Decreases damage taken by "..UPGRADE.CARAPACE_AMOUNT.."% per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=5,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.SPRINT = 3
 UPGRADE.SPRINT_AMOUNT = 16
@@ -50,9 +50,8 @@ UPGRADES[3] = {
 	Desc="Increases the speed of your sprint by "..UPGRADE.SPRINT_AMOUNT.." per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=5,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.EXHAUST = 4
 UPGRADE.EXHAUST_AMOUNT = 45
@@ -62,9 +61,8 @@ UPGRADES[4] = {
 	Desc="Decreases the time a human has to complete their need by "..UPGRADE.EXHAUST_AMOUNT.." seconds every attack, per level.",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=3,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.SDEFENSE = 5
 UPGRADE.SDEFENSE_AMOUNT = 20
@@ -74,9 +72,8 @@ UPGRADES[5] = {
 	Desc="Reduces damage from pistols and SMGs by "..UPGRADE.SDEFENSE_AMOUNT.."%",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=1,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.FALL = 6
 UPGRADE.FALL_AMOUNT = 33
@@ -86,9 +83,8 @@ UPGRADES[6] = {
 	Desc="Decreases fall damage by "..UPGRADE.FALL_AMOUNT.."% per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=3,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.ATKSPEED = 7
 UPGRADE.ATKSPEED_AMOUNT = 10
@@ -98,9 +94,8 @@ UPGRADES[7] = {
 	Desc="Your attack speed increaes by "..UPGRADE.ATKSPEED_AMOUNT.."% per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=4,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.REGEN = 8
 UPGRADE.REGEN_AMOUNT = 1
@@ -110,9 +105,8 @@ UPGRADES[8] = {
 	Desc="Restores "..UPGRADE.REGEN_AMOUNT.."*(LEVEL) health per second when in alien form",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=3,
-	Tier=1
+	Tier=1,
 }
-
 
 UPGRADE.JUMP = 9
 UPGRADE.JUMP_AMOUNT = 110
@@ -122,9 +116,8 @@ UPGRADES[9] = {
 	Desc="Increases jump power by "..UPGRADE.JUMP_AMOUNT.." per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=2,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.LIFESTEAL = 10
 UPGRADE.LIFESTEAL_AMOUNT = 5
@@ -134,9 +127,8 @@ UPGRADES[10] = {
 	Desc="Regenerates "..UPGRADE.LIFESTEAL_AMOUNT.."*(LEVEL) HP everytime you attack a human",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=3,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.HDEFENSE = 11
 UPGRADE.HDEFENSE_AMOUNT = 20
@@ -146,9 +138,8 @@ UPGRADES[11] = {
 	Desc="Reduces damage from Rifles and Shotguns by "..UPGRADE.HDEFENSE_AMOUNT.."%",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=1,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.BREATH = 12
 UPGRADES[12] = {
@@ -157,9 +148,8 @@ UPGRADES[12] = {
 	Desc="Mutes the sound of your breathing",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=1,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.SMELLRANGE = 13
 UPGRADE.SMELLRANGE_AMOUNT = 1000
@@ -169,9 +159,8 @@ UPGRADES[13] = {
 	Desc="Increases the range from which you can smell humans by "..UPGRADE.SMELLRANGE_AMOUNT.." units per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=2,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.HEALTH = 14
 UPGRADE.HEALTH_AMOUNT = 25
@@ -181,9 +170,8 @@ UPGRADES[14] = {
 	Desc="Increases maximum health by "..UPGRADE.HEALTH_AMOUNT.." per level",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=4,
-	Tier=2
+	Tier=2,
 }
-
 
 UPGRADE.INVISIBLE = 15
 UPGRADES[15] = {
@@ -192,7 +180,7 @@ UPGRADES[15] = {
 	Desc="When you stand still for 6-(LEVEL) seconds you become invisible.",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=3,
-	Tier=2
+	Tier=2,
 }
 
 UPGRADE.SCREAM = 16
@@ -202,5 +190,5 @@ UPGRADES[16] = {
 	Desc="When you transform into alien form, blinds and blurs nearby humans vision.",
 	Icon="vgui/achievements/hl2_find_alllambdas",
 	MaxLevel=1,
-	Tier=1
+	Tier=1,
 }

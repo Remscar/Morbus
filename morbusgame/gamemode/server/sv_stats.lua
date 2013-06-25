@@ -1,40 +1,42 @@
-// Stats sender
-// Please dont mess with this file or fake stats
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
+
+-- Stats sender
+-- Please dont mess with this file or fake stats
 
 STATS = {}
-
-
 STATS.RoundStart = 0
 STATS.Version = 3
-
 STATS.URL = "http://www.remscar.com/morbus/stats.php"
 
-/* Parameters
-rln = Round Length
-trt = Total Round Time
-asn = Average Sanity
-swl = Swarm Lives
-nsw = Number of Swarms Alive
-nbr = Number of Broods Alive
-naa = Number of All Aliens
-nha = Number of Humans Alive
-nsp = Number of Spectators
-npy = Number of Players
-rwn = Round Winner
-nrd = Number of RDMs
-nbk = Number of Broods Killed
-nsk = Number of Swarms Killed
-nbi = Number of Brood Infects
-nsi = number of Swarm Infects
-*/
-
-
+--[[ Parameters
+	rln = Round Length
+	trt = Total Round Time
+	asn = Average Sanity
+	swl = Swarm Lives
+	nsw = Number of Swarms Alive
+	nbr = Number of Broods Alive
+	naa = Number of All Aliens
+	nha = Number of Humans Alive
+	nsp = Number of Spectators
+	npy = Number of Players
+	rwn = Round Winner
+	nrd = Number of RDMs
+	nbk = Number of Broods Killed
+	nsk = Number of Swarms Killed
+	nbi = Number of Brood Infects
+	nsi = number of Swarm Infects
+]]
 
 function STATS.Send()
-
 	if #player.GetAll() < 6 then return end
 
+	local url = STATS.URL.."?vrs="..tostring(STATS.Version)
 	local tab = {}
+
 	tab["rln"] = CurTime() - STATS.RoundStart
 	tab["trt"] = GetConVar("morbus_roundtime"):GetInt() * 60
 	tab["asn"] = util.AverageSanity()
@@ -51,15 +53,10 @@ function STATS.Send()
 	tab["nsk"] = Round_Swarm_Kills
 	tab["nbi"] = Round_Brood_Infects
 	tab["nsi"] = Round_Swarm_Infects
-	
-	local url = STATS.URL.."?vrs="..tostring(STATS.Version)
 
 	for k,v in pairs(tab) do
 		url = url.."&"..k.."="..v
 	end
-
-	//MsgN(url)
-
 	http.Fetch(url,STATS.Good, STATS.Bad)
 end
 

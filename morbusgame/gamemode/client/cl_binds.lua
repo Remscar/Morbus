@@ -1,17 +1,12 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-/*--------------------------------------------
-MORBUS CLIENT KEY AND BIND HANDLING
---------------------------------------------*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
-
-
+-- MORBUS CLIENT KEY AND BIND HANDLING
 local function SendWeaponDrop()
    RunConsoleCommand("morbus_dropweapon")
-
-   --WSWITCH:Disable()
 end
 
 function GM:OnSpawnMenuOpen()
@@ -35,15 +30,7 @@ function GM:PlayerBindPress(ply,bind,pressed)
 			return true
 		end
 	elseif bind == "+zoom" then
-      -- set voice type here just in case shift is no longer down when the
-      -- PlayerStartVoice hook runs, which might be the case when switching to
-      -- steam overlay
-      --MsgN("HOOK")
-      --ply.alien_voice = false
-      --RunConsoleCommand("morbus_alien_voice", "0")
-      --return true
-    -- elseif bind == "lastinv" then
-    -- 	return true
+		-- Nothing?
 	elseif bind == "+use" then
 		CheckBody()
 		RunConsoleCommand("morbus_use")
@@ -61,7 +48,6 @@ function GM:PlayerBindPress(ply,bind,pressed)
 		return true
 	end
 end
-
 
 function GM:KeyPress(ply, key)
    if not IsFirstTimePredicted() then return end

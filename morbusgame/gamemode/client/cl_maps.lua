@@ -1,7 +1,10 @@
-/*========================================
-VOTING SYSTEM
-======================================*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
+-- VOTING SYSTEM
 if !SMV then
 	SMV = {}
 end
@@ -13,10 +16,10 @@ SMV.VotingPanel = nil
 SMV.VotingMaps = {}
 SMV.Maps = {}
 
-
 function SMV.StartVote()
 	SMV.Maps = net.ReadTable()
 	SMV.Voting = true
+
 	if SMV.VotingPanel then
 		SMV.VotingPanel:Remove()
 	end
@@ -26,6 +29,7 @@ net.Receive("smv_start",SMV.StartVote)
 
 function SMV.EndVote()
 	SMV.Voting = false
+
 	if SMV.VotingPanel then
 		SMV.VotingPanel.HideVotingButtons()
 	end
@@ -39,6 +43,7 @@ net.Receive("smv_winner",SMV.GetWinner)
 
 function SMV.GetVotes()
 	SMV.Votes = net.ReadTable()
+
 	if SMV.VotingPanel then
 		SMV.VotingPanel.UpdateButtons()
 	end
@@ -47,12 +52,21 @@ net.Receive("smv_vote_status",SMV.GetVotes)
 
 function SMV.OpenVotingPanel()
 	local pnl = vgui.Create("DPanel")
+	local tab = table.Shuffle(SMV.Maps)
+	local n = 30
+	local x = 0
+	local y = 0
+	local z = 10
+	if #tab < n then
+		n = #tab
+	end
+
 	pnl:SetSize(800,600)
 	pnl:Center()
 	pnl:SetMouseInputEnabled(true)
 	gui.EnableScreenClicker(true)
-	//pnl:MakePopup()
 	pnl.VotingButtons = {}
+	SMV.VotingMaps = tab
 
 	function pnl:Paint()
 		draw.RoundedBox(6, 0, 0, self:GetWide(), self:GetTall(), Color(100,100,100,100))
@@ -64,23 +78,15 @@ function SMV.OpenVotingPanel()
 		end
 	end
 
-	local tab = table.Shuffle(SMV.Maps)
-	SMV.VotingMaps = tab
-
-	local n = 30
-	if #tab < n then n = #tab end
-
-	local x = 0
-	local y = 0
-	local z = 10
-
 	for i=1, n do
 		if SMV.VotingMaps[i] then
 			local btn = vgui.Create("DButton",pnl)
+
 			btn:SetSize(240,40)
 			btn:SetPos(20 + (x * 260), 60 + (y * 44))
 			btn:SetText(SMV.VotingMaps[i].." - 0 votes")
 			btn.Map = SMV.VotingMaps[i]
+
 			function btn.DoClick()
 				if SMV.Voting then
 					MsgN("Voted "..btn.Map)
@@ -89,6 +95,7 @@ function SMV.OpenVotingPanel()
 					net.SendToServer()
 				end
 			end
+
 			pnl.VotingButtons[SMV.VotingMaps[i]] = btn
 			y = y + 1
 			if y == z then
@@ -116,19 +123,17 @@ function SMV.OpenVotingPanel()
 	end
 
 	if true then
-
 		local xb = vgui.Create("DButton",pnl)
+
 		xb:SetSize(80,20)
 		xb:SetPos(pnl:GetWide()-82,2)
 		xb:SetText("Exit")
+
 		function xb:DoClick()
 			pnl:SetVisible(false)
 			gui.EnableScreenClicker(false)
 		end
 	end
-	
+
 	SMV.VotingPanel = pnl
-
-	
-
 end

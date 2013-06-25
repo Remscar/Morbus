@@ -1,18 +1,13 @@
-/*--------------------------------------------
-MORBUS MESSAGE SYSTEM
---------------------------------------------*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
+-- MORBUS MESSAGE SYSTEM
 
-
-/*--------------------------------------------
-SEND MESSAGE
----------------------------------------------*/
-
+-- SEND MESSAGE
 function GameMsg(str)
-
 	umsg.Start("game_msg")
 	umsg.String(str)
 	umsg.Bool(false)
@@ -31,7 +26,6 @@ function ColorMsg(filter, str, clr)
 end
 
 function PlayerMsg(filter,str,alien)
-
 	umsg.Start("game_msg", filter)
 	umsg.String(str)
 	umsg.Bool(alien)
@@ -41,7 +35,3 @@ end
 function AlienMsg(filter,str)
 	PlayerMsg(filter,str,true)
 end
-
-
-
-

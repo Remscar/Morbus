@@ -1,8 +1,12 @@
-// eh
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-// to be done later
-
+-- eh, to be done later
 GMNextThink = 0
+
 function GM:Think()
 	if GMNextThink <= CurTime() then
 		CheckAlien() -- Found in sv_brood.lua
