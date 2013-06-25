@@ -1,7 +1,8 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
 TYPE_KILL = 1
 TYPE_INFECT = 2
@@ -10,19 +11,18 @@ TYPE_DIE = 4
 TYPE_DAMAGE = 5
 
 TypeName = {
-  "Kill",
-  "Infect",
-  "RDM",
-  "Die",
-  "Damage"
+	"Kill",
+	"Infect",
+	"RDM",
+	"Die",
+	"Damage",
 }
-
 TypeAction = {
-  "killed",
-  "infected",
-  "RDM'd",
-  "died",
-  "damaged"
+	"killed",
+	"infected",
+	"RDM'd",
+	"died",
+	"damaged",
 }
 
 function ResetLog()
@@ -30,23 +30,22 @@ function ResetLog()
 	Round_IDs = {}
 end
 
-
-
 if SERVER then
 	function AddLog(type,ply1,ply2,info)
 		local ins = ply1:GetName().." ("..GetRoleName(ply1:GetRole())..") has "..Get_TypeAction(type)
+		local tab = {}
+		local t = CurTime() - (GetGlobalFloat("morbus_round_end", 0) - (GetConVar("morbus_roundtime"):GetInt() * 60))
+
+		tab.Type = Get_TypeName(type)
+		tab.Time = string.ToMinutesSeconds(t)
+
 		if (ply2) then
 			ins = ins.." "..ply2:GetName().." ("..GetRoleName(ply2:GetRole())..")"
 		end
-
 		if (info) then
 			ins = ins.." ["..info.."]"
 		end
 
-		local tab = {}
-		tab.Type = Get_TypeName(type)
-		local t = CurTime() - (GetGlobalFloat("morbus_round_end", 0) - (GetConVar("morbus_roundtime"):GetInt() * 60))
-		tab.Time = string.ToMinutesSeconds(t)
 		tab.Text = ins
 
 		if (!Round_IDs[ply1:UniqueID()]) then
@@ -86,23 +85,17 @@ if SERVER then
 		if !file.Exists("Morbus/logs","DATA") then
 			file.CreateDir("logs")
 		end
-		
-		
 		file.Append("Morbus/logs/"..game.GetMap( ).."/".."round_log_"..tostring(os.date("%m-%d_%H-%M"))..".txt","#### MORBUS ROUND LOG ####\n"..os.date().."\n")
 		for k,v in pairs(Round_Log) do
 			file.Append("Morbus/logs/"..game.GetMap( ).."/".."round_log_"..tostring(os.date("%m-%d_%H-%M"))..".txt","["..v.
 				Time.."] ["..v.Type.."] "..v.Text.."\n")
 		end
-
 		file.Append("Morbus/logs/"..game.GetMap( ).."/".."round_log_"..tostring(os.date("%m-%d_%H-%M"))..".txt","#### PLAYER STEAM ID's ####\n")
 		for k,v in pairs(Round_IDs) do
 			file.Append("Morbus/logs/"..game.GetMap( ).."/".."round_log_"..tostring(os.date("%m-%d_%H-%M"))..".txt","["..v[1].."] "..v[2].."\n")
 		end
-		
 	end
-
 else
-
 	function GetLog()
 		MsgN("Recieving Round Log")
 		Round_Log = net.ReadTable()
@@ -119,7 +112,4 @@ else
 		end
 	end
 	concommand.Add("print_log",PrintLog)
-
 end
-
-

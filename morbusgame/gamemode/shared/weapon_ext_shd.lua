@@ -1,19 +1,25 @@
+--[[
+  Morbus - morbus.remscar.com
+  Developed by Remscar
+  and the Morbus dev team
+]]
+
 WEPS = {}
 
 function WEPS.TypeForWeapon(class)
-   local tbl = util.WeaponForClass(class)
-   return tbl and tbl.Kind or WEAPON_NONE
+	local tbl = util.WeaponForClass(class)
+
+	return tbl and tbl.Kind or WEAPON_NONE
 end
 
-
 function WEPS.IsEquipment(wep)
-   return wep.Kind and wep.Kind >= WEAPON_ROLE
+	return wep.Kind and wep.Kind >= WEAPON_ROLE
 end
 
 function WEPS.GetClass(wep)
-   if type(wep) == "table" then
-      return wep.ClassName or wep.Classname
-   elseif IsValid(wep) then
-      return wep:GetClass()
-   end
+	if type(wep) == "table" then
+		return wep.ClassName or wep.Classname
+	elseif IsValid(wep) then
+		return wep:GetClass()
+	end
 end
