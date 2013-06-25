@@ -1,25 +1,19 @@
-
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
 function SetRoundState(state)
 	GAMEMODE.Round_State = state
-
 	SendRoundState(state)
 end
-
 
 function GetRoundState()
 	return GAMEMODE.Round_State
 end
 
-/*----------------------------------------------------
-TIMERS
-----------------------------------------------------*/
-
-
+-- TIMERS
 function StopRoundTimers()
    timer.Stop("wait2prep")
    timer.Stop("prep2begin")
@@ -37,10 +31,7 @@ function StopWinChecks()
 	timer.Stop("winchecker")
 end
 
-/*----------------------------------------------------
-PLAYER CHECKER
-----------------------------------------------------*/
-
+-- PLAYER CHECKER
 function EnoughPlayers()
 	local ready = 0
 	local needed = 2 -- 2 normally
@@ -50,12 +41,12 @@ function EnoughPlayers()
 			ready = ready + 1
 		end
 	end
-
-	if ready > needed then return true else return false end
-
+	if ready > needed then
+		return true
+	else
+		return false
+	end
 end
-
-
 
 function WaitingForPlayersChecker()
 	if GetRoundState() == ROUND_WAIT then
@@ -66,34 +57,25 @@ function WaitingForPlayersChecker()
 	end
 end
 
-
 function WaitForPlayers()
 	SetRoundState(ROUND_WAIT)
-
 	if not timer.Start("waitingforply") then
 		timer.Create("waitingforply",2,0, WaitingForPlayersChecker)
 	end
 end
 
 function CheckForAbort()
-
 	if GAMEMODE.STOP then return true end
-	
+
 	if not EnoughPlayers() then
 		StopRoundTimers()
 		WaitForPlayers()
 		return true
 	end
-
 	return false
 end
 
-
-/*----------------------------------------------------
-MISC
-----------------------------------------------------*/
-
-
+-- MISC
 local function ForceRoundRestart(ply, command, args)
    if (not IsValid(ply)) or ply:IsAdmin() or ply:IsSuperAdmin() then
       StopRoundTimers()
