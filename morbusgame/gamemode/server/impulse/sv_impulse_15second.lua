@@ -1,6 +1,10 @@
-// 15 second impulse
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
 
-
+-- 15 second impulse
 local IMPULSE = {}
 
 function IMPULSE.SECOND15()
@@ -9,7 +13,6 @@ function IMPULSE.SECOND15()
 	end
 end
 hook.Add("Impulse_15Second","15Sec_Impulse",IMPULSE.SECOND15)
-
 
 function IMPULSE.MISSION(k,v)
 	if IsValid(v) then

@@ -1,11 +1,14 @@
-// Morbus - morbus.remscar.com
-// Developed by Remscar
-// and the Morbus dev team
-/*----------------------------------------------------------
-IMPULSES
-These things run every few seconds or what not
-I hook them on timers just cause i can
-----------------------------------------------------------*/
+--[[
+	Morbus - morbus.remscar.com
+	Developed by Remscar
+	and the Morbus dev team
+]]
+
+--[[
+	IMPULSES
+	These things run every few seconds or what not
+	I hook them on timers just cause i can
+]]
 
 timer.Create("SecondImpulse",1,0,function() hook.Call("Impulse_Second") end)
 timer.Create("Second4Impulse",4,0,function() hook.Call("Impulse_4Second") end)
