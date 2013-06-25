@@ -26,7 +26,6 @@ function GM:PlayerInitialSpawn(ply)
 	local sid = string.gsub(ply:SteamID(),":","")
 	local rstate = GetRoundState() or ROUND_WAIT
 	local tm = nil
-	local ply = nil
 	local plys = nil
 
 	ply.NextSpawnTime = 0
@@ -350,7 +349,6 @@ function GetSpawnEnts(shuffled, force_all)
 end
 
 function GM:PlayerSelectSpawn(ply)
-	local num = table.Count(self.SpawnPoints)
 	local picked = nil
 
 	if ply:IsActiveBrood() then
@@ -369,6 +367,9 @@ function GM:PlayerSelectSpawn(ply)
 				ones anyway.
 			]]
 		end
+
+		local num = table.Count(self.SpawnPoints)
+
 		if num == 0 then
 			Error("No spawn entity found!\n")
 			return
