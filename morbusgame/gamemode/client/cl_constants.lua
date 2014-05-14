@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 
 /*------------------------------------------------
@@ -136,55 +128,42 @@ surface.CreateFont( "DSMedium", {
 })
 --surface.CreateFont("DeadSpaceTitleFont", 22, 100, true, false, "DSMedium")
 
-util.PrecacheSound("music/HL2_song8.mp3")
-util.PrecacheSound("music/HL2_song19.mp3")
-util.PrecacheSound("music/HL2_song33.mp3")
-util.PrecacheSound("music/HL2_song30.mp3")
+// 1:00 = 60
+// 2:00 = 120
+// 3:00 = 180
+// 4:00 = 240
+// 5:00 = 300
 
-MUSIC = {"HL2_song8.mp3","HL2_song19.mp3","HL2_song33.mp3","HL2_song30.mp3"}
-MUSIC_ALIEN_WIN = "Ravenholm_1.mp3"
-MUSIC_HUMAN_WIN = "HL1_song11.mp3"
+/*
+1- 100
+2- 130
+3- 230
+4- 250
+5- 180
+6- 190
+7- 270
+8- 310
+9- 195
+10- 220
+11- 220
+12- 210
+13- 250
+14- 310
+15- 240
+16- 240
+*/
+MUSIC_TIME = {100,130,230,250,180,190,270,310,195,220,220,210,250,310,240,240}
 
-local healthcolors = {
-  healthy = Color(0,255,0,255),
-  hurt    = Color(170,230,10,255),
-  wounded = Color(230,215,10,255),
-  badwound= Color(255,140,0,255),
-  death   = Color(255,0,0,255)
-}
-
-function util.HealthToString(health)
-  if health > 90 then
-     return "Healthy", healthcolors.healthy
-  elseif health > 70 then
-     return "Slightly Hurt", healthcolors.hurt
-  elseif health > 45 then
-     return "Wounded", healthcolors.wounded
-  elseif health > 20 then
-     return "Badly Wounded", healthcolors.badwound
-  else
-     return "Near Death", healthcolors.death
-  end
+MUSIC = {}
+for i=1,16 do
+	MUSIC[i] = {"morbus_song"..i..".mp3",MUSIC_TIME[i]}
+	util.PrecacheSound("music/morbus_song"..i..".mp3")
 end
 
-local sanitycolors = {
-  max  = Color(255,255,255,255),
-  high = Color(255,240,135,255),
-  med  = Color(245,220,60,255),
-  low  = Color(255,170,0,255),
-  min  = Color(255,120,0,255),
-}
 
-function util.SanityToString(sanity)
-  if sanity > 890 then
-     return "Perfectly Sane", sanitycolors.max
-  elseif sanity > 800 then
-     return "Mildy Psychotic", sanitycolors.high
-  elseif sanity > 650 then
-     return "Psychotic", sanitycolors.med
-  elseif sanity > 500 then
-     return "Insane", sanitycolors.low
-  else
-     return "Bat Shit Crazy", sanitycolors.min
-  end
-end
+
+MUSIC_ALIEN_WIN = "morbus_alien_victory.mp3"
+MUSIC_HUMAN_WIN = "morbus_human_victory.mp3"
+
+
+

@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 /*--------------------------------------------
 MORBUS COMMUNICATION SYSTEM
@@ -122,6 +114,11 @@ function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit
       return ""
     end
 
+    if text == "/remscar" then
+      WhoIsRemscar()
+      return ""
+    end
+
     if text == "/nightmare" then
       ChangeNightmare(ply)
       return ""
@@ -182,6 +179,11 @@ function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit
 
   if text == "/forcertv" then
     ForceMap(ply)
+    return ""
+  end
+
+  if text == "/remscar" then
+    WhoIsRemscar()
     return ""
   end
 

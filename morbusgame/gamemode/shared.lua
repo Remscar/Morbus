@@ -1,29 +1,23 @@
-/*----------------------------------------------------
-MORBUS DEVELOPED BY REMSCAR
-----------------------------------------------------*/
-GM.Name = "MORBUS" //VERSION 1.5.2
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
+
+
+GM.Name = "MORBUS" //VERSION 1.5.6
 GM.Author = "Remscar"
 GM.Email = "zachary@remscar.com"
 GM.Website = "http://www.remscar.com"
 GM.TeamBased  = false;
 
-GM_VERSION = "1.5.2"
-GM_VERSION_SHORT = 152
+GM_VERSION = "1.5.6"
+GM_VERSION_SHORT = 156
 -----------------------------------------------------
 local folder = GM.Folder
 FOLDER_NAME = folder:gsub("gamemodes/", "")
 
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 _G.ValidEntity = _G.IsValid
 
@@ -95,8 +89,11 @@ SWARM_SPAWNS_BONUS = 3
 
 
 
+
+
 ----------------------------------------------------
 NEED_ENTS = {}
+NEED_ENTS_LOCATIONS = {}
 NEED_ENTS[MISSION_SLEEP] = {"need_bed","need_bedroom"}
 NEED_ENTS[MISSION_EAT] = {"need_food","need_restaurant"}
 NEED_ENTS[MISSION_CLEAN] = {"need_wash","need_shower"}
@@ -107,31 +104,11 @@ COSNTANTS
 ------------------------------*/
 BROOD_SPEED = 330
 BROOD_SPRINT = 390
-SWARM_SPEED = 260
+SWARM_SPEED = 250
 HUMAN_SPEED = 270
 
 TTC_MISSION = 8
 --FIRST_SPAWN = true
-
-
-local math = math
-local rand = math.random
-function table.Shuffle(t)
-  local n = #t
- 
-  while n > 2 do
-    -- n is now the last pertinent index
-    local k = rand(n) -- 1 <= k <= n
-    -- Quick swap
-    t[n], t[k] = t[k], t[n]
-    n = n - 1
-  end
- 
-  return t
-end
-
-
-
 
 
 

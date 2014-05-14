@@ -1,14 +1,6 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 /*----------------------------------------------
 Mission stuff
 ------------------------------------------------*/
@@ -66,7 +58,16 @@ function DoMission(ply,cmd,args)
 	if ply.Touching != MISSION_NONE && ply.Touching == ply.Mission then
 		ply.Mission_Doing = true
 		ply.Mission_Complete = CurTime() + TTC_MISSION
-		ply:EmitSound(Sounds.Mission[ply.Mission],75,100)
+		if ply.Mission != 4 then
+			ply:EmitSound(Sounds.Mission[ply.Mission],75,100)
+		else
+			local r = math.random(1,10)
+			if r <= 3 then
+				ply:EmitSound(Sounds.Mission[ply.Mission + 1],125,100)
+			else
+				ply:EmitSound(Sounds.Mission[ply.Mission],75,100)
+			end
+		end
 		ply:SendMissionComplete()
 		ply:Freeze(true)
 	end

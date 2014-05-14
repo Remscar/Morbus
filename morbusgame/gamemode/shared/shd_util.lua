@@ -9,6 +9,13 @@ function util.GetAlivePlayers()
    return alive
 end
 
+local old_GetGlobalBool = _G.GetGlobalBool
+function GetGlobalBool(key,default)
+  local res = old_GetGlobalBool(key,default)
+  if res == 0 then return false end
+  return true
+end
+
 local exp = math.exp
 -- Equivalent to ExponentialDecay from Source's mathlib.
 -- Convenient for falloff curves.
@@ -81,4 +88,37 @@ function util.StartBleeding(ent, dmg, t)
 
    timer.Create("bleed" .. ent:EntIndex(), delay, times,
                 function() DoBleed(ent) end)
+end
+
+
+local math = math
+local rand = math.random
+function table.Shuffle(t)
+  local n = #t
+ 
+  while n > 2 do
+    -- n is now the last pertinent index
+    local k = rand(n) -- 1 <= k <= n
+    -- Quick swap
+    t[n], t[k] = t[k], t[n]
+    n = n - 1
+  end
+ 
+  return t
+end
+
+
+function Get_TypeName(type) // Damage Log
+  return TypeName[type]
+end
+function Get_TypeAction(type) // Damage Log
+  return TypeAction[type]
+end
+
+function GetRoleName(role)
+  if (role == 1) then return "HUMAN"
+  elseif (role == 2) then return "BROOD ALIEN"
+  elseif (role == 3) then return "SWARM ALIEN" end
+
+  return ""
 end

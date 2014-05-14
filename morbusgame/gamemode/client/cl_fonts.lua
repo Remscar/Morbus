@@ -45,6 +45,8 @@ tblFonts["DefaultBold"] = {
 	weight = 500,
 }
 
+
+
 tblFonts["DefaultUnderline"] = {
 	font = "Tahoma",
 	size = 13,

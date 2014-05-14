@@ -3,7 +3,6 @@ if (SERVER) then
 end
 
 if ( CLIENT ) then
-	language.Add ("ent_glowstick_fly", "Glow Stick") --wtf
 	SWEP.DrawCrosshair		= true
 	SWEP.ViewModelFOV       = 70
 	SWEP.ViewModelFlip		= false

@@ -13,12 +13,10 @@ function ENT:Initialize()
 
 	self:SetCollisionGroup( COLLISION_GROUP_PROJECTILE )
 	
-	
-		if SERVER then
-			util.SpriteTrail(self.Entity, 0, Color(255, 155, 45, 255), false, 25, 0.5, 0.3, 45, "trails/plasma.vmt")
-			
-
-    		end
+	-- Sprite Trail Effect
+	if SERVER then
+		util.SpriteTrail(self.Entity, 0, Color(255, 155, 45, 255), false, 25, 0.5, 0.3, 45, "trails/plasma.vmt")
+	end
 
 	if SERVER then
 		local phys = self:GetPhysicsObject()
@@ -26,27 +24,23 @@ function ENT:Initialize()
 			phys:Wake()
 		end
 	end
-	if CLIENT then
-	local vOffset = self:LocalToWorld( Vector(0, 0, self:OBBMins().z) )
-	self.Emitter = ParticleEmitter( vOffset )
-	end
-	
+
 	self.Created = CurTime()
 end
 
+
 function ENT:Think()
+
 end
+
 
 function ENT:Explode()
 
- 
-	
-	local effectdata = EffectData()
-	effectdata:SetNormal( Vector(0,0,1) )
-	effectdata:SetOrigin( self:GetPos() )
-	util.Effect( "YellowBlast", effectdata  )
+	-- SFX
+	ParticleEffect( "energy_blast", self:GetPos(), Angle(0, 0, 0), nil )
+	self.Entity:EmitSound( "weapons/blaster/blaster_hit.wav", 100, math.random(95,125) );
 
-	
+	-- Damage in sphere
 	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 45 )) do
 		if v != self:GetOwner() then
 			local dmginfo = DamageInfo()
@@ -57,6 +51,7 @@ function ENT:Explode()
 		end
 	end
 	
+	-- Extra cone 
 	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 105 )) do
 		if v != self:GetOwner() then
 			local dmginfo = DamageInfo()
@@ -66,20 +61,17 @@ function ENT:Explode()
 			v:TakeDamageInfo( dmginfo )
 		end
 	end
-	
-
-
-
-
 
 end
 
 
 function ENT:PhysicsCollide( data, phys )
+
 	self:Explode()
 	self:Remove()
 
 end
+
 
 function ENT:OnRemove()
 

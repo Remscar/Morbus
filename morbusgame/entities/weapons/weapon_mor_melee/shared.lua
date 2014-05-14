@@ -52,30 +52,69 @@ end
 
 
 function SWEP:PrimaryAttack()
-    self.Weapon:SetNextPrimaryFire(CurTime() + self.Delay)
+  self.Weapon:SetNextPrimaryFire(CurTime() + self.Delay)
 
-    local trace = {}
-    trace.start = self.Owner:GetShootPos()
-    trace.endpos = trace.start + (self.Owner:GetAimVector()*self.Range)
-    trace.filter = self.Owner
-    trace.mins = Vector(1,1,1) * -10
-    trace.maxs = Vector(1,1,1) * 10
-    trace = util.TraceLine(trace)
-    if SERVER then self.Owner:EmitSound(self.SwingSound) end
+  self.Owner:LagCompensation(true)
+  local trace = {}
+  trace.start = self.Owner:GetShootPos()
+  trace.endpos = trace.start + (self.Owner:GetAimVector()*self.Range)
+  trace.filter = self.Owner
+  trace.mins = Vector(1,1,0.5) * -13
+  trace.maxs = Vector(1,1,0.5) * 13
+  trace.mask = CONTENTS_MONSTER + CONTENTS_HITBOX
+  trace = util.TraceHull(trace)
 
-    if trace.Fraction < 1 && trace.HitNonWorld && trace.Entity:IsPlayer()  then
-        if SERVER then
-            trace.Entity:TakeDamage( self.Damage*2, self.Owner, self.Weapon )
-            self.Owner:EmitSound(self.HitSound)
-        end
-        self.Weapon:SendWeaponAnim(ACT_VM_HITCENTER)
-    elseif trace.Hit && trace.Entity then
-            if SERVER then trace.Entity:TakeDamage( self.Damage*3, self.Owner, self.Weapon ) end
-        self.Weapon:SendWeaponAnim(ACT_VM_HITCENTER)
-    else
-        self.Weapon:SendWeaponAnim(ACT_VM_MISSCENTER)
-    end
-    self.Owner:SetAnimation( PLAYER_ATTACK1 )
+  local trace2 = {}
+  trace2.start = self.Owner:GetShootPos()
+  trace2.endpos = trace2.start + (self.Owner:GetAimVector()*self.Range)
+  trace2.filter = self.Owner
+  trace2.mins = Vector(1,1,0.5) * -11
+  trace2.maxs = Vector(1,1,0.5) * 11
+  trace2 = util.TraceHull(trace2)
+
+  if trace2.Fraction*1.3 < trace.Fraction then
+      if SERVER then self.Owner:EmitSound(self.SwingSound,300,100) end
+      trace = {}
+      trace.start = self.Owner:GetShootPos()
+      trace.endpos = trace.start + (self.Owner:GetAimVector()*self.Range)
+      trace.filter = self.Owner
+      trace = util.TraceLine(trace)
+      if trace.Fraction < 1 && trace.HitNonWorld && trace.Entity && !trace.Entity:IsPlayer() then
+          if SERVER then
+            local dmg = self.Damage * 2
+            trace.Entity:TakeDamage( dmg, self.Owner, self.Weapon )
+          end
+          self.Weapon:SendWeaponAnim(ACT_VM_HITCENTER)
+      else
+          self.Weapon:SendWeaponAnim(ACT_VM_MISSCENTER)
+      end
+      self.Owner:SetAnimation( PLAYER_ATTACK1 )
+      self.HolsterTime = CurTime() + 1.5
+      return 
+  end
+
+  if SERVER then self.Owner:EmitSound(self.SwingSound) end
+
+  if trace.Fraction < 1 && trace.HitNonWorld && trace.Entity:IsPlayer()  then
+      if SERVER then
+          local a1,a2 = trace.Entity:GetAngles().y, self.Owner:GetAngles().y
+
+          local dmg = self.Damage
+          trace.Entity:TakeDamage( dmg, self.Owner, self.Weapon )
+
+          local ent = trace.Entity
+
+          self.Weapon:SendWeaponAnim(ACT_VM_HITCENTER)
+          self.Owner:EmitSound(self.HitSound,300,100)
+      end
+      self.Weapon:SendWeaponAnim(ACT_VM_HITCENTER)
+  else
+      self.Weapon:SendWeaponAnim(ACT_VM_MISSCENTER)
+  end
+  self.Owner:SetAnimation( PLAYER_ATTACK1 )
+  self.Owner:LagCompensation(false)
+
+  self.HolsterTime = CurTime() + 1
 
 end
 

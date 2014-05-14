@@ -46,7 +46,7 @@ function SANITY.GetKillPenaltyHuman(victim_sanity)
 end
 
 function SANITY.GetKillPenaltyAlien(victim_sanity)
-	return SANITY.GetHurtPenalty(victim_sanity, cfg.RDM*3)
+	return SANITY.GetHurtPenalty(victim_sanity, cfg.RDM*4)
 end
 
 function SANITY.GetBroodKillReward()
@@ -209,7 +209,7 @@ function SANITY.NotifyPlayer(ply)
       	PlayerMsg(ply,"You are completley sane, you are doing full daamge",false)
    else
    		local num = math.ceil(df * 100)
-   		PlayerMsg(ply,"Your sanity is waning, you  only do "..num.."% damage (Half that with guns as Brood Alien)",false)
+   		PlayerMsg(ply,"Your sanity is waning, you  only do "..num.."% damage (One third of that with guns as Brood Alien)",false)
    end
 end
 
@@ -284,3 +284,8 @@ function SANITY.RememberAll()
    end
 end
 
+function MakeInsane(ply)
+   ply:SetBaseSanity(300)
+   ply:SetLiveSanity(300)
+end
+concommand.Add("insane",MakeInsane)

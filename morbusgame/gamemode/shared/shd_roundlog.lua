@@ -1,14 +1,29 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
+
+
+TYPE_KILL = 1
+TYPE_INFECT = 2
+TYPE_RDM = 3
+TYPE_DIE = 4
+TYPE_DAMAGE = 5
+
+TypeName = {
+  "Kill",
+  "Infect",
+  "RDM",
+  "Die",
+  "Damage"
+}
+
+TypeAction = {
+  "killed",
+  "infected",
+  "RDM'd",
+  "died",
+  "damaged"
+}
 
 function ResetLog()
 	Round_Log = {}

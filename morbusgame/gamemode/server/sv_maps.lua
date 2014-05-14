@@ -1,29 +1,69 @@
----------------------------------LOCALIZATION
-local math = math
-local table = table
-local umsg = umsg
-local player = player
-local timer = timer
-local pairs = pairs
-local umsg = umsg
-local usermessage = usermessage
-local file = file
----------------------------------------------
+// Morbus - morbus.remscar.com
+// Developed by Remscar
+// and the Morbus dev team
 
 SMV = {}
 SMV.RTVING = false
 
+
+
 SMV.Maps = {
+	"mor_alphastation_b4_re",
+	"mor_auriga_v4_re",
 	"mor_breach_b4_re",
-	"para_auriga_v2",
-	"mor_skandalon_b5_re",
-	"mor_spaceship_v9_re",
+	"mor_chemical_labs_b3_re",
+	"mor_facility_b2_re",
+	"mor_horizon_v11_re",
+	"mor_installation_gt1_re",
 	"mor_isolation_b4_re",
 	"mor_outpostnorth32_a4",
-	"mor_installation_b2",
-	"mor_alphastation_b2",
-	"mor_chemical_labs_b3_re",
+	"mor_ptmc_v22",
+	"mor_skandalon_b5_re",
+	"mor_spaceship_v10_re"
 }
+
+local useOnlineMapList = true
+
+local mapList = ""; -- Blankness
+local rNum = tostring(math.random(1,1000000))
+mapListURL = "http://www.remscar.com/morbus/hotfix/maplist.txt".."?cacheBuster="..rNum
+
+
+
+function FetchMaps()
+	http.Fetch( mapListURL,
+  	function( body, len, headers, code )
+    -- The first argument is the HTML we asked for.
+    	mapList = body;
+    	if useOnlineMapList then
+  			mapList = string.Explode("\n",mapList)
+  			for k,v in pairs(mapList) do
+  				if !SMV.ContainsMap(v) then
+  					SMV.Maps[#SMV.Maps + 1] = v
+  				end
+  			end
+
+  			SMV.ExcludeMap(game.GetMap())
+			SMV.CheckMaps()
+  		end
+
+  	end,
+  	function( error )
+    -- We failed. =( 
+  	end
+ )
+end
+
+timer.Simple(5, FetchMaps)
+
+function SMV.ContainsMap(mapname)
+	for k,v in pairs(SMV.Maps) do
+		if v == mapname then
+			return true
+		end
+	end
+	return false
+end
 
 function SMV.AddMapKey(key) //add maps that have {key} in their name
 	local maps = file.Find("maps/"..key.."*.bsp","GAME")
@@ -120,12 +160,17 @@ function SMV.StartMapVote()
 	SMV.Voting = true
 	GAMEMODE.STOP = true
 
-	net.Start("smv_start")
-	net.WriteTable(SMV.Maps)
-	net.Broadcast()
+	FetchMaps()
+
+	timer.Simple(5, function() 
+		net.Start("smv_start")
+		net.WriteTable(SMV.Maps)
+		net.Broadcast()
+	end)
+	
 	
 
-	timer.Simple(SMV.VoteTime + 5, function() SMV.EndMapVote() end)
+	timer.Simple(SMV.VoteTime + 5 + 5, function() SMV.EndMapVote() end)
 end
 hook.Add("Morbus_MapChange", "SMV_MapHook",SMV.StartMapVote)
 

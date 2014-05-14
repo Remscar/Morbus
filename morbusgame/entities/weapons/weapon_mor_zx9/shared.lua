@@ -69,7 +69,7 @@ SWEP.Tracer = 1
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "2", enabled = true}
 
 SWEP.WElements = {
-	["element_name"] = { type = "Model", model = "models/weapons/w_bach_m249para.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(4.622, 0.256, 0.063), angle = Angle(-9.181, -1.231, 180), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	["element_name"] = { type = "Model", model = "models/weapons/w_bach_m249para.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(4.622, 0.256, 0.063), angle = Angle(-9.181, -1.231, 180), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 }
 
 /*---------------------------------------------------------

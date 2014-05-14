@@ -11,6 +11,7 @@ function ENT:Initialize()
 	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then phys:Wake() end
 	self.Death = CurTime() + 3
+	self.Exploded = false
 end
 
 function ENT:SpawnFunction( ply, tr )
@@ -34,6 +35,9 @@ function ENT:Explode()
 	util.Effect( "shockwave", effectdata, true, true )
 	util.Effect( "explosion_dust", effectdata, true, true )
 
+	ParticleEffect( "frag_explosion", self:GetPos(), Angle(0, 0, 0), nil )
+	self.Entity:EmitSound( "weapons/demon/explosion.wav", 100, math.random(95,125) );
+
 	local explo = ents.Create( "env_explosion" )
 	explo:SetOwner( self.GrenadeOwner )
 	explo:SetPos( self:GetPos() )
@@ -56,21 +60,26 @@ function ENT:Explode()
 end
 
 function ENT:Think()
-	if self.Death && self.Death < CurTime() then
-		self:Remove()
-		self:Explode()
-	end
-end
-
-function ENT:Use( activator, caller )
-	self.Entity:Remove() 
 end
 
 local BounceSnd = Sound( "HEGrenade.Bounce" )
 function ENT:PhysicsCollide( data, phys )
-	if data.Speed > 50 then
-		self:EmitSound( BounceSnd )
-	end
-	local impulse = (-data.Speed * data.HitNormal * .4 + (data.OurOldVelocity * -.6))*0.5
-	phys:ApplyForceCenter( impulse )
+if data.Speed > 50 then
+	self:EmitSound( BounceSnd )
+end
+local impulse = (-data.Speed * data.HitNormal * .4 + (data.OurOldVelocity * -.6))*0.5
+phys:ApplyForceCenter( impulse )
+	
+if self.Exploded == true then return end
+	self.Exploded = true
+	timer.Simple(3, function()
+	if !self.Entity:IsValid() then return end
+		self:Explode()
+		self:Remove()
+	end)
+
+end
+
+function ENT:Use( activator, caller )
+	self.Entity:Remove() 
 end
