@@ -163,22 +163,21 @@ end
 Clean Up Map
 ------------------------------*/
 function GM:CleanUpMap()
-   -- Ragdolls sometimes stay around on clients. Deleting them can create issues
+	   -- Ragdolls sometimes stay around on clients. Deleting them can create issues
    -- so all we can do is try to hide them.
-   for _, ent in pairs(ents.FindByClass("prop_ragdoll")) do
-      if IsValid(ent) then
-         ent:SetNoDraw(true)
-         ent:SetSolid(SOLID_NONE)
-         ent:SetColor(Color(0,0,0,0))
+  for _, ent in pairs(ents.FindByClass("prop_ragdoll")) do
+    if IsValid(ent) then
+       ent:SetNoDraw(true)
+       ent:SetSolid(SOLID_NONE)
+       ent:SetColor(Color(0,0,0,0))
 
-         -- Horrible hack to make targetid ignore this ent, because we can't
-         -- modify the collision group clientside.
-         ent.NoTarget = true
-      end
-   end
-
-   -- This cleans up decals since GMod v100
-   game.CleanUpMap()
+       -- Horrible hack to make targetid ignore this ent, because we can't
+       -- modify the collision group clientside.
+       ent.NoTarget = true
+    end
+  end
+   
+  game.CleanUpMap()
 end
 
 function NoHudMode(ply,cmd,args)

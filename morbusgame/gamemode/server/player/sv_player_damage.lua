@@ -34,16 +34,13 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 
    if att:IsPlayer() then
 
-
-
+      // Infection timer
       if att:IsSwarm() && !ent:IsAlien() then
          ent.BroodInfect = CurTime() + 5
          ent.BroodHit = att
       end
-      
 
-      
-
+      // Brood Alien Need-Reduction poison
       if att:IsBrood() && att:GetNWBool("alienform",false) && (infl:GetClass() == "weapon_mor_brood") then
          ent.BroodInfect = CurTime() + 5
          ent.BroodHit = att
@@ -57,46 +54,51 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
          end
       end
 
+      // Brood Alien lifesteal upgrade
       if att:IsBrood() && att:GetNWBool("alienform",false) && (infl:GetClass() == "weapon_mor_brood") then
-         
          if att.Upgrades[UPGRADE.LIFESTEAL] then
             att:SetHealth(math.Clamp(att:Health() + (att.Upgrades[UPGRADE.LIFESTEAL]*UPGRADE.LIFESTEAL_AMOUNT),0,att.MaxHealth))
          end
       end
 
+      // Brood Aliens do reduced gun damage
       if att:IsBrood() && !(att:GetNWBool("alienform",false)) && !(infl:GetClass() == "weapon_mor_brood") then
          dmginfo:ScaleDamage(0.3)
       end
 
+      // Brood Aliens take extra damage when in human form *DISABLED in 1.5.7*
       if ent:IsBrood() && !ent:GetNWBool("alienform",false) then
          if dmginfo:IsBulletDamage() then
-            dmginfo:ScaleDamage(1.2)
+            //dmginfo:ScaleDamage(1.2)
          end
       end
-      
 
    end
 
-
+   // Brood Alien damage reudction upgrades
    if ent:GetNWBool("alienform",false) == true then
 
+      // Passive Brood Alien damage reduction
+      dmginfo:ScaleDamage(0.85)
+
+      // Upgraded Carapace
       if ent.Upgrades[UPGRADE.CARAPACE] then
          dmginfo:ScaleDamage(1 - ((UPGRADE.CARAPACE_AMOUNT*ent.Upgrades[UPGRADE.CARAPACE])/100))
       end
 
+      // Small Arms defense upgrade
       if ent.Upgrades[UPGRADE.SDEFENSE] then
          if infl.Kind && (infl.Kind == WEAPON_PISTOL || infl.Kind == WEAPON_LIGHT) then
             dmginfo:ScaleDamage(1 - (UPGRADE.SDEFENSE_AMOUNT/100))
          end
       end
 
+      // Heavy Weapon defense upgrade
       if ent.Upgrades[UPGRADE.HDEFENSE] then
          if infl.Kind && (infl.Kind == WEAPON_RIFLE || infl.Kind == WEAPON_HEAVY) then
             dmginfo:ScaleDamage(1 - (UPGRADE.HDEFENSE_AMOUNT/100))
          end
       end
-
-
    end
 
 
@@ -124,17 +126,17 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
    local swarm = ent:IsSwarm()
 
    if (math.floor(dmginfo:GetDamage()) > 0) then
+
       if swarm == true then
          ent:EmitSound(table.Random(Sounds.Swarm.Pain),200,100)
-         return
       end
+
       if alienform == true then
          ent:EmitSound(table.Random(Sounds.Brood.Pain),250,100)
-         return
       end
+
       if gender == GENDER_MALE then
          ent:EmitSound(table.Random(Sounds.Male.Pain),200,100)
-         return
       else
          ent:EmitSound(table.Random(Sounds.Female.Pain),200,100)
       end

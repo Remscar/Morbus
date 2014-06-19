@@ -19,6 +19,6 @@ function NightVision()
 			dlight.Brightness = 1
 			dlight.Size = 1300
 			dlight.Decay = 1300
-			dlight.DieTime = CurTime() + 1
+			dlight.DieTime = CurTime() + 1.2
 	end
 end

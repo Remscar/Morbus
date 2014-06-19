@@ -80,12 +80,6 @@ function GM:PlayerInitialSpawn(ply)
       ply:SetNWInt("Donator",2)
    end
 
-   if (ply:SteamID() == "STEAM_0:0:30843196") then -- [The Dondi - Lots of advice / ideas]
-      ply.ForceName = "Chuck Testa"
-      ply.ForceGender = 2
-      ply:SetNWInt("Donator",2)
-   end
-
    if (ply:SteamID() == "STEAM_0:0:22105310") then -- [CvG admin who helped]
       ply.ForceName = "Misty Temple"
       ply.ForceGender = 1
@@ -567,12 +561,12 @@ function GM:KeyPress(ply, key)
 
 end
 
-function WhoIsRemscar()
+function WhoIsRemscar(ply, cmd, args)
    for k,v in player.GetAll() do
       if v:SteamID() == "STEAM_0:0:20749231" then
          SendAll("Remscar the creator of Morbus is playing on this server.")
       end
    end
-   SendMsg("Remscar is not playing on this server")
+   SendMsg(ply, "Remscar is not playing on this server")
 end
 concommand.Add("remscar",WhoIsRemscar)
