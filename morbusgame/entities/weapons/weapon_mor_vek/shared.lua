@@ -29,15 +29,15 @@ SWEP.WorldModel             = "models/weapons/w_smg1.mdl"   -- Weapon world mode
 SWEP.ShowWorldModel         = false
 
 SWEP.Primary.Sound 		= Sound("kriss_vector.Single")
-SWEP.Primary.Recoil			= 0.5
-SWEP.Primary.Damage			= 11
+SWEP.Primary.Recoil			= 0.45
+SWEP.Primary.Damage			= 12
 SWEP.Primary.NumShots		= 1
-SWEP.Primary.Cone			= 0.03
+SWEP.Primary.Cone			= 0.023
 SWEP.Primary.ClipSize		= 40
-SWEP.Primary.RPM 			= 850
+SWEP.Primary.RPM 			= 600
 SWEP.Primary.DefaultClip	= 40
 SWEP.Primary.Automatic 		= true
-SWEP.Primary.Ammo 		= "smg1"
+SWEP.Primary.Ammo 		= "SMG1"
 
 SWEP.Secondary.ClipSize 	= 1
 SWEP.Secondary.DefaultClip 	= 1
@@ -58,7 +58,7 @@ SWEP.Kind = WEAPON_LIGHT
 SWEP.AutoSpawnable = true
 SWEP.AmmoEnt = "item_ammo_smg1_mor"
 
-SWEP.KGWeight = 18
+SWEP.KGWeight = 15
 
 
 SWEP.WElements = {

@@ -25,15 +25,15 @@ SWEP.ViewModel              = "models/weapons/v_trh_92fs.mdl"
 SWEP.WorldModel             = "models/weapons/w_trh_92fs.mdl"
 
 SWEP.Primary.Sound 		= Sound("92FS.single")
-SWEP.Primary.Recoil			= 0.5
-SWEP.Primary.Damage			= 17
+SWEP.Primary.Recoil			= 0.2
+SWEP.Primary.Damage			= 18
 SWEP.Primary.NumShots		= 1
-SWEP.Primary.Cone			= 0.02
-SWEP.Primary.ClipSize		= 15
-SWEP.Primary.RPM            = 350
-SWEP.Primary.DefaultClip	= 15
+SWEP.Primary.Cone			= 0.01
+SWEP.Primary.ClipSize		= 8
+SWEP.Primary.RPM            = 330
+SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic 		= false
-SWEP.Primary.Ammo 		= "pistol"
+SWEP.Primary.Ammo 		= "Pistol"
 
 SWEP.Secondary.ClipSize 	= 1
 SWEP.Secondary.DefaultClip 	= 1
@@ -51,7 +51,7 @@ SWEP.SightsAng = Vector(0, 0, 0)
 
 SWEP.Kind = WEAPON_PISTOL
 SWEP.AmmoEnt = "item_ammo_pistol_mor"
-SWEP.KGWeight = 12
+SWEP.KGWeight = 7
 SWEP.AutoSpawnable = true
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = false}

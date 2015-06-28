@@ -62,7 +62,7 @@ SWEP.AutoSpawnable = true
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = true}
 
-SWEP.KGWeight = 23
+SWEP.KGWeight = 25
 
 SWEP.VElements = {
 	["rect"] = { type = "Model", model = "models/hunter/plates/plate1x1.mdl", bone = "gun_root", rel = "", pos = Vector(0, -0.461, 3.479), angle = Angle(0, 0, 90), size = Vector(0.009, 0.009, 0.009), color = Color(255, 255, 255, 255), surpresslightning = false, material = "models/wystan/attachments/eotech/rect", skin = 0, bodygroup = {} }

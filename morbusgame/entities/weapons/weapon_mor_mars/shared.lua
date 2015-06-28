@@ -29,10 +29,10 @@ SWEP.WorldModel 			= "models/weapons/w_rif_tavor.mdl"
 
 SWEP.Primary.Sound 		= "weapons/tavor/tavor-1.wav"
 util.PrecacheSound(SWEP.Primary.Sound)
-SWEP.Primary.Recoil 		= 0.4
-SWEP.Primary.Damage 		= 15
+SWEP.Primary.Recoil 		= 0.3
+SWEP.Primary.Damage 		= 17
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.02
+SWEP.Primary.Cone 		= 0.015
 SWEP.Primary.ClipSize 		= 30
 SWEP.Primary.RPM  			= 420
 SWEP.Primary.DefaultClip 	= 30
@@ -53,7 +53,7 @@ SWEP.Kind = WEAPON_RIFLE
 SWEP.AmmoEnt = "item_ammo_revolver_mor"
 SWEP.AutoSpawnable = true
 
-SWEP.KGWeight = 23
+SWEP.KGWeight = 21
 
 SWEP.Primary.KickUp         = 0.4
 SWEP.Primary.KickDown           = 0.3

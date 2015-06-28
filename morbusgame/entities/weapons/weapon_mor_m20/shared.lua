@@ -28,12 +28,12 @@ SWEP.ViewModel 			= "models/weapons/v_rif_xamas.mdl"
 SWEP.WorldModel 			= "models/weapons/w_rif_xamas.mdl"
 
 SWEP.Primary.Sound 		= Sound("m20.Single")
-SWEP.Primary.Recoil 		= 0.35
-SWEP.Primary.Damage 		= 17
+SWEP.Primary.Recoil 		= 0.375
+SWEP.Primary.Damage 		= 18
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.0275
+SWEP.Primary.Cone 		= 0.024
 SWEP.Primary.ClipSize 		= 32
-SWEP.Primary.RPM 		= 440
+SWEP.Primary.RPM 		= 450
 SWEP.Primary.DefaultClip 	= 32
 SWEP.Primary.Automatic 		= true
 SWEP.Primary.Ammo 		= "AlyxGun"

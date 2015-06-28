@@ -26,11 +26,13 @@ SWEP.Spawnable 			= true
 SWEP.AdminSpawnable 		= true
 
 SWEP.ViewModel 			= "models/weapons/v_rif_lamas.mdl"
-SWEP.WorldModel 			= "models/weapons/w_rif_lamas.mdl"
+SWEP.WorldModel 			= "models/weapons/w_irifle.mdl"
+SWEP.ShowViewModel = true
+SWEP.ShowWorldModel = false
 
 SWEP.Primary.Sound 		= Sound("m20.Single")
 
-SWEP.Primary.Recoil 		= 0.4
+SWEP.Primary.Recoil 		= 0.44
 SWEP.Primary.Damage 		= 19
 SWEP.Primary.NumShots 		= 1
 SWEP.Primary.Cone 		= 0.038
@@ -61,3 +63,7 @@ SWEP.AutoSpawnable = true
 SWEP.KGWeight = 24
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = true}
+
+SWEP.WElements = {
+	["element_name"] = { type = "Model", model = "models/weapons/w_rif_lamas.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(5, 5, 2), angle = Angle(-10, 0, 220), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+}

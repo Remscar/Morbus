@@ -32,12 +32,12 @@ SWEP.ShowWorldModel = false
 
 SWEP.Primary.Sound 		= Sound("zx9.Single")  
 
-SWEP.Primary.Recoil 		= 1
+SWEP.Primary.Recoil 		= 0.7
 SWEP.Primary.Damage 		= 14
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.045
+SWEP.Primary.Cone 		= 0.04
 SWEP.Primary.ClipSize 		= 200
-SWEP.Primary.RPM 		= 860
+SWEP.Primary.RPM 		= 800
 SWEP.Primary.DefaultClip 	= 200
 SWEP.Primary.Automatic 		= true
 SWEP.Primary.Ammo 		= "AlyxGun"
@@ -62,7 +62,7 @@ SWEP.AmmoEnt = "item_ammo_none_mor"
 SWEP.AutoSpawnable = true
 SWEP.NeverRandom = true
 
-SWEP.KGWeight = 50
+SWEP.KGWeight = 40
 
 SWEP.Tracer = 1
 

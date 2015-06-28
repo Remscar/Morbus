@@ -28,15 +28,15 @@ SWEP.WorldModel 			= "models/weapons/w_smg_ump45.mdl"
 
 SWEP.Primary.Sound 		= Sound("Weapon_UMP45.Single")
 util.PrecacheSound(SWEP.Primary.Sound)
-SWEP.Primary.Recoil 		= 0.5
-SWEP.Primary.Damage 		= 15
+SWEP.Primary.Recoil 		= 0.38
+SWEP.Primary.Damage 		= 14
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.04
-SWEP.Primary.ClipSize 		= 25
-SWEP.Primary.RPM 			= 500
-SWEP.Primary.DefaultClip 	= 25
+SWEP.Primary.Cone 		= 0.03
+SWEP.Primary.ClipSize 		= 30
+SWEP.Primary.RPM 			= 550
+SWEP.Primary.DefaultClip 	= 30
 SWEP.Primary.Automatic 		= true
-SWEP.Primary.Ammo 		= "smg1"
+SWEP.Primary.Ammo 		= "SMG1"
 
 SWEP.Secondary.ClipSize 	= 1
 SWEP.Secondary.DefaultClip 	= 1

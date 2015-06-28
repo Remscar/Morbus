@@ -26,15 +26,15 @@ SWEP.ViewModel 			= "models/weapons/v_pist_usp.mdl"
 SWEP.WorldModel 			= "models/weapons/w_pist_usp.mdl"
 
 SWEP.Primary.Sound 		= Sound("Weapon_USP.Single")
-SWEP.Primary.Damage 		= 22
+SWEP.Primary.Damage 		= 19
 SWEP.Primary.Recoil 		= 0.5
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.01
+SWEP.Primary.Cone 		= 0.033
 SWEP.Primary.ClipSize 		= 12
-SWEP.Primary.RPM		= 460
+SWEP.Primary.RPM		= 475
 SWEP.Primary.DefaultClip 	= 12
 SWEP.Primary.Automatic 		= false
-SWEP.Primary.Ammo 		= "pistol"
+SWEP.Primary.Ammo 		= "Pistol"
 
 SWEP.Secondary.ClipSize 	= 1
 SWEP.Secondary.DefaultClip 	= 1

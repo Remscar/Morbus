@@ -29,11 +29,11 @@ SWEP.ShowWorldModel			= false
 
 SWEP.Primary.Sound 		= Sound("Weapon_uzi.single")
 SWEP.Primary.Recoil 		= 0.5
-SWEP.Primary.Damage 		= 13
+SWEP.Primary.Damage 		= 12
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.055
+SWEP.Primary.Cone 		= 0.04
 SWEP.Primary.ClipSize 		= 30
-SWEP.Primary.RPM 		= 900
+SWEP.Primary.RPM 		= 760
 SWEP.Primary.DefaultClip 	= 30
 SWEP.Primary.Automatic 		= true
 SWEP.Primary.Ammo 		= "Pistol"

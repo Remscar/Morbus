@@ -32,11 +32,11 @@ SWEP.ShowWorldModel         = false
 
 SWEP.Primary.Sound 		= Sound("weapons/spas/spas-1.wav")   
 SWEP.Primary.Recoil			= 0.5
-SWEP.Primary.Damage			= 9
-SWEP.Primary.NumShots		= 11
+SWEP.Primary.Damage			= 7
+SWEP.Primary.NumShots		= 12
 SWEP.Primary.Cone			= 0.115
 SWEP.Primary.ClipSize		= 8
-SWEP.Primary.RPM            = 60
+SWEP.Primary.RPM            = 45
 SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic 		= false
 SWEP.Primary.Ammo 		= "Buckshot"
@@ -62,7 +62,7 @@ SWEP.Gun = "weapon_mor_scarm8"
 SWEP.Kind = WEAPON_RIFLE
 SWEP.AllowDrop = true
 SWEP.AmmoEnt = "item_ammo_buckshot_mor"
-SWEP.KGWeight = 24
+SWEP.KGWeight = 26
 SWEP.AutoSpawnable = true
 SWEP.StoredAmmo = 0
 

@@ -31,12 +31,12 @@ SWEP.Primary.Sound 		= Sound("r22.Single")
 SWEP.Primary.Recoil 		= 0.5
 SWEP.Primary.Damage 		= 13
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.035
-SWEP.Primary.ClipSize 		= 45
-SWEP.Primary.RPM 			= 750
-SWEP.Primary.DefaultClip 	= 45
+SWEP.Primary.Cone 		= 0.04
+SWEP.Primary.ClipSize 		= 40
+SWEP.Primary.RPM 			= 660
+SWEP.Primary.DefaultClip 	= 40
 SWEP.Primary.Automatic 		= true
-SWEP.Primary.Ammo 		= "smg1"
+SWEP.Primary.Ammo 		= "SMG1"
 
 SWEP.Secondary.ClipSize 	= 1
 SWEP.Secondary.DefaultClip 	= 1
@@ -56,7 +56,7 @@ SWEP.Kind = WEAPON_LIGHT
 SWEP.AutoSpawnable = true
 SWEP.AmmoEnt = "item_ammo_smg1_mor"
 
-SWEP.KGWeight = 15
+SWEP.KGWeight = 16
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = true}
 

@@ -36,27 +36,17 @@ end
 
 function ENT:Explode()
 
-	local MDMG = 20
-	local NERF = 10
 
-	local mult = math.Clamp(#player.GetAll(),3,20)
-    mult = (mult-3)/17
-    mult = 1-mult
-    mult = NERF*mult -- how much lower?
-    local dmg = MDMG - NERF
-    dmg = dmg + mult
-    dmg = math.Round(dmg)
-	
 	-- SFX
 	ParticleEffect( "spit_blast", self:GetPos(), Angle(0, 0, 0), nil )
 	self.Entity:EmitSound( "alien/acid_hit.wav", 100, math.random(95,125) );
 
 	-- Damage in sphere
-	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 105 )) do
+	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 95 )) do
 		local dmginfo = DamageInfo()
 		dmginfo:SetAttacker( self:GetOwner() )
 		dmginfo:SetInflictor( self )
-		dmginfo:SetDamage( math.Round(dmg*0.75) )
+		dmginfo:SetDamage( 6 )
 		v:TakeDamageInfo( dmginfo )
 	end
 

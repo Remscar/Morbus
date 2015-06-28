@@ -31,7 +31,7 @@ SWEP.Primary.Ammo = "none"
  
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
-SWEP.Secondary.Automatic = false
+SWEP.Secondary.Automatic = true
 SWEP.Secondary.Ammo = "none"
 
 sound.Add({
@@ -62,23 +62,38 @@ SWEP.SpitSound = Sound("swarm.spit")
 
 
 
-SWEP.Delay=0.65
-SWEP.Range=75
-SWEP.Damage=11
-SWEP.MaxNerf = 6
+SWEP.Delay      = 0.65
+SWEP.Range      = 75
+SWEP.Damage     = 8
+SWEP.NerfDamage = 0
+SWEP.MaxNerf    = 6
 SWEP.Kind = WEAPON_ROLE
-SWEP.AutoSpawnable = false
+SWEP.AutoSpawnable  = false
+SWEP.Destructing    = 0
+SWEP.Beep       = CurTime() + 1
+SWEP.refire     = 3
+SWEP.Remotes    = 0
+SWEP.attackType = "spit"
+
+SWEP.FlameEffect    = "swep_flamethrower_flame2"
+SWEP.FlameExpl      = "swep_flamethrower_explosion"
+
+SWEP.spitBall = "sent_spitball"
 
 SWEP.HoldType = "melee"
 
 function SWEP:Initialize()
     self:SetWeaponHoldType(self.HoldType)
+
 end
 
 function SWEP:PrimaryAttack()
-    self.Weapon:SetNextPrimaryFire(CurTime() + self.Delay)
+    self.Weapon:SetNextPrimaryFire( CurTime() + self.Delay )
+    self.Weapon:SetNextSecondaryFire( CurTime() + 1 )
 
+    -- Start lag compensate for traces.
     self.Owner:LagCompensation(true)
+    
     local trace = {}
     trace.start = self.Owner:GetShootPos()
     trace.endpos = trace.start + (self.Owner:GetAimVector()*self.Range)
@@ -96,6 +111,9 @@ function SWEP:PrimaryAttack()
     trace2.maxs = Vector(1,1,1) * 12
     trace2 = util.TraceHull(trace2)
 
+    -- End lag compensate after traces.
+    self.Owner:LagCompensation(false)
+
     if trace2.Fraction*1.3 < trace.Fraction then
         if SERVER then self.Owner:EmitSound(self.SwingSound,200,100) end
         trace = {}
@@ -105,7 +123,7 @@ function SWEP:PrimaryAttack()
         trace = util.TraceLine(trace)
         if trace.Fraction < 1 && trace.HitNonWorld && trace.Entity && !trace.Entity:IsPlayer() then
             if SERVER then
-                trace.Entity:TakeDamage( self.Damage*2, self.Owner, self.Weapon )
+                trace.Entity:TakeDamage( 16, self.Owner, self.Weapon )
                 self.Owner:EmitSound(self.HitSound,200,100)
             end
             self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
@@ -124,22 +142,10 @@ function SWEP:PrimaryAttack()
             local a1,a2 = trace.Entity:GetAngles().y, self.Owner:GetAngles().y
             local diff = a1-a2
 
-
-            local mult = math.Clamp(#player.GetAll(),3,17)
-            mult = (mult-3)/14
-            mult = 1-mult
-            mult = self.MaxNerf*mult -- how much lower?
-            local dmg = self.Damage - self.MaxNerf
-            dmg = dmg + mult
-            dmg = dmg*2
-            dmg = math.Round(dmg)
-
-
-
             if (diff <= 60 && diff >= -60) then
-                trace.Entity:TakeDamage( dmg, self.Owner, self.Weapon ) --Surprise buttsex   
+                trace.Entity:TakeDamage( 8, self.Owner, self.Weapon ) --Surprise buttsex   
             else
-                trace.Entity:TakeDamage( dmg, self.Owner, self.Weapon )
+                trace.Entity:TakeDamage( 8, self.Owner, self.Weapon )
             end
             self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
             self.Owner:EmitSound(self.HitSound,200,100)
@@ -150,25 +156,6 @@ function SWEP:PrimaryAttack()
         if trace.Fraction < 1 && trace.HitNonWorld && trace.Entity && !trace.Entity:IsPlayer() then
             if trace.Entity:GetClass() == "prop_ragdoll" then
 
-                //if SERVER then
-                -- timer.Simple(0.01, function()
-                --     for i=1,4 do
-                --         local effectdata = EffectData()
-                --         effectdata:SetOrigin( trace.Entity:GetPos() + Vector(0,0,5) )
-                --         effectdata:SetNormal( trace.Entity:GetVelocity():GetNormal() )
-                --         util.Effect( "bloodsplash", effectdata )
-                --         local effectdata2 = EffectData()
-                --         effectdata2:SetOrigin( trace.Entity:GetPos() + Vector(0,0,5) )
-                --         effectdata2:SetNormal( Vector(0,0,0.1) )
-                --         util.Effect( "bloodstream", effectdata )
-                --         local effectdata3 = EffectData()
-                --         effectdata3:SetOrigin( trace.Entity:GetPos() + Vector(0,0,5) )
-                --         effectdata3:SetNormal( Vector(0,0,0) )
-                --         util.Effect( "goremod_gib", effectdata )
-                --     end
-                -- end)
-                -- trace.Entity:Remove()
-                //end
                 self.Owner:EmitSound(self.HitSound,200,100)
             end
             self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
@@ -177,186 +164,254 @@ function SWEP:PrimaryAttack()
         end
     end
     self.Owner:SetAnimation( PLAYER_ATTACK1 )
-    self.Owner:LagCompensation(false)
 
+end
+
+function SWEP:Reload()
+    self:RemoteDet()
+end
+
+function SWEP:RemoteDet()
+    self.Remotes = 0
+    for k, v in pairs ( ents.FindByClass( "sent_spitball_remote" ) ) do  
+        if v:GetNWEntity( "Owner" ) == self.Owner then
+            v.Exploded = 1
+        end
+    end 
+    for k, v in pairs ( ents.FindByClass( "monster_hlfd_infection_h3" ) ) do  
+        if v:GetNWEntity( "Owner" ) == self.Owner then
+            v.Exploded = 1
+        end
+    end 
 end
 
 function SWEP:SecondaryAttack()
-    self.Weapon:SetNextSecondaryFire(CurTime() + 3)
-    
-	local tr = self.Owner:GetEyeTrace()
 
-	   local ent = ents.Create( "sent_spitball" )
-		local aim = self.Owner:GetAimVector()
-		local side = aim:Cross(Vector(0,0,1))
-		local up = side:Cross(aim)
-	if SERVER then
- 	ent:SetPos(self.Owner:GetShootPos() +  aim * 24 + side * 8 + up * -15)
-	ent:SetOwner( self.Owner )
-	ent:SetAngles(self.Owner:EyeAngles())
-	ent.RocketOwner = self.Owner
-	ent:Spawn()
-    self.Owner:EmitSound(self.SpitSound,200,100)
- 
-	local phys = ent:GetPhysicsObject()
-	phys:ApplyForceCenter( self.Owner:GetAimVector() + 	self.Owner:GetForward(Vector(math.random(-255,255), math.random(-255,255), 0)) * 2100)
-	phys:SetVelocity( phys:GetVelocity() + self.Owner:GetVelocity() )
-	phys:EnableGravity(true)
+    if ( self.Owner:GetSwarmMod() == 0 ) then 
+        self.spitBall = "sent_spitball"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("swarm.spit")
 
-	end
-	
-	self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK ) 		// View model animation
-	self.Owner:SetAnimation( PLAYER_ATTACK1 )				// 3rd Person Animation
-	
-	if ( self.Owner:IsNPC() ) then return end
-	
-	
-	local effect = EffectData();
-	        effect:SetOrigin( self.Owner:GetShootPos() );
-	        effect:SetEntity( self.Weapon );
-	        effect:SetAttachment( 1 );
-    util.Effect( "SpitMuzzle", effect );
-		
-end
+    elseif ( self.Owner:GetSwarmMod() == 1 ) then 
+        self.spitBall = "sent_spitball_fire"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact4")
 
-/*------------------------------------
-    GetMuzzlePosition()
-------------------------------------*/
-local function GetMuzzlePosition( weapon, attachment )
+    elseif ( self.Owner:GetSwarmMod() == 2 ) then 
+        self.spitBall = "sent_spitball_ice"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact2")
 
-    if( !IsValid( weapon ) ) then
-        return vector_origin, Angle( 0, 0, 0 );
+    elseif ( self.Owner:GetSwarmMod() == 3 ) then 
+        self.spitBall = "sent_spitball_storm"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact2")
+
+    elseif ( self.Owner:GetSwarmMod() == 4 ) then 
+        self.spitBall = "sent_spitball_demon"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact2")
+
+    elseif ( self.Owner:GetSwarmMod() == 5 ) then 
+        self.spitBall = "sent_spitball"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("swarm.spit")
+
+    elseif ( self.Owner:GetSwarmMod() == 6 ) then 
+        self.spitBall = "sent_spitball_blood"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact2")
+
+    elseif ( self.Owner:GetSwarmMod() == 7 ) then 
+        self.spitBall = "sent_spitball_timed"
+        self.attackType = "spit"
+        self.refire = 2
+        self.SpitSound = Sound("swarm.spit")
+
+    elseif ( self.Owner:GetSwarmMod() == 8 ) then 
+        self.spitBall = "sent_spitball_remote"
+        self.attackType = "spit"
+        self.refire = 1
+        self.SpitSound = Sound("alien.Spit1")
+
+    elseif ( self.Owner:GetSwarmMod() == 9 ) then 
+        self.spitBall = "spikes"
+        self.attackType = "bullet"
+        self.refire = 1.5
+        self.SpitSound = Sound("alien.Spit1")
+
+    elseif ( self.Owner:GetSwarmMod() == 10 ) then 
+        self.spitBall = "leap"
+        self.attackType = "special"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Grunt2")
+
+    elseif ( self.Owner:GetSwarmMod() == 11 ) then 
+        self.spitBall = "destruct"
+        self.attackType = "special"
+        self.refire = 10
+        self.SpitSound = Sound("alien.Grunt1")
+
+    elseif ( self.Owner:GetSwarmMod() == 12 ) then 
+        self.spitBall = "sent_spitball_acid"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact2")
+
+    elseif ( self.Owner:GetSwarmMod() == 13 ) then 
+        self.spitBall = "sent_spitball_magma"
+        self.attackType = "spit"
+        self.refire = 3
+        self.SpitSound = Sound("alien.Impact4")
+
     end
+    
+    self.Weapon:SetNextSecondaryFire( CurTime() + ( self.refire ))
 
-    local origin = weapon:GetPos();
-    local angle = weapon:GetAngles();
-    
-    // if we're not in a camera and we're being carried by the local player
-    // use their view model instead.
-    if( weapon:IsWeapon() && weapon:IsCarriedByLocalPlayer() ) then
-    
-        local owner = weapon:GetOwner();
-        if( IsValid( owner ) && GetViewEntity() == owner ) then
-        
-            local viewmodel = owner:GetViewModel();
-            if( IsValid( viewmodel ) ) then
-                weapon = viewmodel;
+    if self.attackType == "spit" then
+    	local tr = self.Owner:GetEyeTrace()
+    	    local ent      = ents.Create( self.spitBall )
+    		local aim     = self.Owner:GetAimVector()
+    		local side    = aim:Cross( Vector( 0, 0, 1 ) )
+    		local up      = side:Cross( aim )
+
+    	if SERVER then
+         	ent:SetPos( self.Owner:GetShootPos() +  aim * 24 + side * 8 + up * -15 )
+        	ent:SetOwner( self.Owner )
+        	ent:SetAngles( self.Owner:EyeAngles() )
+        	ent.SpitOwner = self.Owner
+
+            -- Remote Det
+            if self.Owner:GetSwarmMod() == 8 then
+                ent:SetNWEntity("Owner", self.Owner)
+                if self.Remotes == 4 then
+                    self:RemoteDet()
+                end
+                self.Remotes = self.Remotes + 1
             end
-            
-        end
-    
+
+        	   ent:Spawn()
+            self.Owner:EmitSound( self.SpitSound, 200, 100 )
+         
+        	local phys = ent:GetPhysicsObject()
+        	phys:ApplyForceCenter( self.Owner:GetAimVector() + 	self.Owner:GetForward( Vector( math.random( -255, 255 ), math.random( -255, 255 ), 0) ) * 2100 )
+        	phys:SetVelocity( phys:GetVelocity() + self.Owner:GetVelocity() )
+        	phys:EnableGravity( true )
+    	end
+    	
+    	self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+    	self.Owner:SetAnimation( PLAYER_ATTACK1 )
     end
 
-    // get the attachment
-    local attachment = weapon:GetAttachment( attachment or 1 );
-    if( !attachment ) then
-        return origin, angle;
+    -- Spikes
+    if self.attackType == "bullet" then
+
+        self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+        self.Owner:SetAnimation( PLAYER_ATTACK1 )
+        self:ShootBullet()
+
     end
-    
-    return attachment.Pos, attachment.Ang;
+
+
+    -- Special Abilities
+    if self.attackType == "special" then
+
+        -- Swarm Leap
+        if self.spitBall == "leap" then
+            self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+            self.Owner:SetAnimation( PLAYER_ATTACK1 )
+            self.Owner:SetVelocity( self.Owner:GetForward() * 300 + Vector( 0, 0, 400 ) )
+            if SERVER then
+                self.Owner:EmitSound( self.SpitSound, 100, 100 )
+            end
+        end
+	
+
+        -- Self Destruct
+        if self.spitBall == "destruct" then
+            if SERVER then
+                self.Weapon:SetNextSecondaryFire(CurTime() + 10)
+                self.Owner:EmitSound( self.SpitSound, 200, 100 )
+                self.Destructing = 1
+                timer.Simple( 0.8, function()
+                    ParticleEffect( "spit_blast", self:GetPos() + Vector( 0, 0, 50 ), Angle(0, 0, 0), nil )
+                    self.Owner:EmitSound( self.SpitSound, 200, 100 )
+                end)
+                timer.Simple( 1.6, function()
+                    ParticleEffect( "spit_blast", self:GetPos() + Vector( 0, 0, 50 ), Angle(0, 0, 0), nil )
+                    self.Owner:EmitSound( self.SpitSound, 200, 100 )
+                end)
+
+                timer.Simple( 2.4, function()
+                    if self.Owner:Alive() then
+                        -- SFX
+                        ParticleEffect( "destruct_blast", self:GetPos() + Vector( 0, 0, 50 ), Angle(0, 0, 0), nil )
+                        self.Owner:EmitSound( "weapons/demon/explosion.wav", 100, math.random(95,125) );
+
+                        -- Damage in sphere
+                        for _, v in ipairs(ents.FindInSphere( self:GetPos(), 105 )) do
+                            local dmginfo = DamageInfo()
+                            dmginfo:SetAttacker( self.Owner )
+                            dmginfo:SetInflictor( self.Weapon )
+                            dmginfo:SetDamage( 90 )
+                            v:TakeDamageInfo( dmginfo )
+                        end
+
+                        self.Owner:Kill()
+                    end
+                end)
+            end
+        end
+    end
+    -- End of Self Destruct
+
+	if ( self.Owner:IsNPC() ) then return end
+end
+
+function SWEP:Think()   
 
 end
 
+-- Spikes
+function SWEP:ShootBullet( damage, num_bullets, aimcone )
 
-if( CLIENT ) then
+        local bullet = {}
+            bullet.Num          = 8
+            bullet.Src          = self.Owner:GetShootPos()
+            bullet.Dir          = self.Owner:GetAimVector()
+            bullet.Spread       = Vector( 0.1, 0.1, 0 )
+            bullet.Tracer       = 8
+            bullet.TracerName   = "Tracer"
+            bullet.Force        = 355
+            bullet.Damage       = 3
 
-    local GlowMaterial = CreateMaterial( "arcadiumsoft/glow", "UnlitGeneric", {
-        [ "$basetexture" ]    = "sprites/light_glow01",
-        [ "$additive" ]        = "1",
-        [ "$vertexcolor" ]    = "1",
-        [ "$vertexalpha" ]    = "1",
-    } );
-    
-    local EFFECT = {};
-    
-    
-    /*------------------------------------
-        Init()
-    ------------------------------------*/
-    function EFFECT:Init( data )
-    
-        self.Weapon = data:GetEntity();
-        
-        self.Entity:SetRenderBounds( Vector( -16, -16, -16 ), Vector( 16, 16, 16 ) );
-        self.Entity:SetParent( self.Weapon );
-        
-        self.LifeTime = math.Rand( 0.25, 0.35 );
-        self.DieTime = CurTime() + self.LifeTime;
-        self.Size = math.Rand( 16, 24 );
-        
-        local pos, ang = GetMuzzlePosition( self.Weapon );
-        local emitter = ParticleEmitter( pos );
-        for i = 1, 10 do
-        
-            local particle = emitter:Add( "effects/blood_core", pos );
-            particle:SetVelocity( VectorRand() * 0.25  * math.Rand( 5, 25 ) );
-            particle:SetDieTime( math.Rand( 0.2, 0.6 ) );
-            particle:SetStartAlpha( math.Rand( 50, 250 ) );
-            particle:SetEndAlpha( 0 );
-            particle:SetStartSize( math.Rand( 15, 25 ) );
-            particle:SetEndSize( 0 );
-            particle:SetRoll( math.Rand( 0, 359 ) );
-            particle:SetRollDelta( math.Rand( -2, 2 ) );
-            particle:SetColor(Color( 0, 150, 0 ));
-            particle:SetGravity( Vector( 0, 0, 125 ) );
-            particle:SetCollide( false );
-            particle:SetBounce( 0 );
-            particle:SetAirResistance( 2 );
-        end
-        // emit a burst of light
-        local light = DynamicLight( self.Weapon:EntIndex() );
-            light.Pos            = pos;
-            light.Size            = 200;
-            light.Decay            = 400;
-            light.R                = 0;
-            light.G                = 150;
-            light.B                = 0;
-            light.Brightness    = 2;
-            light.DieTime        = CurTime() + 0.35;
-    
-    end
-    
-    
-    /*------------------------------------
-        Think()
-    ------------------------------------*/
-    function EFFECT:Think()
-    
-        return IsValid( self.Weapon ) && self.DieTime >= CurTime();
-        
-    end
-    
-    
-    /*------------------------------------
-        Render()
-    ------------------------------------*/
-    function EFFECT:Render()
-    
-        // how'd this happen?
-        if( !IsValid( self.Weapon ) ) then
-            return;
-        end
-    
-        local pos, ang = GetMuzzlePosition( self.Weapon );
-        
-        local percent = math.Clamp( ( self.DieTime - CurTime() ) / self.LifeTime, 0, 1 );
-        local alpha = 255 * percent;
-        
-        render.SetMaterial( GlowMaterial );
-        
-        // draw it twice to double the brightness D:
-        for i = 1, 2 do
-            render.DrawSprite( pos, self.Size, self.Size, Color( 0, 150, 0, alpha ) );
-            render.StartBeam( 2 );
-                render.AddBeam( pos - ang:Forward() * 48, 16, 0, Color( 0, 150, 0, alpha ) );
-                render.AddBeam( pos + ang:Forward() * 64, 16, 1, Color( 0, 150, 0, 0 ) );
-            render.EndBeam();
-        end
-    
-    end
-    
-    effects.Register( EFFECT, "SpitMuzzle" );
-    
+            self.Owner:FireBullets(bullet)
+            self.Owner:EmitSound( self.SpitSound, 200, 100 )
+            self:ShootEffects()
+
 end
 
+function SWEP:DoImpactEffect( tr, dmgtype )
 
+    if( tr.HitSky ) then return true; end
+    
+    if( game.SinglePlayer() or SERVER or not self:IsCarriedByLocalPlayer() or IsFirstTimePredicted() ) then
+
+        local effect = EffectData();
+        effect:SetOrigin( tr.HitPos );
+        effect:SetNormal( tr.HitNormal );
+        ParticleEffect( "imp_phaser", tr.HitPos, Angle(0, 0, 0), nil )
+        util.Effect( "GaussImpact", effect );
+
+    end
+
+    return true;
+
+end

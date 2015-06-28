@@ -36,9 +36,9 @@ SWEP.Primary.Sound 		= Sound("hk_g3_weapon.Single")
 SWEP.Primary.Recoil 		= 0.5
 SWEP.Primary.Damage 		= 15
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.04
+SWEP.Primary.Cone 		= 0.015
 SWEP.Primary.ClipSize 		= 30
-SWEP.Primary.RPM 		= 670
+SWEP.Primary.RPM 		= 675
 SWEP.Primary.DefaultClip 	= 30
 SWEP.Primary.Automatic 		= true
 SWEP.Primary.Ammo 		= "AlyxGun"
@@ -64,7 +64,7 @@ SWEP.AutoSpawnable = true
 
 --SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "2", enabled = true}
 
-SWEP.KGWeight = 24
+SWEP.KGWeight = 21
 
 SWEP.WElements = {
     ["g3"] = { type = "Model", model = "models/weapons/w_hk_g3_rif.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(0, 0, 0), angle = Angle(-176.93, -180, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }

@@ -25,13 +25,13 @@ SWEP.ViewModel 			= "models/weapons/v_pist_p228.mdl"
 SWEP.WorldModel 			= "models/weapons/w_pist_p228.mdl"
 
 SWEP.Primary.Sound 		= Sound("Weapon_P228.Single")
-SWEP.Primary.Recoil 		= 0.5
-SWEP.Primary.Damage 		= 21
+SWEP.Primary.Recoil 		= 0.325
+SWEP.Primary.Damage 		= 16
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.0125
-SWEP.Primary.ClipSize 		= 12
-SWEP.Primary.RPM 			= 400
-SWEP.Primary.DefaultClip 	= 12
+SWEP.Primary.Cone 		= 0.02
+SWEP.Primary.ClipSize 		= 15
+SWEP.Primary.RPM 			= 440
+SWEP.Primary.DefaultClip 	= 15
 SWEP.Primary.Automatic 		= false
 SWEP.Primary.Ammo 		= "Pistol"
 
@@ -47,7 +47,7 @@ SWEP.SightsAng = SWEP.IronSightsAng
 
 SWEP.Kind = WEAPON_PISTOL
 SWEP.AmmoEnt = "item_ammo_pistol_mor"
-SWEP.KGWeight = 5
+SWEP.KGWeight = 10
 SWEP.AutoSpawnable = true
 
 SWEP.Primary.KickUp         = 0.2

@@ -32,12 +32,12 @@ SWEP.ShowWorldModel         = false
 
 SWEP.Primary.Sound 		= Sound("hk416weapon.UnsilSingle")
 
-SWEP.Primary.Recoil 		= 0.45
-SWEP.Primary.Damage 		= 16
+SWEP.Primary.Recoil 		= 0.51
+SWEP.Primary.Damage 		= 15
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0.036
+SWEP.Primary.Cone 		= 0.035
 SWEP.Primary.ClipSize 		= 30
-SWEP.Primary.RPM 		= 780
+SWEP.Primary.RPM 		= 660
 SWEP.Primary.DefaultClip 	= 30
 SWEP.Primary.Automatic 		= true
 SWEP.Primary.Ammo 		= "AlyxGun"
@@ -63,7 +63,7 @@ SWEP.AutoSpawnable = true
 
 --SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "2", enabled = true}
 
-SWEP.KGWeight = 23
+SWEP.KGWeight = 24
 
 SWEP.WElements = {
     ["416"] = { type = "Model", model = "models/weapons/w_hk416rif.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(0, 0, 0.085), angle = Angle(-176.353, -180, 0), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
