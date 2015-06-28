@@ -7,7 +7,7 @@ ROLE SELECTION
 ------------------------------*/
 
 local function GetBroodCount(ply_count)
-	local count = math.Round(ply_count * 0.11)
+	local count = math.Round(ply_count * 0.14)
 	if count > 0 then
 		return count
 	else
@@ -25,7 +25,7 @@ end
 
 
 LAST_ALIEN = {}
-local Allow_Bots = false
+local Allow_Bots = true
 function SelectRoles()
 	local choices = {}
 

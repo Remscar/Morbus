@@ -14,6 +14,8 @@ COLOR_YELLOW = Color(255,255,0,255)
 COLOR_RED = Color(255,0,0,255)
 
 local tex = surface.GetTextureID( "vgui/morbus/screen2" )
+//local logoTexture = Material( "YourLogoGoesHere.png" )
+local useLogo = false
 
 include("sb_team.lua")
 
@@ -64,20 +66,16 @@ function PANEL:Init()
   self.Trans = 200
 
   self.hostdesc = vgui.Create("DLabel", self)
-  self.hostdesc:SetText(GAMEMODE.Name)
+  self.hostdesc:SetText("")
   self.hostdesc:SetContentAlignment(9)
 
   self.hostname = vgui.Create( "DLabel", self )
-  self.hostname:SetText( GetHostName() )
+  self.hostname:SetText("")
   self.hostname:SetContentAlignment(9)
 
   self.devname = vgui.Create( "DLabel", self )
-  self.devname:SetText( "Version 1.5.6a" )
+  self.devname:SetText( "Version "..GM_VERSION )
   self.devname:SetContentAlignment(9)
-
-  self.devname2 = vgui.Create( "DLabel", self )
-  self.devname2:SetText( "" )
-  self.devname2:SetContentAlignment(9)
 
   self.mapchange = vgui.Create("DLabel", self)
   self.mapchange:SetText("Map changes in 00 rounds")
@@ -114,16 +112,14 @@ function PANEL:Init()
   self.cols[1] = vgui.Create( "DLabel", self )
   self.cols[1]:SetText( "Ping" )
 
-  //self.cols[2] = vgui.Create( "DLabel", self )
-  //self.cols[2]:SetText( "Score" )
-  -- self.cols[3] = vgui.Create( "DLabel", self )
-  -- self.cols[3]:SetText("Rank")
-
   if true then
     self.cols[2] = vgui.Create("DLabel", self)
     self.cols[2]:SetText("Sanity")
     
   end
+
+ -- self.cols[3] = vgui.Create( "DLabel", self )
+ -- self.cols[3]:SetText( "Score" )
 
   self:UpdateScoreboard()
   self:StartUpdateTimer()
@@ -164,9 +160,23 @@ local colors = {
 local y_logo_off = 72
 
 function PANEL:Paint()
+   local ply = LocalPlayer()
 
   surface.SetTexture( tex )
-  surface.SetDrawColor( 40, 220, 235, self.FTrans )
+  if ply:IsAlien() then
+    if !GetConVar("morbus_alienhud_disable"):GetBool() && LocalPlayer():IsValid() then
+        if GetConVar("morbus_alienhud_purple"):GetBool() then
+          surface.SetDrawColor( 185, 55, 255, self.FTrans )
+        else
+         surface.SetDrawColor( 215, 55, 25, self.FTrans )
+        end
+
+      else
+        surface.SetDrawColor( 95, 195, 255, self.FTrans )
+    end
+  else
+     surface.SetDrawColor( 95, 195, 255, self.FTrans )
+  end
   local eu = self:GetWide()/1024
   local ev = self:GetTall()/1024
   surface.DrawTexturedRectUV(0, y_logo_off ,self:GetWide(),self:GetTall() - y_logo_off,0,1,eu,1 - ev)
@@ -176,10 +186,12 @@ function PANEL:Paint()
   -- Server name is outlined by orange/gold area
   draw.RoundedBox( 0, 0, y_logo_off + 60, self:GetWide(), 24, Color(60,60,60,self.FTrans))
 
-  -- TTT Logo
-  //surface.SetTexture( logo )
-  //surface.SetDrawColor( 255, 255, 255, 255 )
-  //surface.DrawTexturedRect( 5, 0, 256, 256 )
+  -- Logo
+  if useLogo then
+    surface.SetMaterial( logoTexture )
+    surface.SetDrawColor( 255, 255, 255, 255 )
+    surface.DrawTexturedRect( 0, 70, 370, 110 )
+  end
 
 end
 
@@ -227,20 +239,24 @@ function PANEL:PerformLayout()
   self.hostdesc:SetPos(8, y_logo_off)
 
   local hw = w - 180 - 8
+  if GetRoundState() == ROUND_WAIT then
+    self.hostname:SetText("At least 4 players are needed to begin the game!")
+    self.hostname:SetColor( Color(200,255,95,255) )
+  else
+    self.hostname:SetText("")
+  end
   self.hostname:SizeToContents()
-  self.hostname:SetPos(8, y_logo_off + 60)
+  self.hostname:SetPos(375, y_logo_off + 60)
 
   self.devname:SizeToContents()
-  self.devname:SetPos(w - 260 - 8, y_logo_off + self.hostname:GetTall())
-  if GetGlobalBool("Morbus_Outdated", false) then
+  self.devname:SetPos(w - 260 - 8, y_logo_off + self.hostname:GetTall() - 10)
+  
     self.devname:SetColor(Color(200,0,0,255))
-    self.devname2:SetColor(Color(255,255,255,255))
-  else
-    self.devname2:SetColor(Color(255,255,255,0))
-  end
+    self.devname2:SetColor(Color(155,255,0,255))
+
 
   self.devname2:SizeToContents()
-  self.devname2:SetPos(w - 210 - 8 + self.devname:GetWide()/2, y_logo_off + self.hostname:GetTall() + self.devname:GetTall() - 8)
+  self.devname2:SetPos(w - 250 - 8 + self.devname:GetWide()/2, y_logo_off + self.hostname:GetTall() + self.devname:GetTall() - 13)
 
   surface.SetFont("cool_large")
   local hname = self.hostname:GetValue()

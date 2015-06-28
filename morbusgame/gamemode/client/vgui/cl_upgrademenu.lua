@@ -14,13 +14,14 @@ function CreateUpgradesMenu()
 	end
 
 	base = vgui.Create("DFrame")
-	base:SetSize(800, 500)
-	base:SetPos(ScrW()/2-400,150)
+	base:SetSize(800, 350)
+	base:SetPos(ScrW()/2-400,300)
 	base:SetVisible(true)
 	base:MakePopup()
 	base:SetTitle("Evolution Menu")
 	function base:Paint()
-		derma.SkinHook( "Paint", "Frame", self, 800, 500 )
+		derma.SkinHook( "Paint", "Frame", self, 800, 350 )
+		draw.RoundedBox( 8, 0, 0, base:GetWide(), base:GetTall(), Color( 55, 85, 55, 185 ) )
 		draw.SimpleTextOutlined("Upgrade Points: "..Morbus.Evo_Points,"DefaultLarge",base:GetWide()/2,20,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_TOP,2,Color(0,0,0,255))
 	end
 
@@ -135,7 +136,9 @@ function UpdateUpgradesMenu()
 					surface.DrawTexturedRect(0,0,self:GetWide(),self:GetTall())
 					
 					if (self.Tier!=1) and (LocalPlayer():GetTierPoints(self.Tree,self.Tier-1)<UPGRADE_TIER_REQUIREMENT) then
-						draw.RoundedBox(0,0,0,self:GetWide(),self:GetTall(),Color(160,160,160,160))
+						surface.SetMaterial(Material("vgui/morbus/brood/icon_brood_locked2.png"))
+						surface.SetDrawColor(255,255,255,255)
+						surface.DrawTexturedRect(0,0,self:GetWide(),self:GetTall())
 					end
 				end
 				function obj:OnCursorEntered()
@@ -166,7 +169,7 @@ function UpdateUpgradesMenu()
 						
 						if pts>0 then
 							--pUpgradesMenu.Supress = true
-							surface.PlaySound(Sound("buttons/blip1.wav"))
+							surface.PlaySound(Sound("weapons/demon/a-build" .. math.random( 1, 2 ) .. ".wav"))
 							
 							local short = UPGRADES[self.Upgrade]
 							-- We can put a point into this; create a confirmation window

@@ -20,7 +20,7 @@ function CreateDescriptionBox(obj)
 	desc:SetSize(ScrW() * 0.25,ScrH() * 0.125)
 	desc:MakePopup()
 	function desc:Paint()
-		draw.RoundedBox(0,0,0,self:GetWide(),self:GetTall(),Color(0,0,0,255))
+		draw.RoundedBox(0,0,0,self:GetWide(),self:GetTall(),Color(0,25,0,235))
 	end
 	function desc:OnCursorEntered()
 		if !pUpgradesMenu then self:Remove() pDescriptionBox = nil return end

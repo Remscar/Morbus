@@ -9,6 +9,8 @@
 local MUTATOR = {}
 MUTATOR.Hooks = {}
 
+SetGlobalBool("mutator_nightmare", false)
+
 function MUTATOR:Prep()
 end
 

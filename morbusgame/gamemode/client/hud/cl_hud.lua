@@ -39,6 +39,20 @@ function MainPlayerHud()
 
    --Positioning
 
+   local HumanR,HumanG,HumanB = 40, 220, 235
+   local AlienR,AlienG,AlienB = 255, 55, 55
+
+
+          if !GetConVar("morbus_alienhud_purple"):GetBool() then
+            AlienR = 255
+            AlienG = 55
+            AlienB = 55
+          else
+            AlienR = 215
+            AlienG = 55
+            AlienB = 255
+          end
+
 
    local ang = EyeAngles()
    local pos = EyePos() + ang:Forward() * 50
@@ -64,11 +78,21 @@ function MainPlayerHud()
          local h = 34
          local x = -wt-130
          local y = 310
-
-         surface.SetDrawColor( 40, 220, 235, ftrans );
-         surface.SetTexture( tex );
-         surface.DrawTexturedRect( x,y, wt, h );
-
+         if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, wt, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, wt, h )
+            end
+         else
+            surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+            surface.SetTexture( tex )
+            surface.DrawTexturedRect( x,y, wt, h )
+         end
          local hp = ply:Health()
          local ah = 0
 
@@ -81,12 +105,24 @@ function MainPlayerHud()
          local hpmax = 100+( ah * UPGRADE.HEALTH_AMOUNT)
          local ratio = math.Clamp(hp/hpmax,0,1)
 
-         surface.SetDrawColor( 20, 220, 35, ftrans+50 );
+         surface.SetDrawColor( 0, 255, 0, ftrans+100 );
          surface.DrawRect(x+2,y+2,wt*ratio-4,h-4)
 
-         surface.SetDrawColor( 40, 220, 235, 100 );
-         surface.SetTexture( tex2 );
-         surface.DrawTexturedRect(x+1,y+1,wt-2,h-2)
+         if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, 100 )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, wt, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, 100 )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, wt, h )
+            end
+         else
+            surface.SetDrawColor( HumanR, HumanG, HumanB, 100 )
+            surface.SetTexture( tex2 )
+            surface.DrawTexturedRect(x+1,y+1,wt-2,h-2)
+         end
 
          wt = 336
 
@@ -100,12 +136,27 @@ function MainPlayerHud()
          h = 34
          x,y = -w-130,345
 
-         surface.SetDrawColor( 40, 220, 235, ftrans );
-         surface.SetTexture( tex );
-         surface.DrawTexturedRect( x,y, w, h );
+         if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            end
+         else
+            surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+            surface.SetTexture( tex )
+            surface.DrawTexturedRect( x,y, w, h )
+         end
 
-         draw.SimpleTextOutlined(ply:GetRoleName(),"DSHuge",x+(w/2),y+(h/2)-2,Color(55,255,55, trans),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,Color(50,50,50,255))
-
+         if GetRoundState() == ROUND_WAIT then
+            draw.SimpleTextOutlined("Deathmatch","DSHuge",x+(w/2),y+(h/2)-2,Color(200,55,55, trans),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,Color(95,50,50,255))
+         else
+            draw.SimpleTextOutlined(ply:GetRoleName(),"DSHuge",x+(w/2),y+(h/2)-2,Color(55,255,55, trans),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,Color(50,50,50,255))
+         end
          w = 240
          h = 22
          x,y = -w-190,285
@@ -127,9 +178,21 @@ function MainPlayerHud()
             surface.SetTexture( tex );
             surface.DrawRect( x+2,y+2, ratio*w-4, h-4 );
 
-            surface.SetDrawColor( 40, 220, 235, ftrans-20 );
-            surface.SetTexture( tex2 );
-            surface.DrawTexturedRect(x+1,y+1,w-2,h-2)
+            if ply:IsAlien() then
+               if !GetConVar("morbus_alienhud_disable"):GetBool() then
+                  surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+                  surface.SetTexture( tex2 );
+                  surface.DrawTexturedRect(x+1,y+1,w-2,h-2)
+               else
+                  surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+                  surface.SetTexture( tex2 );
+                  surface.DrawTexturedRect(x+1,y+1,w-2,h-2)
+               end
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans-20 )
+               surface.SetTexture( tex2 );
+               surface.DrawTexturedRect(x+1,y+1,w-2,h-2)
+            end
          end
 
          
@@ -152,11 +215,21 @@ function MainPlayerHud()
       h = 34
       x,y = -90,-414
 
-
-      surface.SetDrawColor( 40, 220, 235, ftrans );
-      surface.SetTexture( tex );
-      surface.DrawTexturedRect( x,y, w, h );
-
+      if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            end
+      else
+         surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+         surface.SetTexture( tex )
+         surface.DrawTexturedRect( x,y, w, h )
+      end
       local rawend = GetGlobalFloat("morbus_round_end", 0)
       local roundend = string.FormattedTime(rawend - CurTime(), "%02i:%02i")
       if !rawend or ( rawend and rawend <= CurTime()) then roundend = "00:00" end
@@ -168,11 +241,21 @@ function MainPlayerHud()
       h = 16
       x,y = -64,-379
 
-
-      surface.SetDrawColor( 40, 220, 235, ftrans );
-      surface.SetTexture( tex );
-      surface.DrawTexturedRect( x,y, w, h );
-
+      if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            end
+      else
+         surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+         surface.SetTexture( tex )
+         surface.DrawTexturedRect( x,y, w, h )
+      end
       draw.SimpleTextOutlined(ROUND_TEXT[GetRoundState()],"DSTiny",x+(w/2),y+(h/2)-1,Color(200,200,200, trans),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,Color(50,50,50, trans))
 
 
@@ -183,10 +266,21 @@ function MainPlayerHud()
 
          x,y = -400,-414
 
-
-         surface.SetDrawColor( 40, 220, 235, ftrans );
-         surface.SetTexture( tex );
-         surface.DrawTexturedRect( x,y, w, h );
+      if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            end
+      else
+         surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans )
+         surface.SetTexture( tex )
+         surface.DrawTexturedRect( x,y, w, h )
+      end
 
          local Mission_End = Morbus.Mission_End - CurTime()
          local Mission_Color = Color(255,255,255, trans)
@@ -225,10 +319,21 @@ function MainPlayerHud()
          x,y = -400,-414
 
 
-         surface.SetDrawColor( 40, 220, 235, trans );
-         surface.SetTexture( tex );
-         surface.DrawTexturedRect( x,y, w, h );
-
+      if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               surface.SetDrawColor( AlienR, AlienG, AlienB, trans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            else
+               surface.SetDrawColor( HumanR, HumanG, HumanB, trans )
+               surface.SetTexture( tex )
+               surface.DrawTexturedRect( x,y, w, h )
+            end
+      else
+         surface.SetDrawColor( HumanR, HumanG, HumanB, trans )
+         surface.SetTexture( tex )
+         surface.DrawTexturedRect( x,y, w, h )
+      end
          draw.SimpleTextOutlined("LIVES:","DSLarge",x+(w*1.2/3),y+(h/2)-1,Mission_Color,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,Color(50,50,50,255))
 
          local respawns = tostring(GetGlobalInt("morbus_swarm_spawns",0))

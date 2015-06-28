@@ -148,7 +148,11 @@ end
 
 function plymeta:SetSpeed()
    if self:IsSwarm() then
-      GAMEMODE:SetPlayerSpeed(self,SWARM_SPEED,SWARM_SPEED)
+      if self:GetSwarmMod() == 5 then
+          GAMEMODE:SetPlayerSpeed(self,350,350)
+      else
+          GAMEMODE:SetPlayerSpeed(self,SWARM_SPEED,SWARM_SPEED)
+      end
 
    end
    if self:IsHuman() || self:IsBrood() then
@@ -262,8 +266,10 @@ function plymeta:SelectModel()
    if (self:IsSwarm()) then return Models.Swarm end
 
    if (gender == GENDER_MALE) then
+      self:SetHardGender( 1 )
       return table.Random(Models.Male)
    else
+      self:SetHardGender( 2 )
       return table.Random(Models.Female)
    end
 

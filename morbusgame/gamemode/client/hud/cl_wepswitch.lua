@@ -44,24 +44,43 @@ function WSWITCH:DrawBarBg(x, y, w, h, col)
 
    local b = 8 --bordersize
    local bh = b / 2
-
+   local ply = LocalPlayer()
 
    c = col.bg
 
    surface.SetDrawColor(c.r, c.g, c.b, c.a)
    
    if (self.Selected == current) then
-      surface.SetDrawColor(40, 230, 245,220)
+      if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               if !GetConVar("morbus_alienhud_purple"):GetBool() then
+                  surface.SetDrawColor(255, 75, 75, 220)
+               else
+                  surface.SetDrawColor(190, 85, 255, 220)
+               end
+            else
+            surface.SetDrawColor(100, 215, 255, 220)
+            end
+      else
+         surface.SetDrawColor(100, 215, 255, 220)
+      end
       surface.SetTexture(tex)
       surface.DrawTexturedRect( rx+b+h-4, ry,  rw - (h - 4) - b*2,  rh)
 
-
-   -- surface.SetDrawColor(180,180,180,255)
-   -- surface.DrawRect( rx+b+h-4, ry,  rw - (h - 4) - b*2,  rh)
-   -- surface.SetDrawColor(c.r, c.g, c.b, c.a)
-   -- surface.DrawRect( rx+b+h-4, ry+2,  rw - (h - 4) - b*2,  rh-4)
    else
-      surface.SetDrawColor(40, 220, 235,120)
+         if ply:IsAlien() then
+            if !GetConVar("morbus_alienhud_disable"):GetBool() then
+               if !GetConVar("morbus_alienhud_purple"):GetBool() then
+                  surface.SetDrawColor(215, 55, 55, 120)
+               else
+                  surface.SetDrawColor(165, 25, 255, 120)
+               end
+            else
+            surface.SetDrawColor(40, 175, 235, 120)
+            end
+         else
+            surface.SetDrawColor(40, 175, 235, 120)
+         end
       surface.SetTexture(tex)
       surface.DrawTexturedRect( rx+b+h-4, ry,  rw - (h - 4) - b*2,  rh)
 

@@ -22,18 +22,45 @@ function GM:HUDWeaponPickedUp( wep )
    pickup.time      = CurTime()
    pickup.name      = string.upper(name)
    pickup.holdtime  = 5
-   pickup.font      = "DefaultBold"
+   pickup.font      = "TargetIDSmall"
    pickup.fadein    = 0.04
    pickup.fadeout   = 0.3
 
+
    pickup.color = Color(180, 50, 40, 255)
+
+   if pickup.name == "K7-GAMMA" or 
+      pickup.name == "BLASTER" or 
+      pickup.name == "U8 GAUSS SMG" or 
+      pickup.name == "PULSAR-M9100" or 
+      pickup.name == "U22 AUTO PULSAR" or 
+      pickup.name == "U9 SOLSAR DET." or 
+      pickup.name == "JV1-PHASER" or 
+      pickup.name == "GRAV STICKS" or 
+      pickup.name == "TESLAR-YN2" then
+      pickup.color = Color(0, 155, 255, 255)
+   end
+
+   if pickup.name == "GLOW STICKS" or 
+      pickup.name == "MOTION DETECTOR" or 
+      pickup.name == "LASER TRIPWIRE" or 
+      pickup.name == "MEDKIT" then
+      pickup.color = Color(155, 255, 0, 255)
+   end
+
+   if pickup.name == "INCENDIARY GRENADE" or 
+      pickup.name == "STICKY GLOW STICKS" or 
+      pickup.name == "SMOKE GRENADE" or 
+      pickup.name == "FRAG GRENADE" then
+      pickup.color = Color(255, 155, 0, 255)
+   end
 
    pickup.upper = true
 
    surface.SetFont( pickup.font )
    local w, h = surface.GetTextSize( pickup.name )
    pickup.height    = h
-   pickup.width     = w
+   pickup.width     = w + 64
 
    if (self.PickupHistoryLast >= pickup.time) then
       pickup.time = self.PickupHistoryLast + 0.05
@@ -53,7 +80,7 @@ function GM:HUDItemPickedUp( itemname )
 
    pickup.name      = "#"..itemname
    pickup.holdtime  = 5
-   pickup.font      = "DefaultBold"
+   pickup.font      = "TargetIDSmall"
    pickup.fadein    = 0.04
    pickup.fadeout   = 0.3
    pickup.color     = Color( 255, 255, 255, 255 )
@@ -63,7 +90,7 @@ function GM:HUDItemPickedUp( itemname )
    surface.SetFont( pickup.font )
    local w, h = surface.GetTextSize( pickup.name )
    pickup.height = h
-   pickup.width  = w
+   pickup.width  = w + 64
 
    if self.PickupHistoryLast >= pickup.time then
       pickup.time = self.PickupHistoryLast + 0.05
@@ -95,7 +122,7 @@ function GM:HUDAmmoPickedUp( itemname, amount )
    pickup.time      = CurTime()
    pickup.name      = string.upper(itemname2)
    pickup.holdtime  = 5
-   pickup.font      = "DefaultBold"
+   pickup.font      = "TargetIDSmall"
    pickup.fadein    = 0.04
    pickup.fadeout   = 0.3
    pickup.color     = Color(205, 155, 0, 255)
@@ -104,7 +131,7 @@ function GM:HUDAmmoPickedUp( itemname, amount )
    surface.SetFont( pickup.font )
    local w, h = surface.GetTextSize( pickup.name )
    pickup.height = h
-   pickup.width  = w
+   pickup.width  = w + 64
 
    local w, h = surface.GetTextSize( pickup.amount )
    pickup.xwidth = w
@@ -123,7 +150,7 @@ end
 function GM:HUDDrawPickupHistory()
    if (self.PickupHistory == nil) then return end
 
-   local x, y = ScrW() - self.PickupHistoryWide - 20, self.PickupHistoryTop
+   local x, y = ScrW() - self.PickupHistoryWide - 50, self.PickupHistoryTop
    local tall = 0
    local wide = 0
 

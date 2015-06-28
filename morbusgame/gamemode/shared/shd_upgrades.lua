@@ -25,7 +25,7 @@ UPGRADES[1] = {
 	Title="Sharp Claws",
 	Tree=TREE_OFFENSE,
 	Desc="Increases attack damage by "..UPGRADE.CLAW_AMOUNT.." per level",
-	Icon= "vgui/morbus/upgrades/icon_mor_claws.png",
+	Icon= "vgui/morbus/brood/icon_brood_claws.png",
 	MaxLevel=8,
 	Tier=1
 }
@@ -37,7 +37,7 @@ UPGRADES[2] = {
 	Title="Hardened Carapace",
 	Tree=TREE_DEFENSE,
 	Desc="Decreases damage taken by "..UPGRADE.CARAPACE_AMOUNT.."% per level",
-	Icon="vgui/morbus/upgrades/icon_mor_carapace.png",
+	Icon="vgui/morbus/brood/icon_brood_carapace.png",
 	MaxLevel=5,
 	Tier=1
 }
@@ -49,7 +49,7 @@ UPGRADES[3] = {
 	Title="Adrenaline Glands",
 	Tree=TREE_UTILITY,
 	Desc="Increases the speed of your sprint by "..UPGRADE.SPRINT_AMOUNT.." per level",
-	Icon="vgui/morbus/upgrades/icon_mor_adrenaline.png",
+	Icon="vgui/morbus/brood/icon_brood_adrenaline.png",
 	MaxLevel=5,
 	Tier=1
 }
@@ -61,7 +61,7 @@ UPGRADES[4] = {
 	Title="Exhuastion",
 	Tree=TREE_OFFENSE,
 	Desc="Decreases the time a human has to complete their need by "..UPGRADE.EXHAUST_AMOUNT.." seconds every attack, per level.",
-	Icon="vgui/morbus/upgrades/icon_mor_exhaust.png",
+	Icon="vgui/morbus/brood/icon_brood_exhaust.png",
 	MaxLevel=3,
 	Tier=1
 }
@@ -73,7 +73,7 @@ UPGRADES[5] = {
 	Title="Enforced Scales",
 	Tree=TREE_DEFENSE,
 	Desc="Reduces damage from pistols and SMGs by "..UPGRADE.SDEFENSE_AMOUNT.."%",
-	Icon="vgui/morbus/upgrades/icon_mor_scales.png",
+	Icon="vgui/morbus/brood/icon_brood_scales.png",
 	MaxLevel=1,
 	Tier=1
 }
@@ -85,7 +85,7 @@ UPGRADES[6] = {
 	Title="Shock Absorbing Tissue",
 	Tree=TREE_UTILITY,
 	Desc="Decreases fall damage by "..UPGRADE.FALL_AMOUNT.."% per level",
-	Icon="vgui/morbus/upgrades/icon_mor_shock.png",
+	Icon="vgui/morbus/brood/icon_brood_shock.png",
 	MaxLevel=3,
 	Tier=1
 }
@@ -97,7 +97,7 @@ UPGRADES[7] = {
 	Title="Relentless Attack",
 	Tree=TREE_OFFENSE,
 	Desc="Your attack speed increaes by "..UPGRADE.ATKSPEED_AMOUNT.."% per level",
-	Icon="vgui/morbus/upgrades/icon_mor_relentless.png",
+	Icon="vgui/morbus/brood/icon_brood_relentless.png",
 	MaxLevel=4,
 	Tier=2
 }
@@ -109,7 +109,7 @@ UPGRADES[8] = {
 	Title="Regenerative Tissue",
 	Tree=TREE_DEFENSE,
 	Desc="Restores "..UPGRADE.REGEN_AMOUNT.."*(LEVEL) health per second when in alien form",
-	Icon="vgui/morbus/upgrades/icon_mor_regen.png",
+	Icon="vgui/morbus/brood/icon_brood_regen2.png",
 	MaxLevel=4,
 	Tier=1
 }
@@ -121,7 +121,7 @@ UPGRADES[9] = {
 	Title="Strengthened Legs",
 	Tree=TREE_UTILITY,
 	Desc="Increases jump power by "..UPGRADE.JUMP_AMOUNT.." per level",
-	Icon="vgui/morbus/upgrades/icon_mor_jump.png",
+	Icon="vgui/morbus/brood/icon_brood_jump.png",
 	MaxLevel=2,
 	Tier=2
 }
@@ -133,7 +133,7 @@ UPGRADES[10] = {
 	Title="Blood Thirst",
 	Tree=TREE_OFFENSE,
 	Desc="Regenerates "..UPGRADE.LIFESTEAL_AMOUNT.."*(LEVEL) HP everytime you attack a human",
-	Icon="vgui/morbus/upgrades/icon_mor_blood.png",
+	Icon="vgui/morbus/brood/icon_brood_blood.png",
 	MaxLevel=3,
 	Tier=2
 }
@@ -145,7 +145,7 @@ UPGRADES[11] = {
 	Title="Enforced Skeleton",
 	Tree=TREE_DEFENSE,
 	Desc="Reduces damage from Rifles and Shotguns by "..UPGRADE.HDEFENSE_AMOUNT.."%",
-	Icon="vgui/morbus/upgrades/icon_mor_enforced.png",
+	Icon="vgui/morbus/brood/icon_brood_enforced.png",
 	MaxLevel=1,
 	Tier=2
 }
@@ -156,7 +156,7 @@ UPGRADES[12] = {
 	Title="Softened Breath",
 	Tree=TREE_UTILITY,
 	Desc="Mutes the sound of your breathing",
-	Icon="vgui/morbus/upgrades/icon_mor_mute.png",
+	Icon="vgui/morbus/brood/icon_brood_mute.png",
 	MaxLevel=1,
 	Tier=2
 }
@@ -168,7 +168,7 @@ UPGRADES[13] = {
 	Title="Enhanced Smell",
 	Tree=TREE_OFFENSE,
 	Desc="Increases the range from which you can smell humans by "..UPGRADE.SMELLRANGE_AMOUNT.." units per level",
-	Icon="vgui/morbus/upgrades/icon_mor_smell.png",
+	Icon="vgui/morbus/brood/icon_brood_smell.png",
 	MaxLevel=2,
 	Tier=2
 }
@@ -180,7 +180,7 @@ UPGRADES[14] = {
 	Title="Endurance",
 	Tree=TREE_DEFENSE,
 	Desc="Increases maximum health by "..UPGRADE.HEALTH_AMOUNT.." per level",
-	Icon="vgui/morbus/upgrades/icon_mor_health.png",
+	Icon="vgui/morbus/brood/icon_brood_regen.png",
 	MaxLevel=3,
 	Tier=2
 }
@@ -191,7 +191,7 @@ UPGRADES[15] = {
 	Title="Adaptive Carapace",
 	Tree=TREE_UTILITY,
 	Desc="When you stand still for 6-(LEVEL) seconds you become invisible.",
-	Icon="vgui/morbus/upgrades/icon_mor_question.png",
+	Icon="vgui/morbus/brood/icon_brood_question.png",
 	MaxLevel=3,
 	Tier=2
 }
@@ -201,7 +201,7 @@ UPGRADES[16] = {
 	Title="Upgraded Screech",
 	Tree=TREE_OFFENSE,
 	Desc="When you transform into alien form, blinds and blurs nearby humans vision.",
-	Icon="vgui/morbus/upgrades/icon_mor_screech.png",
+	Icon="vgui/morbus/brood/icon_brood_screech.png",
 	MaxLevel=1,
 	Tier=1
 }

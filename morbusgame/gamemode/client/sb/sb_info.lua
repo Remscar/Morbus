@@ -103,7 +103,7 @@ function PANEL:PerformLayout()
    self:SetSize(self:GetWide(), 30)
 
    local margin = 10
-   local x = 8 --29
+   local x = 300 --29
    local y = 0
 
    for k, btn in ipairs(self.TagButtons) do

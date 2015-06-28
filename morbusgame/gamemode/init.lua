@@ -60,7 +60,7 @@ for k, v in pairs(file.Find(FOLDER_NAME .. "/gamemode/client/hud/*.lua","LUA")) 
 --------------------------------SERVER CONVARS
 CreateConVar("morbus_roundtime", "10", FCVAR_NOTIFY)
 CreateConVar("morbus_evactime", "3", FCVAR_NOTIFY)
-CreateConVar("morbus_rounds", "8", FCVAR_NOTIFY)
+CreateConVar("morbus_rounds", "6", FCVAR_NOTIFY)
 CreateConVar("morbus_round_prep", "20", FCVAR_NOTIFY)
 CreateConVar("morbus_round_post", "20", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_time_max", "220", FCVAR_NOTIFY)
@@ -94,6 +94,9 @@ util.AddNetworkString("FoundBody")
 -- util.AddNetworkString("AlienChat")
 
 --------------------------------INITIALIZE GAMEMODE
+
+hook.Remove("PreDrawHalos", "PropertiesHover")
+
 function GM:Initialize()
 	MsgN("Morbus Server Loading...\n")
 	SetGlobalInt("morbus_winner",0)
@@ -124,6 +127,8 @@ function GM:Initialize()
 	SetGlobalFloat("morbus_round_end", -1)
 	SetGlobalInt("morbus_swarm_spawns", 0)
 	SetGlobalInt("morbus_rounds_left", GetConVar("morbus_rounds"):GetInt())
+	SetGlobalInt("alien_wins", 0)
+	SetGlobalInt("human_wins", 0)
 	SetGlobalFloat("morbus_round_time", GetConVar("morbus_roundtime"):GetInt())
 
 	SetGlobalBool("morbus_rpnames_optional", GetConVar("morbus_rpnames_optional"):GetBool())
@@ -135,6 +140,149 @@ function GM:Initialize()
 
 	MsgN("Morbus Server Loaded!\n")
 end
+
+
+concommand.Add( "SwarmBuyMod", function( ply, cmd, args )
+	if !ply:IsSwarm() then
+		ply:PrintMessage( HUD_PRINTTALK, "You aren't a Swarm Alien!" )
+		return
+	end
+
+	-- Cost conditions, done here to prevent abuse
+	local SwarmCost = 0
+	local SWDonator = 0
+	local AllowBuy	= 0
+	if tonumber( args[1] ) == 0 then
+		-- Normal Spit
+		SwarmCost = 0
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 1 then
+		-- Chemical Bomb
+		SwarmCost = 5
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 2 then
+		-- Nitro Core
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 3 then
+		-- Shock Spit
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 4 then
+		-- Demon Flare
+		SwarmCost = 15
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 5 then
+		-- Swarm Haste
+		SwarmCost = 5
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 6 then
+		-- Blood Siphon
+		SwarmCost = 5
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 7 then
+		-- Unstable Bore
+		SwarmCost = 5
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 8 then
+		-- Remote Charge
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 9 then
+		-- Spikes
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 10 then
+		-- Leap
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 11 then
+		-- Self-Destruct
+		SwarmCost = 20
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 12 then
+		-- Acid Sac
+		SwarmCost = 10
+		SWDonator = 0
+
+	elseif tonumber( args[1] ) == 13 then
+		-- Magma Glob
+		SwarmCost = 20
+		SWDonator = 0
+
+	end
+
+	if ply:GetUserGroup() == "donator" or ply:GetUserGroup() == "superadmin" or ply:GetUserGroup() == "owner" or ply:GetUserGroup() == "admin" or ply:GetUserGroup() == "developer" then
+		AllowBuy = 1
+		if SWDonator == 0 then
+			SwarmCost = math.Round( SwarmCost * .0 )
+		else
+			SwarmCost = SwarmCost
+		end
+	end
+
+	-- Fund test
+	local HowMuch = ply:GetSwarmPoints()
+	print( "1.player funds: " .. ply:GetSwarmPoints() )
+	print( "2.upgrade cost: " .. SwarmCost )
+
+	-- Reset mod
+	if tonumber( args[1] ) == 0 then
+		ply:SetSwarmMod( 0 )
+		ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] Modifier reset!" )
+		return
+	end
+
+	-- Already have this mod
+	if ply:GetSwarmMod() == tonumber( args[1] ) then
+		ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You already have this modifier!" )
+		return 
+	end
+
+	-- Not enough points
+	if HowMuch < SwarmCost then
+		ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You don't have enough Swarm Points!" )
+		return
+	end
+
+	-- Successful purchase
+	if HowMuch >= SwarmCost then
+		-- Donator buy
+		if SWDonator == 1 then
+			if AllowBuy == 0 then return end
+
+			ply:SetSwarmPoints( ply:GetSwarmPoints() - SwarmCost )
+
+			print( "Selected Mod: " .. args[1] )
+			ply:SetSwarmMod( tonumber( args[1] ) )
+
+			ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] Successfully purchased: " .. tostring( args[2] ) .. "." )
+
+		-- Regular buy
+		else
+
+			ply:SetSwarmPoints( ply:GetSwarmPoints() - SwarmCost )
+
+			print( "Selected Mod: " .. args[1] )
+			ply:SetSwarmMod( tonumber( args[1] ) )
+
+			ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] Successfully purchased: " .. tostring( args[2] ) .. "." )
+		end
+	end
+
+end)
 
 
 

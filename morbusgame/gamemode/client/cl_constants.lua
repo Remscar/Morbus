@@ -15,20 +15,20 @@ Mission = {
 },
 {
 	"Sleep",
-	"If you don't sleep your going to passout",
+	"If you do not sleep you are going to pass out",
 	"Sleep is vital to your survival",
 	"You need to sleep"
 },
 {
 	"Eat",
-	"If you don't eat your going to starve",
-	"Your stromach is rumbling",
-	"Your getting pretty hungry"
+	"If you do not eat you are going to starve",
+	"Your stomach is rumbling",
+	"You are getting pretty hungry"
 },
 {
 	"Clean",
 	"Clean this shit off",
-	"Your covered in shit",
+	"You are covered in shit",
 	"You look like a mud monster"
 },
 {
@@ -39,7 +39,7 @@ Mission = {
 },
 {
 	"Kill",
-	"Hunt down the humans and infect or kill them"
+	"Hunt down the humans and infect them"
 }
 }
 

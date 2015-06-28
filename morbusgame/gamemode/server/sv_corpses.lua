@@ -14,13 +14,27 @@ function CreateCorpse(ply, attacker, dmginfo)
    rag:SetNWBool("HumanBody",!ply:GetSwarm())
    rag:SetNWEntity("Player",ply)
    rag:SetNWString("Name", ply:GetFName())
-   rag:SetNWInt("RoundNum",GetGlobalInt("morbus_rounds_left"))
+   rag:SetNWInt("RoundNum", GetGlobalInt("morbus_rounds_left"))
 
    rag:Spawn()
    rag:Activate()
 
+   if rag:GetNWBool("HumanBody") == false then
+      timer.Simple( 10, function() 
+         if ( rag ) and ( IsValid( rag ) ) then SafeRemoveEntity(rag) end 
+      end)
+   end
+
+   -- Remove bodies on deathmatch.
+   if GetRoundState() == ROUND_WAIT then
+      timer.Simple( 3, function() 
+         if ( rag ) and ( IsValid( rag ) ) then SafeRemoveEntity(rag) end 
+      end);
+      rag:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+   else
+      rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+   end
    -- nonsolid to players, but can be picked up and shot
-   rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 end
 
 

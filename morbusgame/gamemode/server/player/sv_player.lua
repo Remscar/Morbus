@@ -40,7 +40,37 @@ function GM:PlayerInitialSpawn(ply)
    ply:InitSanity()
    ply:SetNWInt("Mute_Status",0)
 
-   
+
+
+   --ply:SetForceRPName( 0 ) -- 0 = no, 1 = yes
+   --ply:SetForceGender( 0 ) -- 0 = don't force, 1 = male, 2 = female
+   --ply:SetRPNameFirst( "0" )
+   --ply:SetRPNameLast( "0" )
+
+   ply:SetSwarmMod( 0 )
+ --  ply:SetDeathFX( 0 )
+   ply:SetSwarmPoints( 0 )
+
+   -- Score
+   ply:SetInfections( 0 )
+   ply:SetInfectionsPotential( 0 )
+   ply:SetRDMScore( 0 )
+   ply:SetRDMScorePotential( 0 )
+   ply:SetAlienKills( 0 )
+   ply:SetAlienKillsPotential( 0 )
+
+  -- ply:SetMeleeOverride( 0 )
+  -- ply:SetWfxGuns( 0 )
+   -- Weapon Effects
+   --ply:SetWfxGamma( 0 )
+   --ply:SetWfxSmoke( 0 )
+   --ply:SetWfxBlaster( 0 )
+   --ply:SetWfxTeslar( 0 )
+   --ply:SetWfxPhaser( 0 )
+  -- ply:SetWfxPulsar( 0 )
+  -- ply:SetWfxSwarm( 0 )
+  -- ply:SetWfxBulldog( 0 )
+
    ply.Evo_Points = 0
    ply.Upgrades = {}
 
@@ -74,7 +104,8 @@ function GM:PlayerInitialSpawn(ply)
       ply.ForceGender = 2
       ply:SetNWInt("Donator",2)
    end
-   if (ply:SteamID() == "STEAM_0:0:10342150") then -- [Demonkush - Lots of work]
+
+   if (ply:SteamID() == "STEAM_0:0:10342150") then -- [Demonkush - lots of stuff]
       ply.ForceName = "Mr. Kush"
       ply.ForceGender = 2
       ply:SetNWInt("Donator",2)
@@ -98,6 +129,19 @@ function GM:PlayerInitialSpawn(ply)
       ply:SetNWInt("Donator",2)
    end
 
+   if (ply:SteamID() == "STEAM_0:1:40238734") then
+      ply.ForceName = "Luke Skywalker"
+      ply.ForceGender = 2
+      ply:SetNWInt("Donator",2)
+   end
+
+   if (ply:SteamID() == "STEAM_0:0:5305311") then
+      ply.ForceName = "Ben Affleck"
+      ply.ForceGender = 2
+      ply:SetNWInt("Donator",2)
+   end
+
+
 	ply:SetCanZoom(false)
 	ply:SetJumpPower(ply.Jump)
 	ply:SetCrouchedWalkSpeed(0.7)
@@ -108,9 +152,13 @@ function GM:PlayerInitialSpawn(ply)
 
 	local rstate = GetRoundState() or ROUND_WAIT
 
+
+
+
 	if rstate <= ROUND_PREP then
 		ply:SetRole(ROLE_HUMAN)
 	else
+
       if Swarm_Respawns > 0 || rstate == ROUND_EVAC then
          ply:SetRole(ROLE_SWARM)
          if rstate == ROUND_ACTIVE then
@@ -122,6 +170,7 @@ function GM:PlayerInitialSpawn(ply)
          ply:SetTeam(TEAM_SPEC)
          ply:SetRole(ROLE_SWARM)
       end
+
 	end
 
 	SendRoundState(rstate,ply)
@@ -141,8 +190,30 @@ end
 
 function GM:PlayerSpawn(ply)
 
-
    if (GetRoundState() == ROUND_ACTIVE) && (ply.NextSpawnTime && ply.NextSpawnTime > CurTime()) then return end
+
+   if (GetRoundState() == ROUND_WAIT) then
+
+      if tonumber(#player.GetAll()) == 1 then
+
+         local et = ents.MORBUS
+         local import = et.CanImportEntities(game.GetMap())
+
+         game.CleanUpMap()
+
+         if import then
+            et.ProcessImportScript(game.GetMap())
+         else
+            et.ReplaceEntities()
+         end
+      
+      end
+
+
+      ply:SetRole(ROLE_HUMAN)
+      ply:SetTeam(TEAM_GAME)
+
+   end
 
 	ply:ResetViewRoll()
 
@@ -294,7 +365,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
          dmg:SetAttacker(ply)
          dmg:SetInflictor(ply)
          dmg:SetDamageForce(Vector(0,0,-1))
-         dmg:SetDamage(damage)
+         dmg:SetDamage(damage / 2)
 
          ground:TakeDamageInfo(dmg)
       end
@@ -322,7 +393,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
       elseif ply:IsSwarm() then
          dmg:SetDamage(1)
       else
-         dmg:SetDamage(damage)
+         dmg:SetDamage(damage * 0.8)
       end
       --print("Dealing fall damage:", damage, "for speed", speed)
 
@@ -569,4 +640,4 @@ function WhoIsRemscar()
    end
    SendMsg("Remscar is not playing on this server")
 end
-concommand.Add("remscar", WhoIsRemscar)
+concommand.Add("remscar",WhoIsRemscar)

@@ -12,7 +12,7 @@ TYPE_DAMAGE = 5
 TypeName = {
   "Kill",
   "Infect",
-  "RDM",
+  "] RDM [",
   "Die",
   "Damage"
 }
@@ -20,7 +20,7 @@ TypeName = {
 TypeAction = {
   "killed",
   "infected",
-  "RDM'd",
+  "--- RDM'd ---",
   "died",
   "damaged"
 }
@@ -107,9 +107,7 @@ else
 		MsgN("Recieving Round Log")
 		Round_Log = net.ReadTable()
 
-		if (LocalPlayer():IsAdmin()) then
-			LocalPlayer():ConCommand("print_log")
-		end
+		LocalPlayer():ConCommand("print_log")
 	end
 	net.Receive("RoundLog",GetLog)
 
@@ -119,6 +117,8 @@ else
 		end
 	end
 	concommand.Add("print_log",PrintLog)
+
+
 
 end
 

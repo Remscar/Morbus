@@ -123,6 +123,6 @@ function IMPULSE.AFK(k,ply)
 		end
 	else
 		ply.LastAimVector = ply:GetAimVector()
-		ply.KickTime = CurTime() + 180 // Kick after 3 minutes
+		ply.KickTime = CurTime() + 360 // Kick after 6 minutes
 	end
 end

@@ -5,7 +5,7 @@
 /* This is to load hotfixes from the Morbus website */
 
 local useServerHotfix = false
-local silenceVersionChecker = false
+local silenceVersionChecker = true
 
 
 

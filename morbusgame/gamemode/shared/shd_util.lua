@@ -12,7 +12,8 @@ end
 local old_GetGlobalBool = _G.GetGlobalBool
 function GetGlobalBool(key,default)
   local res = old_GetGlobalBool(key,default)
-  if res == 0 or false then return false end
+
+  if res == false or res == 0 then return false end
   return true
 end
 

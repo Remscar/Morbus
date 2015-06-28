@@ -62,6 +62,31 @@ function PANEL:Paint()
    surface.SetTextColor(255,255,255,255)
    surface.DrawText(txt)
 
+   if self.name == "Humans" then
+
+   -- Shadow Text
+   surface.SetTextPos(201, 11 - h/2)
+   surface.SetTextColor(0,0,0,255)
+   surface.DrawText("[Human Wins]: " .. GetGlobalInt("human_wins"))
+
+   -- Text
+   surface.SetTextPos(200, 10 - h/2)
+   surface.SetTextColor(125,255,125,255)
+   surface.DrawText("[Human Wins]: " .. GetGlobalInt("human_wins"))
+
+   -- Shadow Text
+   surface.SetTextPos(401, 11 - h/2)
+   surface.SetTextColor(0,0,0,255)
+   surface.DrawText("[Alien Wins]: " .. GetGlobalInt("alien_wins"))
+
+   -- Text
+   surface.SetTextPos(400, 10 - h/2)
+   surface.SetTextColor(255,115,115,255)
+   surface.DrawText("[Alien Wins]: " .. GetGlobalInt("alien_wins"))
+
+   end
+
+
    -- Alternating row background
    local y = 24
    for i, row in ipairs(self.rows_sorted) do
@@ -77,7 +102,7 @@ function PANEL:Paint()
    surface.SetDrawColor(0,0,0,50)
    //surface.DrawRect(self:GetWide() - 175, 0, 50, self:GetTall())
    //surface.DrawRect(self:GetWide() - 75, 0, 50, self:GetTall())
-   surface.DrawRect(self:GetWide() - 125, 0, 100, self:GetTall())
+   surface.DrawRect(self:GetWide() - 130, 0, 100, self:GetTall())
 end
 
 function PANEL:AddPlayerRow(ply)

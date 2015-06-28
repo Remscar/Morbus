@@ -45,6 +45,7 @@ if !ResourcesProcessed then
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/resource/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/sound/')
 	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/scripts/')
+	ProcessFolder('gamemodes/' .. FOLDER_NAME .. '/content/particles/')
 	ResourcesProcessed = true
 end
 

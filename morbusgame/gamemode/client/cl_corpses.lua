@@ -13,8 +13,8 @@ function CheckBody()
 		local ent = trace.Entity
 		local distance = trace.HitPos:Distance(trace.StartPos)
 
-		if ent:GetNWBool("HumanBody",false) && distance < 140 && ent:GetNWInt("RoundNum", 1) == GetGlobalInt("morbus_rounds_left", 0) then
-			local ply = ent:GetNWEntity("Player",nil)
+		if ent:GetNWBool("HumanBody",false) && distance < 140 && ent:GetNWInt("RoundNum", 999) == GetGlobalInt("morbus_rounds_left", 0) then
+			local ply = ent:GetNWEntity("Player", nil)
 			if !ply || !IsValid(ply) then return end
 			if ply == LocalPlayer() then return end
 			net.Start("FoundBody")

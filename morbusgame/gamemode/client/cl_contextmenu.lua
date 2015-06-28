@@ -18,8 +18,19 @@ function GM:OnContextMenuOpen( )
 		if pDescriptionBox then
 			pDescriptionBox:Remove()
 		end
-
 		CreateUpgradesMenu()
+	end
+
+	-- Swarm Alien Shop
+	if LocalPlayer():IsSwarm() then
+		if pSwarmShop && pSwarmShop:IsValid() then 
+			pSwarmShop:Remove()
+		end
+		if pDescriptionBox then
+			pDescriptionBox:Remove()
+		end
+
+		CreateSwarmShop()
 	end
 
 end
