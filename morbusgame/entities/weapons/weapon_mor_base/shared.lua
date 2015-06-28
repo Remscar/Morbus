@@ -483,7 +483,6 @@ end
    Desc: A convenience func to shoot bullets.
 ---------------------------------------------------------*/
 local TracerName = "Tracer"
-local GloablRecoilScale = 1.3
 
 function SWEP:ShootBullet(damage, recoil, num_bullets, aimcone)
 
@@ -517,7 +516,7 @@ function SWEP:ShootBullet(damage, recoil, num_bullets, aimcone)
 	self.Owner:FireBullets(bullet)
 	if CLIENT and !self.Owner:IsNPC() then
 		--local anglo = Angle(math.Rand(-self.Primary.KickDown,-self.Primary.KickUp), 0, 0)
-		local anglo = Angle(math.Rand(-self.Primary.KickDown * GloablRecoilScale,self.Primary.KickUp * GloablRecoilScale) * recoil, math.Rand(-self.Primary.KickHorizontal * GloablRecoilScale,self.Primary.KickHorizontal * GloablRecoilScale) * recoil, 0)
+		local anglo = Angle(math.Rand(-self.Primary.KickDown,self.Primary.KickUp)*recoil, math.Rand(-self.Primary.KickHorizontal,self.Primary.KickHorizontal)*recoil, 0)
 		self.Owner:ViewPunch(anglo)
 
 		local eyeang = self.Owner:EyeAngles()

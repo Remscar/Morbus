@@ -5,7 +5,7 @@
 
 GM.Name = "MORBUS" //VERSION 1.5.7
 GM.Author = "Remscar"
-GM.Email = "remscar@live.com"
+GM.Email = "zachary@remscar.com"
 GM.Website = "http://www.remscar.com"
 GM.TeamBased  = false;
 

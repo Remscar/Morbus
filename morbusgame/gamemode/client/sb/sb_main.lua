@@ -232,7 +232,7 @@ function PANEL:PerformLayout()
 
   self.devname:SizeToContents()
   self.devname:SetPos(w - 260 - 8, y_logo_off + self.hostname:GetTall())
-  if GetGlobalBool("Morbus_Outdated",0) then
+  if GetGlobalBool("Morbus_Outdated", false) then
     self.devname:SetColor(Color(200,0,0,255))
     self.devname2:SetColor(Color(255,255,255,255))
   else

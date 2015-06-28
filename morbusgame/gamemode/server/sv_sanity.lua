@@ -1,4 +1,7 @@
-// Sanity system  This is like TTT's Karma system 
+/* Sanity system 
+
+This is like TTT's Karma system
+*/
 
 local math = math
 

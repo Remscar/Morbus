@@ -25,7 +25,7 @@ end
 hook.Add("Impulse_Second","Sec_Impulse",IMPULSE.SECOND)
 
 function IMPULSE.BONUSLIVES()
-	local tend = GetGlobalFloat("morbus_round_end",nil)
+	local tend = GetGlobalFloat("morbus_round_end", 0)
 	if tend and ((tend-90) < CurTime()) and GetRoundState() == ROUND_ACTIVE then
 		Swarm_Respawns =  Swarm_Respawns + 1
 		SetGlobalInt("morbus_swarm_spawns", Swarm_Respawns)

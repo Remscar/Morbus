@@ -561,12 +561,12 @@ function GM:KeyPress(ply, key)
 
 end
 
-function WhoIsRemscar(ply, cmd, args)
+function WhoIsRemscar()
    for k,v in player.GetAll() do
       if v:SteamID() == "STEAM_0:0:20749231" then
          SendAll("Remscar the creator of Morbus is playing on this server.")
       end
    end
-   SendMsg(ply, "Remscar is not playing on this server")
+   SendMsg("Remscar is not playing on this server")
 end
-concommand.Add("remscar",WhoIsRemscar)
+concommand.Add("remscar", WhoIsRemscar)

@@ -222,7 +222,8 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
     return false,false
   end
 
-  if (speaker:Team() == TEAM_SPEC && listener:Team() == TEAM_SPEC) && (listener:GetNWBool("Mute_Status",0) == 0 || listener:GetNWBool("Mute_Status",0) == 2) then
+  if (speaker:Team() == TEAM_SPEC && listener:Team() == TEAM_SPEC) &&
+   (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 2) then
     return true,false
   end
 
@@ -233,18 +234,23 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
   end
   
   if speaker:IsAlien() && (speaker.alien_voice==false) then
-    if listener:IsAlien() && (listener:GetNWBool("Mute_Status",0) == 0 || listener:GetNWBool("Mute_Status",0) == 3 || listener:GetNWBool("Mute_Status",0) == 1) then
+    if listener:IsAlien() && (listener:GetNWInt("Mute_Status",0) == 0 ||
+     listener:GetNWInt("Mute_Status",0) == 3 || listener:GetNWInt("Mute_Status",0) == 1) then
       return true,false
     else
       return false,false
     end
   end
 
-  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 2000) && (listener:Team() == TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) && (listener:GetNWBool("Mute_Status",0) == 0 || listener:GetNWBool("Mute_Status",0) == 1 || listener:GetNWBool("Mute_Status",0) == 4) then
+  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 2000) &&
+   (listener:Team() == TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) 
+   && (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4) then
     return true,true
   end
 
-  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 750) && (speaker:Team() != TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) && (listener:GetNWBool("Mute_Status",0) == 0 || listener:GetNWBool("Mute_Status",0) == 1 || listener:GetNWBool("Mute_Status",0) == 4) then
+  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 750) &&
+    (speaker:Team() != TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true)
+    && (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4) then
     return true,true
   end
 

@@ -1,7 +1,7 @@
 //Options/Settings menu
 
 CreateClientConVar("morbus_hide_rolehint","0",true)
-CreateClientConVar("morbus_hide_distortion","1",true)
+CreateClientConVar("morbus_hide_distortion","0",true)
 CreateClientConVar("morbus_hide_rpnames", "0",true)
 CreateClientConVar("morbus_disable_music", "0",true)
 
