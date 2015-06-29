@@ -162,11 +162,6 @@ function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit
     return ""
   end
 
-  if text == "/rtv" then
-    RTV(ply)
-    return ""
-  end
-
   if text == "/spec" then
     ToggleSpec(ply)
     return ""
@@ -217,51 +212,45 @@ function MuteForRestart(state)
 end
 
 function GM:PlayerCanHearPlayersVoice(listener, speaker)
-  
+ 
   if mute_all then
     return false,false
   end
-
-  if (speaker:Team() == TEAM_SPEC && listener:Team() == TEAM_SPEC) &&
-   (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 2) then
+ 
+  if (speaker:Team() == TEAM_SPEC && listener:Team() == TEAM_SPEC) && ((listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 2)) then
     return true,false
   end
-
+ 
   if !listener:Alive() then
     if !listener:IsSwarm() && GetRoundState() == ROUND_ACTIVE && listener:IsGame() then
       return false,false
     end
   end
-  
+ 
   if speaker:IsAlien() && (speaker.alien_voice==false) then
-    if listener:IsAlien() && (listener:GetNWInt("Mute_Status",0) == 0 ||
-     listener:GetNWInt("Mute_Status",0) == 3 || listener:GetNWInt("Mute_Status",0) == 1) then
+    if listener:IsAlien() && (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 3 || listener:GetNWInt("Mute_Status",0) == 1) then
       return true,false
     else
       return false,false
     end
   end
-
-  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 2000) &&
-   (listener:Team() == TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) 
-   && (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4) then
+ 
+  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 2000) && (listener:Team() == TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) && ((listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4)) then
     return true,true
   end
-
-  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 750) &&
-    (speaker:Team() != TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true)
-    && (listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4) then
+ 
+  if (listener:GetShootPos():Distance(speaker:GetShootPos()) < 750) && (speaker:Team() != TEAM_SPEC) && (GetRoundState() == ROUND_ACTIVE) && (ISLOCALCHAT == true) && ((listener:GetNWInt("Mute_Status",0) == 0 || listener:GetNWInt("Mute_Status",0) == 1 || listener:GetNWInt("Mute_Status",0) == 4)) then
     return true,true
   end
-
+ 
   if (ISLOCALCHAT == false) then
     return true,false
   end
-
+ 
   if (GetRoundState() != ROUND_ACTIVE) then
     return true,false
   end
-
+ 
   return false,false
 end
 
