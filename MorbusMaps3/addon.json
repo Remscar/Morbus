@@ -1,0 +1,16 @@
+{
+    "default_changelog": "http://remscar.com/morbusgame",
+    "description": "\t",
+    "ignore": [
+        "maps/mor_facility_b2_re.rar",
+        "maps/mor_horizon_v2_re.rar",
+        "maps/mor_lorica_v2.rar"
+    ],
+    "tags": [
+        "roleplay",
+        "realism"
+    ],
+    "title": "Morbus Maps",
+    "type": "map",
+    "workshopid": 139445741.0
+}
