@@ -173,9 +173,8 @@ concommand.Add( "SwarmBuyMod", function( ply, cmd, args )
 		SWDonator = 0
 
 	elseif tonumber( args[1] ) == 4 then
-		-- Demon Flare
-		SwarmCost = 15
-		SWDonator = 0
+		-- Shock Spit
+		return
 
 	elseif tonumber( args[1] ) == 5 then
 		-- Swarm Haste
@@ -193,44 +192,39 @@ concommand.Add( "SwarmBuyMod", function( ply, cmd, args )
 		SWDonator = 0
 
 	elseif tonumber( args[1] ) == 8 then
-		-- Remote Charge
+		--remote
 		SwarmCost = 10
 		SWDonator = 0
 
+
 	elseif tonumber( args[1] ) == 9 then
-		-- Spikes
-		SwarmCost = 10
-		SWDonator = 0
+		return
 
 	elseif tonumber( args[1] ) == 10 then
 		-- Leap
-		SwarmCost = 10
+		SwarmCost = 5
 		SWDonator = 0
 
 	elseif tonumber( args[1] ) == 11 then
-		-- Self-Destruct
-		SwarmCost = 20
-		SWDonator = 0
+		-- Shock Spit
+		return
 
 	elseif tonumber( args[1] ) == 12 then
-		-- Acid Sac
+		-- Shock Spit
 		SwarmCost = 10
 		SWDonator = 0
 
 	elseif tonumber( args[1] ) == 13 then
-		-- Magma Glob
-		SwarmCost = 20
-		SWDonator = 0
-
+		-- Shock Spit
+		return
+	elseif tonumber( args[1] ) == 14 then
+		-- Shock Spit
+		return
 	end
 
-	if ply:GetUserGroup() == "donator" or ply:GetUserGroup() == "superadmin" or ply:GetUserGroup() == "owner" or ply:GetUserGroup() == "admin" or ply:GetUserGroup() == "developer" then
+	if ply:GetUserGroup() == "superadmin" or ply:GetUserGroup() == "owner" or ply:GetUserGroup() == "admin" or ply:GetUserGroup() == "developer" then
 		AllowBuy = 1
-		if SWDonator == 0 then
-			SwarmCost = math.Round( SwarmCost * .0 )
-		else
-			SwarmCost = SwarmCost
-		end
+		SwarmCost = 0
 	end
 
 	-- Fund test
@@ -260,15 +254,11 @@ concommand.Add( "SwarmBuyMod", function( ply, cmd, args )
 	-- Successful purchase
 	if HowMuch >= SwarmCost then
 		-- Donator buy
-		if SWDonator == 1 then
-			if AllowBuy == 0 then return end
-
-			ply:SetSwarmPoints( ply:GetSwarmPoints() - SwarmCost )
-
+		if AllowBuy then
 			print( "Selected Mod: " .. args[1] )
 			ply:SetSwarmMod( tonumber( args[1] ) )
 
-			ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] Successfully purchased: " .. tostring( args[2] ) .. "." )
+			ply:PrintMessage( HUD_PRINTTALK, "[Swarm Shop] Admin purchased: " .. tostring( args[2] ) .. "." )
 
 		-- Regular buy
 		else

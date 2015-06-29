@@ -66,7 +66,7 @@ function PANEL:Init()
   self.Trans = 200
 
   self.hostdesc = vgui.Create("DLabel", self)
-  self.hostdesc:SetText("")
+  self.hostdesc:SetText("Morbus")
   self.hostdesc:SetContentAlignment(9)
 
   self.hostname = vgui.Create( "DLabel", self )

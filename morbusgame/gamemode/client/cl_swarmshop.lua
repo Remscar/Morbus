@@ -179,30 +179,6 @@ SpitText1:SetPos( Margin1x + 10, textMarginOffset1 )
 SpitText1:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
--- Chemical Bomb
---
---------------------------------------------------------------------------------------------------
-local Spit2 = vgui.Create( "DImageButton", SShop2 )
-Spit2:SetMaterial( "VGUI/morbus/swarm/icon_chemicalbomb.png" )
-Spit2:SetPos( Margin2x,Margin2y )
-Spit2:SetSize( bSizeX, bSizeY )
-Spit2.DoClick = function()
-	if LocalPlayer():IsSwarm() then
-	 	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ Chemical Bomb ]- Fireball spit modifier that can ignite humans."
-	 	SpitIconSelect 		= "VGUI/morbus/swarm/icon_chemicalbomb.png"
-	 	SelectionSec 		= 1
-	 	SpitSelectionName 	= "Chemical Bomb"
-	else
-	 	surface.PlaySound( soundInvalid )
-	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
-	end
-end
-local SpitText2 = vgui.Create( "DLabel", SShop2 )
-SpitText2:SetText( "( 5 ) Chemical Bomb" )
-SpitText2:SetTextColor( colorNormal )
-SpitText2:SetPos( Margin2x - 20, textMarginOffset1 )
-SpitText2:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
 
@@ -211,7 +187,7 @@ SpitText2:SizeToContents()
 --------------------------------------------------------------------------------------------------
 local Spit3 = vgui.Create( "DImageButton", SShop2 )
 Spit3:SetMaterial( "VGUI/morbus/swarm/icon_unstablebore.png" )
-Spit3:SetPos( Margin3x,Margin3y )
+Spit3:SetPos( Margin2x,Margin1y )
 Spit3:SetSize( bSizeX, bSizeY )
 Spit3.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -228,35 +204,9 @@ end
 local SpitText3 = vgui.Create( "DLabel", SShop2 )
 SpitText3:SetText( "( 5 ) Unstable Bore" )
 SpitText3:SetTextColor( colorNormal )
-SpitText3:SetPos( Margin3x - 20, textMarginOffset1 )
+SpitText3:SetPos( Margin2x - 20, textMarginOffset1 )
 SpitText3:SizeToContents()
 --------------------------------------------------------------------------------------------------
-
-
--- Blood Siphon
---
---------------------------------------------------------------------------------------------------
-local Spit4 = vgui.Create( "DImageButton", SShop2 )
-Spit4:SetMaterial( "VGUI/morbus/swarm/icon_bloodsiphon.png" )
-Spit4:SetPos( Margin4x,Margin4y )
-Spit4:SetSize( bSizeX, bSizeY )
-Spit4.DoClick = function()
-	if LocalPlayer():IsSwarm() then
-	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ Blood Siphon ]- Steals health from humans that you hit."
-	 	SpitIconSelect 		= "VGUI/morbus/swarm/icon_bloodsiphon.png"
-	 	SelectionSec 		= 6
-	 	SpitSelectionName 	= "Blood Siphon"
-	else
-	 	surface.PlaySound( soundInvalid )
-	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
-	end
-end
-local SpitText4 = vgui.Create( "DLabel", SShop2 )
-SpitText4:SetText( "( 5 ) Blood Siphon" )
-SpitText4:SetTextColor( colorNormal )
-SpitText4:SetPos( Margin4x - 10, textMarginOffset1 )
-SpitText4:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
 
@@ -265,7 +215,7 @@ SpitText4:SizeToContents()
 --------------------------------------------------------------------------------------------------
 local Spit5 = vgui.Create( "DImageButton", SShop2 )
 Spit5:SetMaterial( "VGUI/morbus/swarm/icon_nitrocore.png" )
-Spit5:SetPos( Margin5x,Margin5y )
+Spit5:SetPos( Margin3x,Margin1y )
 Spit5:SetSize( bSizeX, bSizeY )
 Spit5.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -282,7 +232,7 @@ end
 local SpitText5 = vgui.Create( "DLabel", SShop2 )
 SpitText5:SetText( "( 10 ) Nitro Core" )
 SpitText5:SetTextColor( colorNormal )
-SpitText5:SetPos( Margin5x - 10, textMarginOffset1 )
+SpitText5:SetPos( Margin3x - 10, textMarginOffset1 )
 SpitText5:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
@@ -292,7 +242,7 @@ SpitText5:SizeToContents()
 --------------------------------------------------------------------------------------------------
 local Spit6 = vgui.Create( "DImageButton", SShop2 )
 Spit6:SetMaterial( "VGUI/morbus/swarm/icon_shockspit.png" )
-Spit6:SetPos( Margin6x,Margin6y )
+Spit6:SetPos( Margin4x,Margin1y )
 Spit6:SetSize( bSizeX, bSizeY )
 Spit6.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -309,7 +259,7 @@ end
 local SpitText6 = vgui.Create( "DLabel", SShop2 )
 SpitText6:SetText( "( 10 ) Shock Spit" )
 SpitText6:SetTextColor( colorNormal )
-SpitText6:SetPos( Margin6x - 10, textMarginOffset1 )
+SpitText6:SetPos( Margin4x - 10, textMarginOffset1 )
 SpitText6:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
@@ -319,12 +269,12 @@ SpitText6:SizeToContents()
 --------------------------------------------------------------------------------------------------
 local Spit7 = vgui.Create( "DImageButton", SShop2 )
 Spit7:SetMaterial( "VGUI/morbus/swarm/icon_remotespit.png" )
-Spit7:SetPos( Margin7x,Margin7y )
+Spit7:SetPos( Margin5x,Margin1y )
 Spit7:SetSize( bSizeX, bSizeY )
 Spit7.DoClick = function()
 	if LocalPlayer():IsSwarm() then
 	 	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ Remote Charge ]- Sticky remote detonated spit ball."
+	 	SelectTextSec 		= " -[ Remote Charge ]- Sticky remote detonated spit ball. (Hit reload while firing to explode or when 5 are placed)"
 	 	SpitIconSelect 		= "VGUI/morbus/swarm/icon_remotespit.png"
 	 	SelectionSec 		= 8
 	 	SpitSelectionName 	= "Remote Charge"
@@ -336,66 +286,16 @@ end
 local SpitText7 = vgui.Create( "DLabel", SShop2 )
 SpitText7:SetText( "( 10 ) Remote Charge" )
 SpitText7:SetTextColor( colorNormal )
-SpitText7:SetPos( Margin7x - 20, textMarginOffset2 )
+SpitText7:SetPos( Margin5x - 20, textMarginOffset1 )
 SpitText7:SizeToContents()
 --------------------------------------------------------------------------------------------------
 
-
--- Demon Flare
---
---------------------------------------------------------------------------------------------------
-local Spit8 = vgui.Create( "DImageButton", SShop2 )
-Spit8:SetMaterial("VGUI/morbus/swarm/icon_demonflare.png")
-Spit8:SetPos( Margin8x,Margin8y )
-Spit8:SetSize( bSizeX, bSizeY )
-Spit8.DoClick = function()
-	if LocalPlayer():IsSwarm() then
-	 	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ Demon Flare ] Deals normal spit damage and ignites enemies."
-	 	SpitIconSelect 		= "VGUI/morbus/swarm/icon_demonflare.png"
-	 	SelectionSec 		= 4
-	 	SpitSelectionName 	= "Demon Flare"
-	else
-	 	surface.PlaySound( soundInvalid )
-	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
-	end
-end
-local SpitText8 = vgui.Create( "DLabel", SShop2 )
-SpitText8:SetText( "( 15 ) Demon Flare" )
-SpitText8:SetTextColor( colorNormal )
-SpitText8:SetPos( Margin8x - 15, textMarginOffset2 )
-SpitText8:SizeToContents()
---------------------------------------------------------------------------------------------------
-
-
--- Spikes
-local Spit9 = vgui.Create( "DImageButton", SShop2 )
-Spit9:SetMaterial(sm_Spit9icon)
-Spit9:SetPos( Margin9x,Margin9y )
-Spit9:SetSize( bSizeX, bSizeY )
-Spit9.DoClick = function()
-	if LocalPlayer():IsSwarm() then
-	 	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ ".. sm_Spit9name .." ]- " .. sm_Spit9desc .. "."
-	 	SpitIconSelect 		= sm_Spit9icon
-	 	SelectionSec 		= sm_Spit9type
-	 	SpitSelectionName 	= sm_Spit9name
-	else
-	 	surface.PlaySound( soundInvalid )
-	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
-	end
-end
-local SpitText9 = vgui.Create( "DLabel", SShop2 )
-SpitText9:SetText( "( 10 ) " .. sm_Spit9name )
-SpitText9:SetTextColor( colorNormal )
-SpitText9:SetPos( Margin9x, textMarginOffset2 )
-SpitText9:SizeToContents()
 
 
 -- Swarm Haste
 local Spit10 = vgui.Create( "DImageButton", SShop2 )
 Spit10:SetMaterial( sm_Spit10icon )
-Spit10:SetPos( Margin10x,Margin10y )
+Spit10:SetPos( Margin6x,Margin1y )
 Spit10:SetSize( bSizeX, bSizeY )
 Spit10.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -412,14 +312,14 @@ end
 local SpitText10 = vgui.Create( "DLabel", SShop2 )
 SpitText10:SetText( "( 5 ) " .. sm_Spit10name )
 SpitText10:SetTextColor( colorNormal )
-SpitText10:SetPos( Margin10x - 15, textMarginOffset2 )
+SpitText10:SetPos( Margin6x - 15, textMarginOffset1 )
 SpitText10:SizeToContents()
 
 
 -- Leap
 local Spit11 = vgui.Create( "DImageButton", SShop2 )
 Spit11:SetMaterial( sm_Spit11icon )
-Spit11:SetPos( Margin11x,Margin10y )
+Spit11:SetPos( Margin7x ,Margin7y )
 Spit11:SetSize( bSizeX, bSizeY )
 Spit11.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -434,39 +334,16 @@ Spit11.DoClick = function()
 	end
 end
 local SpitText11 = vgui.Create( "DLabel", SShop2 )
-SpitText11:SetText( "( 10 ) " .. sm_Spit11name )
+SpitText11:SetText( "( 5 ) " .. sm_Spit11name )
 SpitText11:SetTextColor( colorNormal )
-SpitText11:SetPos( Margin11x + 5, textMarginOffset2 )
+SpitText11:SetPos( Margin7x + 5, textMarginOffset2 )
 SpitText11:SizeToContents()
 
-
--- -- Self Destruct
--- local Spit12 = vgui.Create( "DImageButton", SShop2 )
--- Spit12:SetMaterial( sm_Spit12icon )
--- Spit12:SetPos( Margin12x,Margin12y )
--- Spit12:SetSize( bSizeX, bSizeY )
--- Spit12.DoClick = function()
--- 	if LocalPlayer():IsSwarm() then
--- 	 	surface.PlaySound( soundValid )
--- 	 	SelectTextSec 		= " -[ ".. sm_Spit12name .." ]- " .. sm_Spit12desc .. "."
--- 	 	SpitIconSelect 		= sm_Spit12icon
--- 	 	SelectionSec 		= sm_Spit12type
--- 	 	SpitSelectionName 	= sm_Spit12name
--- 	else
--- 	 	surface.PlaySound( soundInvalid )
--- 	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
--- 	end
--- end
--- local SpitText12 = vgui.Create( "DLabel", SShop2 )
--- SpitText12:SetText( "( 20 ) " .. sm_Spit12name )
--- SpitText12:SetTextColor( colorNormal )
--- SpitText12:SetPos( Margin12x - 15, textMarginOffset2 )
--- SpitText12:SizeToContents()
 
 -- Acid Sac
 local Spit13 = vgui.Create( "DImageButton", SShop2 )
 Spit13:SetMaterial( sm_Spit13icon )
-Spit13:SetPos( Margin13x,Margin13y )
+Spit13:SetPos( Margin8x,Margin7y )
 Spit13:SetSize( bSizeX, bSizeY )
 Spit13.DoClick = function()
 	if LocalPlayer():IsSwarm() then
@@ -483,33 +360,8 @@ end
 local SpitText13 = vgui.Create( "DLabel", SShop2 )
 SpitText13:SetText( "( 10 ) " .. sm_Spit13name )
 SpitText13:SetTextColor( colorNormal )
-SpitText13:SetPos( Margin13x, textMarginOffset3 )
+SpitText13:SetPos( Margin8x, textMarginOffset2 )
 SpitText13:SizeToContents()
-
--- Magma Spit
-local Spit14 = vgui.Create( "DImageButton", SShop2 )
-Spit14:SetMaterial( sm_Spit14icon )
-Spit14:SetPos( Margin14x,Margin14y )
-Spit14:SetSize( bSizeX, bSizeY )
-Spit14.DoClick = function()
-	if LocalPlayer():IsSwarm() then
-	 	surface.PlaySound( soundValid )
-	 	SelectTextSec 		= " -[ ".. sm_Spit14name .." ]- " .. sm_Spit14desc .. "."
-	 	SpitIconSelect 		= sm_Spit14icon
-	 	SelectionSec 		= sm_Spit14type
-	 	SpitSelectionName 	= sm_Spit14name
-	else
-	 	surface.PlaySound( soundInvalid )
-	 	LocalPlayer():PrintMessage( HUD_PRINTTALK, "[Swarm Shop] You are not a Swarm alien!" )
-	end
-end
-local SpitText14 = vgui.Create( "DLabel", SShop2 )
-SpitText14:SetText( "( 20 ) " .. sm_Spit14name )
-SpitText14:SetTextColor( colorDonator )
-SpitText14:SetPos( Margin14x - 10, textMarginOffset3 )
-SpitText14:SizeToContents()
-
-
 
 
 
@@ -537,13 +389,6 @@ SpitSelectText2.Think = function( self )
 	self:SetText( SelectTextSec )
 	self:SizeToContents()
 end
-
-local SpitSelectText3 = vgui.Create( "DLabel", SShop2 )
-SpitSelectText3:SetText( "Donators get 25% off all modifiers!" )
-SpitSelectText3:SetTextColor( Color( 225, 185, 25, 255 ) )
-SpitSelectText3:SetPos( 260, 400 )
-SpitSelectText3:SizeToContents()
-
 
 
 

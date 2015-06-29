@@ -7,7 +7,7 @@ Credits to TTT for this script
 --------------------------------------------*/
 
 ents.MORBUS = {}
-ents.MORBUS.useWebArmFirst = true
+ents.MORBUS.useWebArmFirst = false
 
 webArmFile = ""; -- Blankness
 local rNum = tostring(math.random(1,1000000))
@@ -333,6 +333,8 @@ local function ImportEntities(map)
       if (not string.match(line, "^#")) and (not string.match(line, "^setting")) and line != "" then
          local data = string.Explode("\t", line)
 
+
+
          local fail = true -- pessimism
 
          if data[2] and data[3] then 
@@ -364,9 +366,6 @@ local function ImportEntities(map)
             if weaponvariations[cls] then
                cls = WeaponVariation(cls)
             end
-
-
-
             fail = not CreateImportedEnt(cls, pos, ang, kv)
          end
 
