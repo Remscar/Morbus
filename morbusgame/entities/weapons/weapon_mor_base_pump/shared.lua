@@ -85,8 +85,8 @@ function SWEP:Deploy()
 	self.Weapon:SetNextSecondaryFire(CurTime() + .25)
 	self.ActionDelay = (CurTime() + .25)
 
-	ShotgunReloading = false
-	self.Weapon:SetNetworkedBool( "reloading", false)
+	self.ShotgunReloading = false
+	self.Weapon:SetNWBool( "reloading", false)
 
 	if (SERVER) then
 		self:SetIronsights(false)
@@ -104,17 +104,17 @@ function SWEP:Reload()
 
 	if ( self.Reloadaftershoot > CurTime() ) then return end
 
-	if (self.Weapon:GetNWBool("reloading", false)) or ShotgunReloading then return end
+	if (self.Weapon:GetNWBool("reloading", false)) or self.ShotgunReloading then return end
 
 	if (self.Weapon:Clip1() < self.Primary.ClipSize and self.Owner:GetAmmoCount(self.Primary.Ammo) > 0) then
-			ShotgunReloading = true
+			self.ShotgunReloading = true
 			self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
 			self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
 			self.Weapon:SendWeaponAnim(ACT_SHOTGUN_RELOAD_START)
 		timer.Simple(0.3, function()
-			ShotgunReloading = false
-			self.Weapon:SetNetworkedBool("reloading", true)
-			self.Weapon:SetVar("reloadtimer", CurTime() + 1)
+			self.ShotgunReloading = false
+			self.Weapon:SetNWBool("reloading", true)
+			self.Weapon:SetNWInt("reloadtimer", CurTime() + 1)
 			self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
 			self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
 		end)
@@ -136,33 +136,12 @@ function SWEP:Think()
 		self.Weapon:SetClip1(self.Primary.ClipSize)
 	end
 
-	if self.Weapon:GetNetworkedBool( "reloading") == true then
+	if self.Weapon:GetNWBool( "reloading") == true then
 	
-		if self.Weapon:GetNetworkedInt( "reloadtimer") < CurTime() then
-			if self.unavailable then return end
+		if self.Weapon:GetNWInt( "reloadtimer") < CurTime() then
+			--if self.unavailable then return end
 
-			if ( self.Weapon:Clip1() >= self.Primary.ClipSize || self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0 ) then
-				self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
-				self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
-				self.Weapon:SetNetworkedBool( "reloading", false)
-				self.Weapon:SendWeaponAnim(ACT_SHOTGUN_RELOAD_FINISH)
-			else
-			
-			self.Weapon:SetNetworkedInt( "reloadtimer", CurTime() + 0.45 )
-			self.Weapon:SendWeaponAnim( ACT_VM_RELOAD )
-			self.Owner:RemoveAmmo( 1, self.Primary.Ammo, false )
-			self.Weapon:SetClip1(  self.Weapon:Clip1() + 1 )
-			self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
-			self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
-
-				if ( self.Weapon:Clip1() >= self.Primary.ClipSize || self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0) then
-					self.Weapon:SetNextPrimaryFire(CurTime() + 1.5)
-					self.Weapon:SetNextSecondaryFire(CurTime() + 1.5)
-				else
-					self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
-					self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
-				end
-			end
+			self:ShotgunReload()
 		end
 	end
 
@@ -171,8 +150,39 @@ function SWEP:Think()
 	if self.Owner:KeyPressed(IN_ATTACK) and (self.Weapon:GetNWBool("reloading", true)) then
 		self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
 		self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
-		self.Weapon:SetNetworkedBool( "reloading", false)
+		self.Weapon:SetNWBool( "reloading", false)
 		self.Weapon:SendWeaponAnim(ACT_SHOTGUN_RELOAD_FINISH)
 	end
 end
 
+function SWEP:ShotgunReload()
+
+	if ( self.Weapon:Clip1() >= self.Primary.ClipSize || self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0 ) then
+		self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
+		self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
+		self.Weapon:SetNWBool( "reloading", false)
+		self.Weapon:SendWeaponAnim(ACT_SHOTGUN_RELOAD_FINISH)
+	else
+	
+	self.Weapon:SetNWInt( "reloadtimer", CurTime() + 1 )
+	self.Owner:RemoveAmmo( 1, self.Primary.Ammo, false )
+	self.Weapon:SetClip1(  self.Weapon:Clip1() + 1 )
+
+	print( self.Weapon:Clip1() )
+
+	self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
+	self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
+
+		if ( self.Weapon:Clip1() >= self.Primary.ClipSize || self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0) then
+			self.Weapon:SetNextPrimaryFire(CurTime() + 1.5)
+			self.Weapon:SetNextSecondaryFire(CurTime() + 1.5)
+		else
+			self.Weapon:SetNextPrimaryFire(CurTime() + 0.5)
+			self.Weapon:SetNextSecondaryFire(CurTime() + 0.5)
+		end
+
+		self.Weapon:SendWeaponAnim(ACT_VM_RELOAD)
+
+	end
+
+end
