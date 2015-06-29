@@ -251,12 +251,7 @@ function PANEL:PerformLayout()
   self.devname:SizeToContents()
   self.devname:SetPos(w - 260 - 8, y_logo_off + self.hostname:GetTall() - 10)
   
-    self.devname:SetColor(Color(200,0,0,255))
-    self.devname2:SetColor(Color(155,255,0,255))
-
-
-  self.devname2:SizeToContents()
-  self.devname2:SetPos(w - 250 - 8 + self.devname:GetWide()/2, y_logo_off + self.hostname:GetTall() + self.devname:GetTall() - 13)
+  self.devname:SetColor(Color(200,0,0,255))
 
   surface.SetFont("cool_large")
   local hname = self.hostname:GetValue()
@@ -283,7 +278,6 @@ function PANEL:ApplySchemeSettings()
   self.hostdesc:SetFont("DSMass")
   self.hostname:SetFont("cool_large")
   self.devname:SetFont("DSLarge")
-  self.devname2:SetFont("treb_small")
   self.mapchange:SetFont("treb_small")
 
   self.hostdesc:SetTextColor(COLOR_WHITE)
