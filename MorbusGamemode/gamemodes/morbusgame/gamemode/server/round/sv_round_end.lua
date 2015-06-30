@@ -49,6 +49,7 @@ function EndRound(type)
 		end
 	end
 
+
 	Send_RoundHistory()
 
 end

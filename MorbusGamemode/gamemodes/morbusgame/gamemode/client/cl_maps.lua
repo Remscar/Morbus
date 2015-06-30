@@ -67,6 +67,8 @@ function SMV.OpenVotingPanel()
 	local tab = table.Shuffle(SMV.Maps)
 	SMV.VotingMaps = tab
 
+	PrintTable(tab)
+
 	local n = 30
 	if #tab < n then n = #tab end
 

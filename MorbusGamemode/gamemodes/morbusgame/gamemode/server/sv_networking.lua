@@ -132,6 +132,7 @@ end
 
 function SetRoundEnd(endtime)
 	SetGlobalFloat("morbus_round_end", endtime)
+	STATS.RoundEnd = endtime
 end
 
 

@@ -11,11 +11,13 @@ SMV.Maps = {
 	"mor_alphastation_b4_re",
 	"mor_auriga_v4_re",
 	"mor_breach_b4_re",
+	"mor_breach_cv21",
 	"mor_chemical_labs_b3_re",
 	"mor_facility_b2_re",
 	"mor_horizon_v11_re",
 	"mor_installation_gt1_re",
 	"mor_isolation_b4_re",
+	"mor_isolation_cv1",
 	"mor_outpostnorth32_a4",
 	"mor_ptmc_v22",
 	"mor_skandalon_b5_re",
@@ -87,15 +89,19 @@ end
 
 function SMV.CheckMaps()
 	local toremove = {}
+	local goodMaps = {}
 	for k,v in pairs(SMV.Maps) do
 		if !file.Exists("maps/"..v..".bsp","GAME") then
-			table.insert(toremove,k)
+			table.insert(toremove, k)
+		else
+			table.insert(goodMaps, v)
 		end
 	end
 	for k,v in pairs(toremove) do
 		MsgN("[SMV] Removed "..SMV.Maps[v].." from vote list (DID NOT EXIST)")
-		SMV.Maps[v] = nil
 	end
+
+	SMV.Maps = goodMaps
 end
 
 

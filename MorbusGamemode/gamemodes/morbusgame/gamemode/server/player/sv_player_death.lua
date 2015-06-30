@@ -283,6 +283,12 @@ function Death_Unknown(ply,wpn,klr)
         return
     end
 
+    if ply:IsBrood() then
+        Death_Normal( ply, wpn, klr )
+        hook.Call("MorbusBroodDied", GAMEMODE)
+        return
+    end
+
 
     NewAlien(ply,ROLE_SWARM)
 
@@ -291,6 +297,12 @@ end
 
 function Death_Suicide( ply, wpn, klr )
 
+    if ply:IsBrood() then
+        Death_Normal( ply, wpn, klr )
+        hook.Call("MorbusBroodDied", GAMEMODE)
+        return
+    end
+
     Death_Normal( ply, wpn, klr )
 
 end
@@ -298,7 +310,11 @@ end
 
 function Death_Brood( ply, weapon, killer )
 
-    Death_Normal(ply,weapon,killer)
+
+
+    Death_Normal(ply, weapon, killer)
+
+    hook.Call("MorbusBroodDied", GAMEMODE)
 
     if ply != killer then
         if !RoundHistory["Kill"][killer] then

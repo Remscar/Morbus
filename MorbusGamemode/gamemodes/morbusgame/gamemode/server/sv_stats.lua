@@ -5,6 +5,8 @@ STATS = {}
 
 
 STATS.RoundStart = 0
+STATS.RoundEnd = 0
+STATS.InitialHumans = 0
 STATS.Version = 4
 
 STATS.URL = "http://www.remscar.com/morbus/stats.php"

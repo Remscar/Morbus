@@ -11,6 +11,10 @@ function SendMsg( ply, msg)
 	ply:PrintMessage(3,msg)
 end
 
+function SendMsgCenter(ply, msg)
+	ply:PrintMessage(4, msg)
+end
+
 
 function WhoIsPlayer(name)
 	if !name then return end

@@ -20,12 +20,16 @@ function CheckMission()
 					v.Mission = 0
 					v:Freeze(false)
 					v:SetHealth(math.Clamp(v:Health()+25,0,100))
+					
 					ResetMission(v)
+
 					if v.Gender == GENDER_FEMALE then
-       					v:EmitSound(table.Random(Response.Female.Yes),100,100)
-      				else
-        				v:EmitSound(table.Random(Response.Male.Yes),100,100)
-      				end
+   					v:EmitSound(table.Random(Response.Female.Yes),100,100)
+  				else
+    				v:EmitSound(table.Random(Response.Male.Yes),100,100)
+  				end
+
+
 				end
 
 			elseif (v.Mission == 0) && (v.Mission_Next <= CurTime()) then

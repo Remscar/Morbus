@@ -70,7 +70,7 @@ local function GetLoadoutWeapons(r)
 end
 
 
-local function GiveLoadoutWeapons(ply)
+function GiveLoadoutWeapons(ply)
    local r = ply:GetRole()
    local weps = GetLoadoutWeapons(r)
    

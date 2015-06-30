@@ -63,5 +63,8 @@ function BeginRound()
 		Human_Evacuated = false
 	end
 
-print("Round started!\n")
+	STATS.InitialHumans = #GetHumanList()
+
+
+	print("Round started!\n")
 end
