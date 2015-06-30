@@ -13,10 +13,10 @@ SANITY.st = {} //settings
 SANITY.st.Enabled = CreateConVar("mor_sanity", "1", FCVAR_ARCHIVE)
 SANITY.st.Starting = CreateConVar("mor_sanity_starting", "1000")
 SANITY.st.Max = CreateConVar("mor_sanity_max", "1000")
-SANITY.st.KillBrood = 20
+SANITY.st.KillBrood = 50
 SANITY.st.KillSwarm = 10
 SANITY.st.KillHuman = 20
-SANITY.st.RDM = 90
+SANITY.st.RDM = 45
 SANITY.st.Dirty = 0.5
 SANITY.st.Ratio = 0.0018
 SANITY.st.AlienRatio = 0.0005
@@ -145,6 +145,7 @@ function SANITY.Killed(attacker, victim, dmginfo)
    if not IsValid(attacker) or not IsValid(victim) then return end
    if attacker == victim then return end
    if not attacker:IsPlayer() or not victim:IsPlayer() then return end
+
    if attacker:GetBrood() and victim:GetBrood() then
 
       local penalty = SANITY.GetKillPenaltyAlien(victim:GetLiveSanity())
@@ -155,19 +156,21 @@ function SANITY.Killed(attacker, victim, dmginfo)
 
 	      local reward = SANITY.GetBroodKillReward()
 	      reward = SANITY.GiveReward(attacker, reward)
-         //MsgN(reward)
+         MsgN(attacker:Name().." gained ".. reward.." sanity.")
 
-      elseif vitcim:IsSwarm() then
+      elseif victim:IsSwarm() then
 
   			local reward = SANITY.GetSwarmKillReward()
       	reward = SANITY.GiveReward(attacker, reward)
-         //MsgN(reward)
+         MsgN(attacker:Name().." gained ".. reward.." sanity.")
+
 
     	elseif victim:IsHuman() then
 
-    		local penalty = SANITY.GetKillPenaltyAlien(victim:GetLiveSanity())
+    		local penalty = SANITY.GetKillPenaltyHuman(victim:GetLiveSanity())
       	SANITY.GivePenalty(attacker, penalty)
-         //MsgN(penalty)
+         MsgN(attacker:Name().." lost ".. penalty.." sanity.")
+
   		end
    end
 
@@ -175,6 +178,7 @@ function SANITY.Killed(attacker, victim, dmginfo)
 
       local penalty = SANITY.GetKillPenaltyHuman(victim:GetLiveSanity()) * 1.2
       SANITY.GivePenalty(attacker, penalty)
+      MsgN(attacker:Name().." lost ".. penalty.." sanity.")
 
    end
 
@@ -182,6 +186,7 @@ function SANITY.Killed(attacker, victim, dmginfo)
 
       // local reward = SANITY.GetBroodKillReward()
       // reward = SANITY.GiveReward(attacker, reward)
+      // MsgN(attacker:Name().." gained ".. reward.." sanity.")
 
    end
 

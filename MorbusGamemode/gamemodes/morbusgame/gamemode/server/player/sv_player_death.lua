@@ -79,7 +79,8 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
         ply.Killer:Spawn()
     end
 
-    if GetRoundState() == ROUNT_ACTIVE then
+
+    if GetRoundState() == ROUND_ACTIVE then
         if ply.FreeKill < CurTime() then
             if attacker:GetHuman() && ply:GetHuman() then
                 attacker.FreeKill = CurTime() + 5
@@ -226,15 +227,15 @@ function Death_Normal(ply,weapon,killer)
 
         killer:AddFrags(-2)
 
-        -- Punish the player more if they have more RDMs this game.
-        if killer:GetRDMScore() > 2 then
-            killer:SetLiveSanity( killer:GetLiveSanity() - 100 )
-        end
+        // -- Punish the player more if they have more RDMs this game.
+        // if killer:GetRDMScore() > 2 then
+        //     killer:SetLiveSanity( killer:GetLiveSanity() - 100 )
+        // end
 
-        -- Three strikes you're out, at least three strikes in a row.
-        if killer:GetRDMScorePotential() > 2 then
-            killer:SetLiveSanity( killer:GetLiveSanity() - 250 )
-        end
+        // -- Three strikes you're out, at least three strikes in a row.
+        // if killer:GetRDMScorePotential() > 2 then
+        //     killer:SetLiveSanity( killer:GetLiveSanity() - 250 )
+        // end
 
         PlayerMsg( killer, "RDM is against the rules! Press F2 for the rules, to avoid penalties.", false )
     end
@@ -245,15 +246,15 @@ function Death_Normal(ply,weapon,killer)
 
         killer:AddFrags(-1)
 
-        -- Punish the player more if they have more RDMs this game.
-        if killer:GetRDMScore() > 2 then
-            killer:SetLiveSanity( killer:GetLiveSanity() - 50 )
-        end
+        // -- Punish the player more if they have more RDMs this game.
+        // if killer:GetRDMScore() > 2 then
+        //     killer:SetLiveSanity( killer:GetLiveSanity() - 50 )
+        // end
 
-        -- Three strikes you're out, at least three strikes in a row.
-        if killer:GetRDMScorePotential() > 2 then
-            killer:SetLiveSanity( killer:GetLiveSanity() - 200 )
-        end
+        // -- Three strikes you're out, at least three strikes in a row.
+        // if killer:GetRDMScorePotential() > 2 then
+        //     killer:SetLiveSanity( killer:GetLiveSanity() - 200 )
+        // end
 
         PlayerMsg( killer, "RDM is against the rules! Press F2 for the rules, to avoid penalties.", false )
     end
@@ -266,7 +267,7 @@ function Death_Normal(ply,weapon,killer)
 
     -- Brood Kills a Human
     if killer:IsBrood() && !ply:IsAlien() then
-        killer:SetLiveSanity( killer:GetLiveSanity() - 50 )
+        //killer:SetLiveSanity( killer:GetLiveSanity() - 50 )
         PlayerMsg( killer, "Killing humans with guns will reduce sanity!", false )
     end
 
