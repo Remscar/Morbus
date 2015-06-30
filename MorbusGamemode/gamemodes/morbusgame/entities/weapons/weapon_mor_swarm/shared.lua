@@ -193,12 +193,6 @@ function SWEP:SecondaryAttack()
         self.refire = 3
         self.SpitSound = Sound("swarm.spit")
 
-    elseif ( self.Owner:GetSwarmMod() == 1 ) then 
-        self.spitBall = "sent_spitball_fire"
-        self.attackType = "spit"
-        self.refire = 3
-        self.SpitSound = Sound("alien.Impact4")
-
     elseif ( self.Owner:GetSwarmMod() == 2 ) then 
         self.spitBall = "sent_spitball_ice"
         self.attackType = "spit"
@@ -211,23 +205,11 @@ function SWEP:SecondaryAttack()
         self.refire = 3
         self.SpitSound = Sound("alien.Impact2")
 
-    elseif ( self.Owner:GetSwarmMod() == 4 ) then 
-        self.spitBall = "sent_spitball_demon"
-        self.attackType = "spit"
-        self.refire = 3
-        self.SpitSound = Sound("alien.Impact2")
-
     elseif ( self.Owner:GetSwarmMod() == 5 ) then 
         self.spitBall = "sent_spitball"
         self.attackType = "spit"
         self.refire = 3
         self.SpitSound = Sound("swarm.spit")
-
-    elseif ( self.Owner:GetSwarmMod() == 6 ) then 
-        self.spitBall = "sent_spitball_blood"
-        self.attackType = "spit"
-        self.refire = 3
-        self.SpitSound = Sound("alien.Impact2")
 
     elseif ( self.Owner:GetSwarmMod() == 7 ) then 
         self.spitBall = "sent_spitball_timed"
@@ -241,35 +223,17 @@ function SWEP:SecondaryAttack()
         self.refire = 1
         self.SpitSound = Sound("alien.Spit1")
 
-    elseif ( self.Owner:GetSwarmMod() == 9 ) then 
-        self.spitBall = "spikes"
-        self.attackType = "bullet"
-        self.refire = 1.5
-        self.SpitSound = Sound("alien.Spit1")
-
     elseif ( self.Owner:GetSwarmMod() == 10 ) then 
         self.spitBall = "leap"
         self.attackType = "special"
         self.refire = 3
         self.SpitSound = Sound("alien.Grunt2")
 
-    elseif ( self.Owner:GetSwarmMod() == 11 ) then 
-        self.spitBall = "destruct"
-        self.attackType = "special"
-        self.refire = 10
-        self.SpitSound = Sound("alien.Grunt1")
-
     elseif ( self.Owner:GetSwarmMod() == 12 ) then 
         self.spitBall = "sent_spitball_acid"
         self.attackType = "spit"
         self.refire = 3
         self.SpitSound = Sound("alien.Impact2")
-
-    elseif ( self.Owner:GetSwarmMod() == 13 ) then 
-        self.spitBall = "sent_spitball_magma"
-        self.attackType = "spit"
-        self.refire = 3
-        self.SpitSound = Sound("alien.Impact4")
 
     end
     
@@ -291,7 +255,7 @@ function SWEP:SecondaryAttack()
             -- Remote Det
             if self.Owner:GetSwarmMod() == 8 then
                 ent:SetNWEntity("Owner", self.Owner)
-                if self.Remotes == 4 then
+                if self.Remotes == 5 or self.Owner:KeyPressed(IN_RELOAD) then
                     self:RemoteDet()
                 end
                 self.Remotes = self.Remotes + 1
