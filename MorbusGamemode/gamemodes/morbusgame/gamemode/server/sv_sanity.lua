@@ -16,9 +16,9 @@ SANITY.st.Max = CreateConVar("mor_sanity_max", "1000")
 SANITY.st.KillBrood = 50
 SANITY.st.KillSwarm = 10
 SANITY.st.KillHuman = 20
-SANITY.st.RDM = 45
+SANITY.st.RDM = 25
 SANITY.st.Dirty = 0.5
-SANITY.st.Ratio = 0.0018
+SANITY.st.Ratio = 0.0015
 SANITY.st.AlienRatio = 0.0005
 SANITY.st.Heal = 10
 
