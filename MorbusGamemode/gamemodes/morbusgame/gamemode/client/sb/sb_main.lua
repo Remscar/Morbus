@@ -246,7 +246,7 @@ function PANEL:PerformLayout()
     self.hostname:SetText("")
   end
   self.hostname:SizeToContents()
-  self.hostname:SetPos(375, y_logo_off + 60)
+  self.hostname:SetPos(5, y_logo_off + 62)
 
   self.devname:SizeToContents()
   self.devname:SetPos(w - 260 - 8, y_logo_off + self.hostname:GetTall() - 10)

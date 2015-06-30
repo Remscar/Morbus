@@ -38,7 +38,7 @@ function SANITY.GetHurtPenalty(victim_sanity, dmg)
 end
 
 function SANITY.GetHurtReward(dmg)
-   return cfg.Max:GetFloat() * math.Clamp(dmg * cfg.AlienRatio, 0, 1)
+   return cfg.Max:GetInt() * math.Clamp(dmg * cfg.AlienRatio, 0, 1)
 end
 
 function SANITY.GetKillPenaltyHuman(victim_sanity)
@@ -67,14 +67,14 @@ end
 
 function SANITY.GiveReward(ply, reward)
    reward = SANITY.DecayedMultiplier(ply) * reward
-   ply:SetLiveSanity(math.min(ply:GetLiveSanity() + reward, cfg.Max:GetFloat()))
+   ply:SetLiveSanity(math.min(ply:GetLiveSanity() + reward, cfg.Max:GetInt()))
    return reward
 end
 
 local expdecay = math.ExponentialDecay
 function SANITY.DecayedMultiplier(ply)
-   local max   = cfg.Max:GetFloat()
-   local start = cfg.Starting:GetFloat()
+   local max   = cfg.Max:GetInt()
+   local start = cfg.Starting:GetInt()
    local k     = ply:GetLiveSanity()
 
    if k < start then
@@ -178,6 +178,13 @@ function SANITY.Killed(attacker, victim, dmginfo)
 
    end
 
+   if victim:IsHuman() && attacker:GetBrood() && attacker:GetNWBool("alienform") then
+
+      // local reward = SANITY.GetBroodKillReward()
+      // reward = SANITY.GiveReward(attacker, reward)
+
+   end
+
 end
 
 function SANITY.RoundIncrement()
@@ -244,9 +251,11 @@ function SANITY.RoundBegin()
 end
 
 function SANITY.InitPlayer(ply)
-   local k = SANITY.Recall(ply) or cfg.Starting:GetFloat()
+   local k = SANITY.Recall(ply) or cfg.Starting:GetInt()
 
-   k = math.Clamp(k, 0, cfg.Max:GetFloat())
+   k = math.Clamp(k, 0, cfg.Max:GetInt())
+
+   print("Initializing player "..ply:GetName().." with ".. k .." sanity.")
 
    ply:SetBaseSanity(k)
    ply:SetLiveSanity(k)

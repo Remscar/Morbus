@@ -63,7 +63,7 @@ function plymeta:GetFName(fake)
 end
 
 function plymeta:GetBaseSanity()
-   return self:GetNWFloat("sanity", 0)
+   return self:GetNWFloat("sanity", 1000) -- f it
 end
 
 function plymeta:CanCarryWeapon(wep)

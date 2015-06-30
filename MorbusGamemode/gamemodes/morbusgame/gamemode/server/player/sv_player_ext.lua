@@ -195,10 +195,16 @@ SANITY
 ---------------------------------------------------*/
 
 
-AccessorFunc(plymeta, "live_sanity", "LiveSanity", FORCE_NUMBER)
+function plymeta:SetLiveSanity(k)
+   self.LiveSanity = k
+end
+
+function plymeta:GetLiveSanity()
+   return self.LiveSanity
+end
 
 function plymeta:SetBaseSanity(k)
-   self:SetNWFloat("sanity", k)
+   self:SetNWFloat("sanity", k, true)
 end
 
 function plymeta:InitSanity()
