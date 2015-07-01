@@ -12,7 +12,7 @@ local function GetBroodCount(ply_count)
   end
 end
 
-local Allow_Bots = false
+local Allow_Bots = true
 local function ChooseNewAliens()
   local choices = {}
 
@@ -62,6 +62,11 @@ local function ChooseNewAliens()
 end
 
 
+// 1 + 1 for every 10 players
+local function NumberOfResurgence()
+  return 1 + math.floor(#player.GetAll() * 0.095)
+end
+
 
 function CheckResurgence()
   local broods = GetBroodList()
@@ -69,17 +74,31 @@ function CheckResurgence()
   -- All broods must be dead
   if #broods > 0 then return end
 
+  --SendAll("Number of resurgencies: ".. tostring(STATS.ResurgenceCount or 0))
+  --SendAll("Number of allowed resurgencies: ".. tostring(NumberOfResurgence()))
+
+  -- Can't have more than the allowed count
+  if (STATS.ResurgenceCount or 0) >= NumberOfResurgence() then return end
+
   local startRoundTime = STATS.RoundStart
   local endRoundTime = STATS.RoundEnd
   local now = CurTime()
+
+  --SendAll("Time Left in round: "..tostring(now - startRoundTime))
+  --SendAll("Required Time Left: "..tostring((endRoundTime - startRoundTime) * 0.6))
 
   -- The round must be less than 60% done
   if now - startRoundTime > (endRoundTime - startRoundTime) * 0.6 then return end
 
   local humans = GetHumanList()
 
+  --SendAll("Number of humans = "..tostring(#humans))
+  --SendAll("Required number of humans = ".. tostring(STATS.InitialHumans * 0.6))
+
   -- 40% of the humans at the start of the round must still be alive
   if #humans < STATS.InitialHumans * 0.6 then return end
+
+  STATS.ResurgenceCount = STATS.ResurgenceCount + 1
 
   ChooseNewAliens()
 

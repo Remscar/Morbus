@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	"$baseTexture" "models\weapons\v_models\tavor_famas\mars"
+	"$envmap" "env_cubemap"
+	"$envmapmask" "models\weapons\v_models\tavor_famas\mars_ref"
+}

@@ -1,0 +1,19 @@
+
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/samzanemesis/T_WP_ShockRifle_Instagib_D"
+
+	"$bumpmap" "models/weapons/samzanemesis/T_WP_ShockRifle_N"
+
+$selfillum 1
+$selfillummask "models/weapons/samzanemesis/T_WP_ShockRifle_E"
+	"$phong" "1"
+	"$phongexponent" "100"
+	"$phongboost" "5"	
+	"$phongfresnelranges"	"[.1 1 1]"
+	"$halflambert" "0"
+
+
+}
+
+}

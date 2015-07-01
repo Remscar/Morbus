@@ -19,7 +19,9 @@ function EndRound(type)
 	SetGlobalInt("morbus_winner",type)
 
 	SANITY.RoundEnd()
-	STATS.Send()
+
+	pcall(STATS.Send)
+	
 
 	SetRoundState(ROUND_POST)
 	

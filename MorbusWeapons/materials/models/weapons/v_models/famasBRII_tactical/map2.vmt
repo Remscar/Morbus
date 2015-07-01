@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\weapons\v_models\famasBRII_tactical\map2"
+	"$envmapmask" "models\weapons\v_models\famasBRII_tactical\map2_ref"
+      	"$envmap" "env_cubemap"
+	"$envmaptint" "[.6 .6 .6]"
+}

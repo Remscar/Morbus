@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\weapons/v_smg3/MP7"
+	"$bumpmap" "models\weapons/v_smg3/MP7_Normal"
+}

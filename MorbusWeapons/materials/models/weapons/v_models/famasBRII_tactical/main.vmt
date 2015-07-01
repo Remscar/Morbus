@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\weapons\v_models\famasBRII_tactical\main"
+	"$nocull" "1"
+	"$envmapmask" "models\weapons\v_models\famasBRII_tactical\main_ref"
+      	"$envmap" "env_cubemap"
+	"$envmaptint" "[.6 .6 .6]"
+}

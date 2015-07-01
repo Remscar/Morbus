@@ -4,9 +4,7 @@
 STATS = {}
 
 
-STATS.RoundStart = 0
-STATS.RoundEnd = 0
-STATS.InitialHumans = 0
+
 STATS.Version = 4
 
 STATS.URL = "http://www.remscar.com/morbus/stats.php"
@@ -37,7 +35,7 @@ function STATS.Send()
 	if #player.GetAll() < 6 then return end
 
 	local tab = {}
-	tab["rln"] = CurTime() - STATS.RoundStart
+	tab["rln"] = CurTime() - (STATS.RoundStart or CurTime())
 	tab["trt"] = GetConVar("morbus_roundtime"):GetInt() * 60
 	tab["asn"] = util.AverageSanity()
 	tab["swl"] = Swarm_Respawns

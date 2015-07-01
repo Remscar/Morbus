@@ -64,6 +64,7 @@ function BeginRound()
 	end
 
 	STATS.InitialHumans = #GetHumanList()
+	STATS.ResurgenceCount = 0
 
 
 	print("Round started!\n")

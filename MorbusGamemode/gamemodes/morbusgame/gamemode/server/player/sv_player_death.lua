@@ -80,14 +80,6 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
     end
 
 
-    if GetRoundState() == ROUND_ACTIVE then
-        if ply.FreeKill < CurTime() then
-            if attacker:GetHuman() && ply:GetHuman() then
-                attacker.FreeKill = CurTime() + 5
-            end
-            SANITY.Killed(attacker, ply, dmginfo)
-        end
-    end
 
     for k, wep in pairs(ply:GetWeapons()) do
         WEPS.DropNotifiedWeapon(ply, wep, true) -- with ammo in them
@@ -138,6 +130,15 @@ function GM:PlayerDeath( victim, weapon, killer )
 
     if killer:IsPlayer() && killer != victim && victim:IsAlien() && !killer:GetNWBool( "alienform", false ) then
         killer:KilledAlien()
+    end
+
+    if GetRoundState() == ROUND_ACTIVE then
+        if victim.FreeKill < CurTime() && killer:IsPlayer() then
+            if killer:GetHuman() && victim:GetHuman() then
+                killer.FreeKill = CurTime() + 5
+            end
+            SANITY.Killed(killer, victim, dmginfo)
+        end
     end
 
     -- Dont bother with this shit if we arent playing
@@ -278,16 +279,19 @@ end
 
 function Death_Unknown(ply,wpn,klr)
 
+
+    if ply:IsBrood() then
+        Death_Swarm( ply, wpn, klr )
+        hook.Call("MorbusBroodDied", GAMEMODE)
+        return
+    end
+
     if ply:IsSwarm() then
         Death_Swarm(ply,weapon,killer)
         return
     end
 
-    if ply:IsBrood() then
-        Death_Normal( ply, wpn, klr )
-        hook.Call("MorbusBroodDied", GAMEMODE)
-        return
-    end
+    
 
 
     NewAlien(ply,ROLE_SWARM)

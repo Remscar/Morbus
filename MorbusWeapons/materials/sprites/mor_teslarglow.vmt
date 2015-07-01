@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"sprites/mor_teslarglow"
+	"$additive"		"1"
+	"$vertexcolor"	"1"
+}
