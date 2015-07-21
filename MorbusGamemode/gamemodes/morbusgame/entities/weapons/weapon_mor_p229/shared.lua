@@ -47,7 +47,7 @@ SWEP.SightsAng = SWEP.IronSightsAng
 
 SWEP.Kind = WEAPON_PISTOL
 SWEP.AmmoEnt = "item_ammo_pistol_mor"
-SWEP.KGWeight = 10
+SWEP.KGWeight = 4
 SWEP.AutoSpawnable = true
 
 SWEP.Primary.KickUp         = 0.2

@@ -80,6 +80,8 @@ function CheckResurgence()
   -- Can't have more than the allowed count
   if (STATS.ResurgenceCount or 0) >= NumberOfResurgence() then return end
 
+  if #player.GetAll() < 9 then return end
+
   local startRoundTime = STATS.RoundStart
   local endRoundTime = STATS.RoundEnd
   local now = CurTime()

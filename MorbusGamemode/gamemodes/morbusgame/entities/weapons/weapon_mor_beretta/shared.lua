@@ -51,7 +51,7 @@ SWEP.SightsAng = Vector(0, 0, 0)
 
 SWEP.Kind = WEAPON_PISTOL
 SWEP.AmmoEnt = "item_ammo_pistol_mor"
-SWEP.KGWeight = 7
+SWEP.KGWeight = 2
 SWEP.AutoSpawnable = true
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = false}
