@@ -311,7 +311,7 @@ local classremap = {
 
 local weaponvariations = {
    weapon_test = {"weapon_one","weapon_two","weapon_three"},
-   weapon_glowstick = {"weapon_glowstick","weapon_glowstick_sticky"},
+   weapon_glowstick = {"weapon_glowstick","weapon_glowstick_sticky", "weapon_glowstick_grav"},
    weapon_mor_zx9 = {"weapon_mor_zx9", "weapon_mor_bulldog"}
 }
 
