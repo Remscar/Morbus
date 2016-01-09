@@ -7,7 +7,7 @@ ROLE SELECTION
 ------------------------------*/
 
 local function GetBroodCount(ply_count)
-	local count = math.Round(ply_count * 0.14)
+	local count = math.Round(ply_count * 0.13)
 	if count > 0 then
 		return count
 	else
