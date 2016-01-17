@@ -217,7 +217,7 @@ function SMV.GetWinner()
 
 
 	if num < 1 then
-		return table.Random(SMV.Maps)
+		return table.Random(SMV.MapVoteList)
 	end
 
 	for k,v in pairs(tab) do
