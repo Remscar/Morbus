@@ -134,8 +134,6 @@ function GM:Initialize()
 	SetGlobalBool("morbus_rpnames_optional", GetConVar("morbus_rpnames_optional"):GetBool())
 	WaitForPlayers()
 
-	CAN_RTV = CurTime() + 120
-
 	PrepMutators()
 
 	MsgN("Morbus Server Loaded!\n")
