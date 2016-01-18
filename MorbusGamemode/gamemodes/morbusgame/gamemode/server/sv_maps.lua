@@ -23,6 +23,7 @@ SMV.Maps = {
 }
 
 local useOnlineMapList = true
+local excludeLastMap = true
 
 local mapList = ""; -- Blankness
 local rNum = tostring(math.random(1,1000000))
@@ -116,8 +117,17 @@ SMV.MapVoteList = {}
 function SMV.CreateMapList()
 	SMV.ExcludedMaps = {}
 	
-	--exclude current map
-	table.insert(SMV.ExcludedMaps, game.GetMap())
+	--retreive and exclude current map
+	local currentMap = game.GetMap()
+	table.insert(SMV.ExcludedMaps, currentMap)
+	
+	if excludeLastMap then
+		--retreive and exclude previous map
+		--write current map to be excluded next round
+		local prevMap = file.Read( "lastmap.txt" )
+		table.insert(SMV.ExcludedMaps, prevMap)	
+		file.Write( "lastmap.txt", currentMap)
+	end
 	
 	/* 	Give an example for using player-count based excludes
 	 *
