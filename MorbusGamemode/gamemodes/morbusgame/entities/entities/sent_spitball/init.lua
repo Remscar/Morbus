@@ -35,7 +35,7 @@ function ENT:Explode()
 		local dmginfo = DamageInfo()
 		dmginfo:SetAttacker( self:GetOwner() )
 		dmginfo:SetInflictor( self )
-		dmginfo:SetDamage( 8 )
+		dmginfo:SetDamage( 7 )
 		v:TakeDamageInfo( dmginfo )
 	end
 end
