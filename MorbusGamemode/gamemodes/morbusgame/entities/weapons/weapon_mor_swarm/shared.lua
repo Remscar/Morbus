@@ -89,7 +89,10 @@ end
 
 function SWEP:PrimaryAttack()
     self.Weapon:SetNextPrimaryFire( CurTime() + self.Delay )
-    self.Weapon:SetNextSecondaryFire( CurTime() + 1 )
+    
+    if self.Weapon:GetNextSecondaryFire() < CurTime() + 1 then	
+        self.Weapon:SetNextSecondaryFire( CurTime() + 1 )
+    end
 
     -- Start lag compensate for traces.
     self.Owner:LagCompensation(true)
