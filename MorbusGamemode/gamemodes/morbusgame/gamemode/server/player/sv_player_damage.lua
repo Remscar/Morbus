@@ -106,21 +106,6 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
    ent.DMG = 0 -- clear
    GAMEMODE:ScalePlayerDamage(ent, ent:LastHitGroup() or HITGROUP_GENERIC, dmginfo, true)
    
-
-
-   -- general actions for pvp damage
-   
-   if ent != att and ValidEntity(att) and att:IsPlayer() and GetRoundState() == ROUND_ACTIVE and math.floor(dmginfo:GetDamage()) > 0 then
-      local txt = ""
-      if infl:GetClass() == "env_explosion" then
-         infl = "Grenade"
-         txt = infl..": "..tostring(math.Round(ent.DMG))
-      else
-         txt = (infl.PrintName or tostring(infl))..": "..tostring(math.Round(ent.DMG))
-      end
-      LogDMG(att,ent,txt)
-   end
-
    local gender = ent.Gender
    local alienform = ent:GetNWBool("alienform",false)
    local swarm = ent:IsSwarm()
@@ -144,6 +129,18 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
       util.StartBleeding(ent, dmginfo:GetDamage(), 10)
    end
 
+   -- general actions for pvp damage
+   
+   if ent != att and ValidEntity(att) and att:IsPlayer() and GetRoundState() == ROUND_ACTIVE and math.floor(dmginfo:GetDamage()) > 0 then
+      local txt = ""
+      if infl:GetClass() == "env_explosion" then
+         infl = "Grenade"
+         txt = infl..": "..tostring(math.Round(ent.DMG))
+      else
+         txt = (infl.PrintName or tostring(infl))..": "..tostring(math.Round(ent.DMG))
+      end
+      LogDMG(att,ent,txt)
+   end
 end
 
 
