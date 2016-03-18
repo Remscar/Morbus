@@ -176,6 +176,10 @@ function SWEP:Reload()
         self:SetIronsights(false)
         -- Set the ironsight to false
         self.Weapon:SetNetworkedBool("Reloading", true)
+        
+        --improper fix to the teslar reload exploit that works
+        --simply forces you wait to 2.5s before firing the weapon
+        self.Weapon:SetNextPrimaryFire(CurTime() + 2.5)
     end
     local waitdammit = (self.Owner:GetViewModel():SequenceDuration())
     timer.Simple(waitdammit + .1, 
