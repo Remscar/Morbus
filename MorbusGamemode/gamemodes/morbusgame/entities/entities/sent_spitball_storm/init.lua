@@ -13,12 +13,9 @@ function ENT:Initialize()
 
 	self:SetCollisionGroup( COLLISION_GROUP_PROJECTILE )
 	
-	
 	if SERVER then
 		util.SpriteTrail(self.Entity, 0, Color(155, 215, 255, 255), false, 15, 1, 0.2, 25, "trails/plasma.vmt")
-    end
 
-	if SERVER then
 		local phys = self:GetPhysicsObject()
 		if phys:IsValid() then
 			phys:Wake()
@@ -30,7 +27,7 @@ end
 
 
 function ENT:Think()
-	        self.tes = ents.Create( "point_tesla" ) -- extra electric effect
+	self.tes = ents.Create( "point_tesla" ) -- extra electric effect
         self.tes:SetPos( self:GetPos() )
         self.tes:SetKeyValue( "m_SoundName", "" )
         self.tes:SetKeyValue( "texture", "sprites/bluelight1.spr" )
@@ -53,8 +50,6 @@ end
 
 
 function ENT:Explode()
-
-	
 	-- SFX
 	ParticleEffect( "spit_blast_storm2", self:GetPos(), Angle(0, 0, 0), nil )
 	self.Entity:EmitSound( "weapons/demon/hit3.wav", 100, math.random(85,95) );
@@ -64,18 +59,18 @@ function ENT:Explode()
 		local dmginfo = DamageInfo()
 		dmginfo:SetAttacker( self:GetOwner() )
 		dmginfo:SetInflictor( self )
-		dmginfo:SetDamage( 8 )
+		dmginfo:SetDamage( 7 )
 		v:TakeDamageInfo( dmginfo )
 	end
 
-    -- Damage in sphere
-    for _, v in ipairs(ents.FindInSphere( self:GetPos(), 45 )) do
-        local dmginfo = DamageInfo()
-        dmginfo:SetAttacker( self:GetOwner() )
-        dmginfo:SetInflictor( self )
-        dmginfo:SetDamage( 5 )
-        v:TakeDamageInfo( dmginfo )
-    end
+    	-- Damage in sphere
+	for _, v in ipairs(ents.FindInSphere( self:GetPos(), 45 )) do
+	        local dmginfo = DamageInfo()
+	        dmginfo:SetAttacker( self:GetOwner() )
+	        dmginfo:SetInflictor( self )
+	        dmginfo:SetDamage( 4 )
+	        v:TakeDamageInfo( dmginfo )
+    	end
 
         self.tes = ents.Create( "point_tesla" ) -- extra electric effect
         self.tes:SetPos( self:GetPos() )
@@ -97,18 +92,10 @@ function ENT:Explode()
         self.tes:Fire( "DoSpark", "", 0.1 )
         self.tes:Fire( "DoSpark", "", 0.2 )
         self.tes:Fire( "kill", "", 0.3 )
-
 end
 
 
 function ENT:PhysicsCollide( data, phys )
-
 	self:Explode()
 	self:Remove()
-
-end
-
-
-function ENT:OnRemove()
-
 end
