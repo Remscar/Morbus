@@ -140,6 +140,9 @@ local base_spec = {
 function MSYS:Draw(client)
    if next(self.MESSAGES) == nil then return end -- fast empty check
 
+   --refresh incase the client changes screen resolution
+   top_x = ScrW()-msg_width-margin
+   
    local running_y = top_y
    for k, item in pairs(self.MESSAGES) do
       if item.time < CurTime() then
@@ -189,13 +192,15 @@ function MSYS:Draw(client)
             spec.text=item.text[i]
 
             local tx = top_x + (msg_width / 2)
-            local ty = y + margin + (i - 1) * (text_height + margin)
+            
+            --Fix an issue caused by a recent gmod update
+            local ty = y + 20 + (i - 1) * (text_height + margin)
+	    --old broken equation :
+	    --local ty = y + margin + (i - 1) * (text_height + margin)
+	    
             spec.pos={tx, ty}
 
             --draw.TextShadow(spec, 2, alpha)
-
-
-
 
             draw.SimpleTextOutlined(spec.text, spec.font, spec.pos[1], spec.pos[2], Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM, 2, Color(0,0,0,255))
          end
