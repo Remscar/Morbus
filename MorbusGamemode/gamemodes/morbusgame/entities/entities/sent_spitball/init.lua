@@ -13,12 +13,9 @@ function ENT:Initialize()
 
 	self:SetCollisionGroup( COLLISION_GROUP_PROJECTILE )
 	
-	
 	if SERVER then
 		util.SpriteTrail(self.Entity, 0, Color(25, 155, 0, 255), false, 25, 1, 0.3, 45, "trails/plasma.vmt")
-    end
-
-	if SERVER then
+    
 		local phys = self:GetPhysicsObject()
 		if phys:IsValid() then
 			phys:Wake()
@@ -28,15 +25,7 @@ function ENT:Initialize()
 	self.Created = CurTime()
 end
 
-
-function ENT:Think()
-
-end
-
-
 function ENT:Explode()
-
-
 	-- SFX
 	ParticleEffect( "spit_blast", self:GetPos(), Angle(0, 0, 0), nil )
 	self.Entity:EmitSound( "alien/acid_hit.wav", 100, math.random(95,125) );
@@ -46,21 +35,12 @@ function ENT:Explode()
 		local dmginfo = DamageInfo()
 		dmginfo:SetAttacker( self:GetOwner() )
 		dmginfo:SetInflictor( self )
-		dmginfo:SetDamage( 6 )
+		dmginfo:SetDamage( 7 )
 		v:TakeDamageInfo( dmginfo )
 	end
-
 end
-
 
 function ENT:PhysicsCollide( data, phys )
-
 	self:Explode()
 	self:Remove()
-
-end
-
-
-function ENT:OnRemove()
-
 end
