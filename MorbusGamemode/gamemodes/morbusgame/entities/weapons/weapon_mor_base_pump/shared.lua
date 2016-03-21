@@ -81,7 +81,10 @@ function SWEP:Deploy()
 
 	self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 
-	self.Weapon:SetNextPrimaryFire(CurTime() + .25)
+	if self.Weapon:GetNextPrimaryFire() < CurTime() + .25 then
+		self.Weapon:SetNextPrimaryFire(CurTime() + .25)
+	end
+	
 	self.Weapon:SetNextSecondaryFire(CurTime() + .25)
 	self.ActionDelay = (CurTime() + .25)
 
