@@ -5,7 +5,7 @@ STATS = {}
 
 
 
-STATS.Version = 4
+STATS.Version = 5
 
 STATS.URL = "http://www.remscar.com/morbus/stats.php"
 

@@ -3,14 +3,14 @@
 // and the Morbus dev team
 
 
-GM.Name = "MORBUS" //VERSION 1.5.7
+GM.Name = "MORBUS" //VERSION 1.5.8
 GM.Author = "Remscar"
 GM.Email = "zachary@remscar.com"
 GM.Website = "http://www.remscar.com"
 GM.TeamBased  = false;
 
-GM_VERSION = "1.5.7"
-GM_VERSION_SHORT = 157
+GM_VERSION = "1.5.8"
+GM_VERSION_SHORT = 158
 -----------------------------------------------------
 local folder = GM.Folder
 FOLDER_NAME = folder:gsub("gamemodes/", "")
