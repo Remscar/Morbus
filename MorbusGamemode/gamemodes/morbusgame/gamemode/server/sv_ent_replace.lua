@@ -118,7 +118,15 @@ local dummify = {
    "team_control_point_master",
    "team_control_point_round",
    -- ZM
-   "item_ammo_revolver"
+   "item_ammo_revolver",
+   --remove console spam
+   "spawn_item",
+   "spawn_pistol",
+   "spawn_other_weaps",
+   "info_ladder",
+   "spawn_jail",
+   "reprog_robot",
+   "spawn_spawn"
 };
 
 for k, cls in pairs(dummify) do
