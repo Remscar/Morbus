@@ -215,6 +215,23 @@ function GM:PlayerSpawn(ply)
 
    end
 
+	--Enable spawn protection when a new swarn alien spawns
+	--Create a timer to disable it after the convar time
+	if ply:IsSwarm() then
+		--ply:PrintMessage(HUD_PRINTTALK, "Spawn protection activated!")
+		
+		ply.SpawnProtected = true
+		
+		local ProtectionTime = GetConVar("morbus_swarm_protection_time"):GetInt()
+		timer.Simple(ProtectionTime , function() 
+			if IsValid(ply) && ply:IsGame() then 
+				ply.SpawnProtected = false 
+			end 
+		end)	
+	end
+	
+
+
 	ply:ResetViewRoll()
 
 	ply:SetNWBool("alienform", false)
