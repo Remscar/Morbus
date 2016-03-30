@@ -39,8 +39,8 @@ function GM:PlayerInitialSpawn(ply)
    ply.DamageFactor = 1
    ply:InitSanity()
    ply:SetNWInt("Mute_Status",0)
-
-
+   
+   ply:SpawnProtected = false
 
    --ply:SetForceRPName( 0 ) -- 0 = no, 1 = yes
    --ply:SetForceGender( 0 ) -- 0 = don't force, 1 = male, 2 = female
