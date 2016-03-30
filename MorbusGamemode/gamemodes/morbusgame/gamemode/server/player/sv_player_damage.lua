@@ -73,6 +73,11 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
          end
       end
 
+      --if the entity taking damage is swarm & has spawn protection
+      if ent:IsSwarm() && ent.SpawnProtected == true then
+		   --scale damage to almost nothing
+		   dmginfo:ScaleDamage(0.01)
+	   end
    end
 
    // Brood Alien damage reudction upgrades
