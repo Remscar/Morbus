@@ -2,7 +2,6 @@
 
 if (SERVER) then
 	AddCSLuaFile("shared.lua")
-
 end
 
 if (CLIENT) then
@@ -11,8 +10,8 @@ if (CLIENT) then
 	SWEP.SlotPos 		= 1
 	SWEP.IconLetter 		= "b"
 	SWEP.ViewModelFlip	= false
-
 end
+
 SWEP.PrintName 		= "Bulldog-HMG"
 
 SWEP.HoldType 		= "ar2"
@@ -69,7 +68,20 @@ SWEP.Tracer = 1
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "2", enabled = true}
 
 SWEP.WElements = {
-	["element_name"] = { type = "Model", model = "models/weapons/w_bach_m249para.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(4.622, 0.256, 0.063), angle = Angle(-9.181, -1.231, 180), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	["element_name"] = { 
+		type = "Model", 
+		model = "models/weapons/w_bach_m249para.mdl", 
+		bone = "ValveBiped.Bip01_R_Hand", 
+		rel = "", 
+		pos = Vector(4.622, 0.256, 0.063), 
+		angle = Angle(-9.181, -1.231, 180), 
+		size = Vector(1, 1, 1), 
+		color = Color(255, 255, 255, 255), 
+		surpresslightning = false, 
+		material = "", 
+		skin = 0, 
+		bodygroup = {} 
+	}
 }
 
 sound.Add({
@@ -80,13 +92,6 @@ sound.Add({
 })
 
 SWEP.shootsound = Sound("bulldog.shoot")
-
-/*---------------------------------------------------------
-Reload
----------------------------------------------------------*/
-function SWEP:Reload()
-
-end
 
 /*---------------------------------------------------------
 Deploy
@@ -151,11 +156,6 @@ function SWEP:ShootBullet(damage, recoil, num_bullets, aimcone)
         -- eyes.yaw = eyes.yaw + anglo.yaw
         -- self.Owner:SetEyeAngles(eyes)
     end
-
-    if (CLIENT) then
-        
-    end
-
 end
 
 function SWEP:DoImpactEffect( tr, dmgtype )
