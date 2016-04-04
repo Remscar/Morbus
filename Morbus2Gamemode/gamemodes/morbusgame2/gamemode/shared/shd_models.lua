@@ -3,10 +3,14 @@
   Zachary Nawar - zachary.nawar.org
   ------------------------------------*/
 
-Morbus.Models = {}
+if not Morbus.Models then
+  Morbus.Models = {}
+end
 
 /* ===== ===== Human Models ===== ===== */
-Morbus.Models[eRoleHuman] = {}
+if not Morbus.Models[eRoleHuman] then
+  Morbus.Models[eRoleHuman] = {}
+end
 
 Morbus.Models[eRoleHuman][eGenderMale] = {
 "models/player/group01/male_01.mdl",

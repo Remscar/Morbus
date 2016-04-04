@@ -32,7 +32,7 @@ if SERVER then
 
   function TeamState:SendStateToPlayer(ply)
     net.Start("MorbusTeamState")
-    self:_SendState(ply:MorbusTeam()) -- Will crash till implemented
+    self:_SendState(ply:MorbusTeam())
     net.Send(ply)
   end
 

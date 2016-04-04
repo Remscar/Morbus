@@ -32,6 +32,14 @@ function META:MorbusName(real)
   end
 end
 
+function META:MorbusTeam()
+  if self:IsAlien() then
+    return eTeamAlien
+  else
+    return eTeamHuman
+  end
+end
+
 function META:CanCarryWeapon(wep)
   if not wep or not wep.Type then return false end
 

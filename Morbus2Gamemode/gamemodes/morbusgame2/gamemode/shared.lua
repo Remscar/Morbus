@@ -9,7 +9,9 @@ GM.Author = "Zachary Nawar"
 GM.Website = "http://morbus.remscar.com"
 
 /* Morbus Global Data */
-Morbus = {}
+if not Morbus then
+  Morbus = {}
+end
 
 /* Version data */
 Morbus.Version = "2.0.0"
