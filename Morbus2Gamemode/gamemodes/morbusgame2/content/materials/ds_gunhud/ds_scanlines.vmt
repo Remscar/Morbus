@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture" "ds_gunhud/ds_scanlines"
+	"$nocull" 1
+	"$translucent" 1
+	"$vertexalpha" 1
+	"$vertexcolor" 1
+}

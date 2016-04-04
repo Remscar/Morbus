@@ -1,0 +1,12 @@
+"morbusgame2"
+{
+  "base"    "base"
+  "title"   "MORBUS 2"
+  "maps"    "^mor_"
+  "menusystem"  "1"
+
+  "settings"
+  {
+    // TODO: put some settings here
+  }
+}

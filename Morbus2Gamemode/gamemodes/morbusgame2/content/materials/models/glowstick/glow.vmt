@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+
+	"$basetexture" "Models/glowstick/glow"
+	"$surfaceprop" "plastic"
+	"$selfillum" 1
+}
+
+
+
+
