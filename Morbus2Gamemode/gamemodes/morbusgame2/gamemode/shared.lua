@@ -58,3 +58,9 @@ eWeaponHeavy = 5
 eWeaponMisc = 6
 eWeaponRole = 7
 eWeaponMission = 8
+
+/* GMOD Teams */
+eTeamPlayers = 1
+eTeamSpectators = 2
+team.SetUp(eTeamPlayers, "Players", Color(200, 200, 200), true)
+team.SetUp(eTeamSpectators, "Spectators", Color(255, 125, 0), true)
