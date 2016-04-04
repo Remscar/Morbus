@@ -10,26 +10,19 @@ function ENT:Initialize()
 	self:SetSolid(SOLID_VPHYSICS)
 	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then phys:Wake() end
-	self.Death = CurTime() + 90
+	
+	timer.Simple(90, function() if self.Entity then self.Entity:Remove() end end) 
 end
 
 function ENT:SpawnFunction( ply, tr )
-    if ( !tr.Hit ) then return end
-    local ent = ents.Create("ent_glowstick_fly")
-    ent:SetPos( tr.HitPos + tr.HitNormal * 16 )
-    ent:Spawn()
-    ent:Activate()
+	if ( !tr.Hit ) then return end
+	
+	local ent = ents.Create("ent_glowstick_fly")
+	ent:SetPos( tr.HitPos + tr.HitNormal * 16 )
+	ent:Spawn()
+	ent:Activate()
 
-    return ent
-end
-
-function ENT:OnRemove()
-end
-
-function ENT:Think()
-	if self.Death && self.Death < CurTime() then
-		self:Remove()
-	end
+	return ent
 end
 
 function ENT:Use( activator, caller )
