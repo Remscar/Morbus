@@ -31,9 +31,9 @@ SWEP.Primary.Recoil			= 0.8
 SWEP.Primary.Damage			= 18
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.Cone			= 0.02
-SWEP.Primary.ClipSize		= 8
+SWEP.Primary.ClipSize		= 6
 SWEP.Primary.RPM			= 90
-SWEP.Primary.DefaultClip	= 8
+SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic 		= false
 SWEP.Primary.Ammo 		= "Battery"
 
@@ -48,7 +48,7 @@ SWEP.SightsAng = SWEP.IronSightsAng
 
 SWEP.Kind = WEAPON_PISTOL
 SWEP.AmmoEnt = "item_ammo_battery_mor"
-SWEP.KGWeight = 7
+SWEP.KGWeight = 10
 SWEP.NeverRandom = true
 
 SWEP.GunHud = {height = 2, width = 4, attachmentpoint = "1", enabled = false}
