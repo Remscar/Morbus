@@ -67,6 +67,11 @@ end
 function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit 
   --ToDo: REDO THIS
    if not ValidEntity(ply) then return end
+   
+   --check ulx if the client is gagged and block chatting
+   --assume the client isn't gaged if ulx isn't present
+   if ply:GetNWBool("ulx_gagged", false) then return "" end
+   
    if ply.Gagged then return "" end -- for later use
 
    to_all = !to_all
