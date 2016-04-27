@@ -17,15 +17,20 @@ if not Morbus.Settings then
   Morbus.Settings.Team[eTeamAlien] = {}
 
   Morbus.Settings.Game = {}
+
+  Morbus.Settings.Weapons = {}
+
+  Morbus.Settings.Player = {}
 end
 
 local Settings = Morbus.Settings
-
 
 function Settings:Default()
   self:DefaultRole()
   self:DefaultTeam()
   self:DefaultGame()
+  self:DefaultWeapons()
+  self:DefaultPlayer()
 end
 
 function Settings:DefaultRole()
@@ -79,13 +84,26 @@ function Settings:DefaultTeam()
 end
 
 function Settings:DefaultGame()
-
   /* Game */ 
   self.Game.NumberRounds = 8
   self.Game.RoundTime = 600
 
 end
 
+function Settings:DefaultPlayer()
+
+  self.Player.WeaponTypeLimit = {}
+  local limitTable = self.Player.WeaponTypeLimit
+
+  -- Default all to 1
+  for i=1, eWTypeCount-1 do limitTable[i] = 1 end
+  limitTable[eWTypeMisc] = 2
+
+
+
+end
+
+include("settings/weapons.lua")
 
 /* Only default settings the first run of the file */
 if Settings._first then
@@ -105,6 +123,10 @@ if SERVER then
     net.WriteTable(self.Team[eTeamAlien])
 
     net.WriteTable(self.Game)
+
+    net.WriteTable(self.Weapons)
+
+    net.WriteTable(self.Player)
   end
 
   function Settings:SendSettingsToPlayer(ply)
@@ -120,6 +142,7 @@ if SERVER then
   end
 
 else
+  AddCSLuaFile("settings/weapons.lua")
 
   function Settings:_GetSettings(msgLength)
     self.Role[eRoleHuman] = net.ReadTable()
@@ -130,7 +153,13 @@ else
     self.Team[eTeamAlien] = net.ReadTable()
 
     self.Game = net.ReadTable()
+
+    self.Weapons = net.ReadTable()
+
+    self.Player = net.ReadTable()
   end
   net.Receive("MorbusSettings", function(len) Settings:_GetSettings(len) end)
 
 end
+
+

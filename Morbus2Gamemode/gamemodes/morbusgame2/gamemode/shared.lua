@@ -18,51 +18,68 @@ Morbus.Version = "2.0.0"
 Morbus.VersionNumber = 200
 Morbus.Folder = GM.Folder:gsub("gamemodes/", "")
 
+
+/* Enum Helper */
+local function Enum(type, name, reset)
+  local typeCounter = "enum"..type.."counter"
+  if not _G[typeCounter] or reset then
+    _G[typeCounter] = 1
+    _G["Enum"..type] = {}
+  else
+    _G[typeCounter] = _G[typeCounter] + 1
+  end
+
+  _G["e"..type..name] = _G[typeCounter]
+  _G["e"..type.."Count"] = _G[typeCounter]
+
+  _G["Enum"..type][_G[typeCounter]] = name
+end
+
+local function EnumList(type, ...)
+  local enumList = {...}
+  local typeCounter = "enum"..type.."counter"
+
+  _G[typeCounter] = 0
+  _G["Enum"..type] = {}
+
+  for i, v in ipairs(enumList) do
+    Enum(type, v)
+  end
+end
+
+
+
 /* Morbus Round Enums */
-eRoundWait = 1
-eRoundPrep = 2
-eRoundActive = 3
-eRoundEvac = 4
-eRoundPost = 5
+EnumList("Round", "Wait", "Prep", "Active", "Evac", "Post")
 
 /* Morbus Gender Enums */
-eGenderMale = 1
-eGenderFemale = 2
+EnumList("Gender", "Male", "Female")
 
 /* Morbus Role Enums */
-eRoleHuman = 1
-eRoleBrood = 2
-eRoleSwarm = 3
-eRoleNone = 4
+EnumList("Role", "Human", "Brood", "Swarm", "None")
 
 /* Morbus Need Enums */
-eNeedNone = 1
-eNeedSleep = 2
-eNeedEat = 3
-eNeedClean = 4
-eNeedBathroom = 5
+EnumList("Need", "None", "Sleep", "Eat", "Clean", "Bathroom")
 
 /* Morbus Teams */
-eTeamHuman = 1
-eTeamAlien = 2
+EnumList("Team", "Human", "Alien")
 
 /* Morbus Win Types */
-eWinNone = 1
-eWinHuman = 2
-eWinAlien = 3
+EnumList("Win", "None", "Human", "Alien")
 
 /* Morbus Weapon Types */
-eWeaponMelee = 1
-eWeaponHandgun = 2
-eWeaponLight = 3
-eWeaponRifle = 4
-eWeaponHeavy = 5
-eWeaponMisc = 6
-eWeaponRole = 7
-eWeaponMission = 8
+EnumList("WType", "Melee", "Handgun", "Light", "Rifle", "Heavy", "Misc", "Role", "Mission")
+
+/* Morbus Ammo Types */
+EnumList("Ammo", "Pistol", "SMG", "Rifle", "Shotgun", "Battery")
 
 /* GMOD Teams */
-eTeamPlayers = 1
-eTeamSpectators = 2
-team.SetUp(eTeamPlayers, "Players", Color(200, 200, 200), true)
-team.SetUp(eTeamSpectators, "Spectators", Color(255, 125, 0), true)
+EnumList("GTeam", "Players", "Spectators")
+
+team.SetUp(eGTeamPlayers, "Players", Color(200, 200, 200), true)
+team.SetUp(eGTeamSpectators, "Spectators", Color(255, 125, 0), true)
+
+EnumList("Weapon",
+  "Beretta",
+  "R22",
+  "KA47")

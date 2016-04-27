@@ -6,6 +6,8 @@
 local META = FindMetaTable("Player")
 if not META then return end
 
+local Settings = Morbus.Settings
+
 function META:IsGame() return self:Team() == eTeamPlayer end
 function META:IsSpec() return self:Team() == eTeamSpectator end
 
@@ -46,13 +48,18 @@ function META:CanCarryWeapon(wep)
   return self:CanCarryWeaponType(wep.Type)
 end
 
--- @TODO: Specific weapon slot limits
 function META:CanCarryWeaponType(wepType)
   if not wepType then return end
 
+  local hasCount = 0
+
   for k, w in pairs(self:GetWeapons()) do
-    if w.Type and w.Type == wepType then
-      return false -- to change
+    if w.Type == wepType then
+      hasCount = hasCount + 1
+
+      if hasCount >= Settings.Player.WeaponTypeLimit[w.Type] then
+        return false
+      end
     end
   end
 
