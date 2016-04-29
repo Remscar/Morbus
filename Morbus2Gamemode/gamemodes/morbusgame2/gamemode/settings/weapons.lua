@@ -28,7 +28,7 @@ end
 
 -- Name should match enum
 function Settings:GetWeapon(name)
-  return self.Weapons["eWeapon"..name]
+  return self.Weapons[_G["eWeapon"..name]]
 end
 
 function Settings:SetWeaponStats(name, defFunc, dmg, rpm, cone, recoil, clip, weight)
@@ -56,7 +56,6 @@ local function DefaultPistol(wep)
 
   wep.NumShots = 1
   wep.Automatic = false
-  wep.Ammo = "Pistol"
 end
 
 local function DefaultSMG(wep)
@@ -66,7 +65,6 @@ local function DefaultSMG(wep)
 
   wep.NumShots = 1
   wep.Automatic = true
-  wep.Ammo = "SMG1"
 end
 
 local function DefaultRifle(wep)
@@ -76,7 +74,6 @@ local function DefaultRifle(wep)
 
   wep.NumShots = 1
   wep.Automatic = true
-  wep.Ammo = "AlyxGun"
 end
 
 
@@ -100,6 +97,8 @@ function Settings:FillWeaponStats(enumName, swepTable)
   swepTable.PrintName = wep.Name -- Do i need this?
   swepTable.HoldType = wep.HoldType -- Do i need this?
 
+  swepTable.Weight = wep.Weight -- Means something different to the engine
+
   swepTable.Primary.Damage = wep.Damage
   swepTable.Primary.RPM = wep.RPM
   swepTable.Primary.Cone = wep.Cone
@@ -107,7 +106,7 @@ function Settings:FillWeaponStats(enumName, swepTable)
   swepTable.Primary.NumShots = wep.NumShots
   swepTable.Primary.ClipSize = wep.Clip
   swepTable.Primary.DefaultClip = wep.Clip
-  swepTable.Primary.Ammo = wep.Ammo
+  swepTable.Primary.Ammo = EnumAmmo[wep.AmmoType]
   swepTable.Primary.AmmoType = wep.AmmoType
   swepTable.Primary.Automatic = wep.Automatic
 end

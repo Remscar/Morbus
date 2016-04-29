@@ -83,3 +83,17 @@ EnumList("Weapon",
   "Beretta",
   "R22",
   "KA47")
+
+
+function IncludeFolder(path, func)
+  local files, folders = file.Find(Morbus.Folder .. "/gamemode/".. path .. "/*", "LUA")
+
+  for _, f in pairs(files) do
+    include(path .. "/" .. f)
+    if func then func(path .. "/" .. f) end
+  end
+
+  for _, d in pairs(folders) do
+    IncludeFolder(path .. "/" .. d, func)
+  end
+end

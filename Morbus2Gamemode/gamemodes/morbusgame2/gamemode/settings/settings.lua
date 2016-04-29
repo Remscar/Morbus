@@ -20,6 +20,8 @@ if not Morbus.Settings then
 
   Morbus.Settings.Weapons = {}
 
+  Morbus.Settings.Items = {}
+
   Morbus.Settings.Player = {}
 end
 
@@ -30,6 +32,7 @@ function Settings:Default()
   self:DefaultTeam()
   self:DefaultGame()
   self:DefaultWeapons()
+  self:DefaultItems()
   self:DefaultPlayer()
 end
 
@@ -96,14 +99,22 @@ function Settings:DefaultPlayer()
   local limitTable = self.Player.WeaponTypeLimit
 
   -- Default all to 1
-  for i=1, eWTypeCount-1 do limitTable[i] = 1 end
+  for i=1, eWTypeCount do limitTable[i] = 1 end
   limitTable[eWTypeMisc] = 2
 
 
+  self.Player.AmmoTypeLimit = {}
+  local limitTable = self.Player.AmmoTypeLimit
+  limitTable[eAmmoPistol] = 45
+  limitTable[eAmmoSMG] = 60
+  limitTable[eAmmoRifle] = 60
+  limitTable[eAmmoShotgun] = 16
+  limitTable[eAmmoBattery] = 30
 
 end
 
-include("settings/weapons.lua")
+include("weapons.lua")
+include("items.lua")
 
 /* Only default settings the first run of the file */
 if Settings._first then
@@ -113,6 +124,8 @@ end
 
 if SERVER then
   util.AddNetworkString("MorbusSettings")
+  AddCSLuaFile("weapons.lua")
+  AddCSLuaFile("items.lua")
 
   function Settings:_SendSettings()
     net.WriteTable(self.Role[eRoleHuman])
@@ -125,6 +138,8 @@ if SERVER then
     net.WriteTable(self.Game)
 
     net.WriteTable(self.Weapons)
+
+    net.WriteTable(self.Items)
 
     net.WriteTable(self.Player)
   end
@@ -142,7 +157,6 @@ if SERVER then
   end
 
 else
-  AddCSLuaFile("settings/weapons.lua")
 
   function Settings:_GetSettings(msgLength)
     self.Role[eRoleHuman] = net.ReadTable()
@@ -155,6 +169,8 @@ else
     self.Game = net.ReadTable()
 
     self.Weapons = net.ReadTable()
+
+    self.Items = net.ReadTable()
 
     self.Player = net.ReadTable()
   end
