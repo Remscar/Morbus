@@ -217,8 +217,10 @@ function MuteForRestart(state)
 end
 
 function GM:PlayerCanHearPlayersVoice(listener, speaker)
- 
-  if mute_all then
+  
+  -- If mute all clients or the client is muted from ulx
+  -- Notice: returns false if ulx nw boolean is not present
+  if (mute_all || speaker:GetNWBool("ulx_muted", false)) then
     return false,false
   end
  
