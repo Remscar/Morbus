@@ -10,8 +10,6 @@ function ENT:Initialize()
 	self:SetSolid(SOLID_VPHYSICS)
 	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then phys:Wake() end
-	self.Death = CurTime() + 3
-	self.Exploded = false
 end
 
 function ENT:SpawnFunction( ply, tr )
@@ -24,9 +22,6 @@ function ENT:SpawnFunction( ply, tr )
     return ent
 end
 ents.Create("prop_physics")
-
-function ENT:OnRemove()
-end
 
 function ENT:Explode()
 	local effectdata = EffectData()
@@ -57,27 +52,18 @@ function ENT:Explode()
 	shake:Spawn()
 	shake:Activate()
 	shake:Fire( "StartShake", "", 0 )
-end
-
-function ENT:Think()
+	
+	--remove after explosion
+	self.Entity:Remove()
 end
 
 local BounceSnd = Sound( "HEGrenade.Bounce" )
 function ENT:PhysicsCollide( data, phys )
-if data.Speed > 50 then
-	self:EmitSound( BounceSnd )
-end
-local impulse = (-data.Speed * data.HitNormal * .4 + (data.OurOldVelocity * -.6))*0.5
-phys:ApplyForceCenter( impulse )
-	
-if self.Exploded == true then return end
-	self.Exploded = true
-	timer.Simple(3, function()
-	if !self.Entity:IsValid() then return end
-		self:Explode()
-		self:Remove()
-	end)
-
+	if data.Speed > 50 then
+		self:EmitSound( BounceSnd )
+	end
+	local impulse = (-data.Speed * data.HitNormal * .4 + (data.OurOldVelocity * -.6))*0.5
+	phys:ApplyForceCenter( impulse )
 end
 
 function ENT:Use( activator, caller )
