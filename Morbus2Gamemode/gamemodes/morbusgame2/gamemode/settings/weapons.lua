@@ -27,8 +27,12 @@ function Settings:DefaultWeapons()
 end
 
 -- Name should match enum
-function Settings:GetWeapon(name)
-  return self.Weapons[_G["eWeapon"..name]]
+function Settings:GetWeapon(nameOrIdx)
+  if type(nameOrIdx) == "number" then
+    return self.Weapons[nameOrIdx]
+  end
+
+  return self.Weapons[_G["eWeapon"..nameOrIdx]]
 end
 
 function Settings:SetWeaponStats(name, defFunc, dmg, rpm, cone, recoil, clip, weight)
@@ -88,7 +92,6 @@ function Settings:DefaultWeaponStats()
 
   self:SetWeaponStats("KA47", DefaultRifle,
     19, 500, 0.0375, 0.44, 30, 24)
-
 end
 
 function Settings:FillWeaponStats(enumName, swepTable)
@@ -98,6 +101,10 @@ function Settings:FillWeaponStats(enumName, swepTable)
   swepTable.HoldType = wep.HoldType -- Do i need this?
 
   swepTable.Weight = wep.Weight -- Means something different to the engine
+  swepTable.Type = wep.Type
+  swepTable.Slot = wep.Type
+
+  if not swepTable.Primary then swepTable.Primary = {} end
 
   swepTable.Primary.Damage = wep.Damage
   swepTable.Primary.RPM = wep.RPM
@@ -110,3 +117,5 @@ function Settings:FillWeaponStats(enumName, swepTable)
   swepTable.Primary.AmmoType = wep.AmmoType
   swepTable.Primary.Automatic = wep.Automatic
 end
+
+Settings:DefaultWeaponStats()
