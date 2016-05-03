@@ -89,7 +89,24 @@ end
 function Settings:DefaultGame()
   /* Game */ 
   self.Game.NumberRounds = 8
-  self.Game.RoundTime = 600
+  self.Game.RoundTime = 5
+  self.Game.PlayerRequirement = 2
+
+  self.Game.PrepTime = 3
+  self.Game.PostTime = 3
+  self.Game.EvacTime = 3
+
+  self.Game.ChatRange = 800
+
+  self.Game.BroodCount = 0.13
+
+  self.Game.MinNeedTime = 60
+  self.Game.MaxNeedTime = 90
+
+  self.Game.SwarmRespawnTime = 5
+  self.Game.BroodRespawnTime = 3
+
+  self.Game.BroodBots = true
 
 end
 
@@ -110,6 +127,9 @@ function Settings:DefaultPlayer()
   limitTable[eAmmoRifle] = 60
   limitTable[eAmmoShotgun] = 16
   limitTable[eAmmoBattery] = 30
+
+
+  self.Player.WeightLimit = 100
 
 end
 
@@ -144,7 +164,7 @@ if SERVER then
     net.WriteTable(self.Player)
   end
 
-  function Settings:SendSettingsToPlayer(ply)
+  function Settings:SendToPlayer(ply)
     net.Start("MorbusSettings")
     self:_SendSettings()
     net.Send(ply)

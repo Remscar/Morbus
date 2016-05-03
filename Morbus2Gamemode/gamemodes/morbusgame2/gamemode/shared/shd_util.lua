@@ -3,7 +3,7 @@
   Zachary Nawar - zachary.nawar.org
   ------------------------------------*/
 
-local function GetPlayerList(req)
+function GetPlayerList(req)
   local pList = {}
   for k,v in pairs(player.GetAll()) do
     if IsValid(v) and req(v) then

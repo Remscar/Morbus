@@ -3,16 +3,38 @@
   Zachary Nawar - zachary.nawar.org
   ------------------------------------*/
 
-function GM:PlayerInitialSpawn(ply)
+local Settings = MorbusTable("Settings")
+local RoundEngine = MorbusTable("RoundEngine")
+local GameData = MorbusTable("GameData")
+local TeamState = MorbusTable("TeamState")
+local Corpses = MorbusTable("Corpses")
+local Players = MorbusTable("Players")
+local Aliens = MorbusTable("Aliens")
 
+function GM:PlayerInitialSpawn(ply)
+  ply:FullReset()
+  ply:SpawnSetup()
+
+  RoundEngine:SendState(ply)
+  GameData:Send(ply)
+  TeamState:SendStateToPlayer(ply)
+  Settings:SendToPlayer(ply)
 end
 
 function GM:PlayerSpawn(ply)
+  ply:ResetBroodStats()
+  ply:ResetNeed()
 
+  self:PlayerSetModel(ply)
 end
 
 function GM:PlayerSetModel(ply)
+  local mdl = ply.WantedModel
+  if ply:IsSwarm() then
+    mdl = Morbus.Models[eRoleSwarm]
+  end
 
+  ply:SetModel(mdl)
 end
 
 function GM:CanPlayerSuicide(ply)

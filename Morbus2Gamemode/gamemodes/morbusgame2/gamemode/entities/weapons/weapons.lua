@@ -5,6 +5,10 @@
 
 local Settings = Morbus.Settings
 
+if not Morbus._WeaponList then
+  Morbus._WeaponList = {}
+end
+
 local function PrepareWeaponTable(enumIdx, vModel, wModel)
   local wep = {}
   wep.Base = "weapon_mor_base"
@@ -16,8 +20,10 @@ local function PrepareWeaponTable(enumIdx, vModel, wModel)
   return wep
 end
 
-local function RegisterWeaponTable(enumIdx, wepTable)
-  weapons.Register(wepTable, "weapon_mor_"..string.lower(EnumWeapon[enumIdx]))
+function RegisterWeaponTable(enumIdx, wepTable)
+  local className = "weapon_mor_"..string.lower(EnumWeapon[enumIdx])
+  Morbus._WeaponList[enumIdx] = wepTable
+  weapons.Register(wepTable, className)
   return wepTable
 end
 

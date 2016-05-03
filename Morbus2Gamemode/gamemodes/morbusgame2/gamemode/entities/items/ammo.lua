@@ -3,6 +3,10 @@
   Zachary Nawar - zachary.nawar.org
   ------------------------------------*/
 
+if not Morbus._AmmoList then
+  Morbus._AmmoList = {}
+end
+
 local AmmoModels = {
   "models/items/boxsrounds.mdl",
   "models/items/boxmrounds.mdl",
@@ -31,7 +35,9 @@ for i=1, eAmmoCount do
   AmmoEnt.AutoSpawnable = true
   AmmoEnt.NeverRandom = false
 
-  scripted_ents.Register(AmmoEnt, "mor_ammo_"..string.lower(EnumAmmo[i]))
+  local className = "mor_ammo_"..string.lower(EnumAmmo[i])
+  Morbus._AmmoList[i] = className
+  scripted_ents.Register(AmmoEnt, className)
 end
 
 function TestAmmo()

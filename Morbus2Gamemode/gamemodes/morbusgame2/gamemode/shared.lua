@@ -13,6 +13,11 @@ if not Morbus then
   Morbus = {}
 end
 
+function MorbusTable(name)
+  if not Morbus[name] then Morbus[name] = {} end
+  return Morbus[name]
+end
+
 /* Version data */
 Morbus.Version = "2.0.0"
 Morbus.VersionNumber = 200
@@ -61,6 +66,12 @@ EnumList("Role", "Human", "Brood", "Swarm", "None")
 /* Morbus Need Enums */
 EnumList("Need", "None", "Sleep", "Eat", "Clean", "Bathroom")
 
+/* Morbus Status Enums */
+EnumList("Status", "Hatred", "Insanity", "Love", "Fear", "Guilt")
+
+/* Morbus Speciality Enum */
+EnumList("Spec", "None", "Mechanic", "Captain", "Scientist", "Physician", "Security")
+
 /* Morbus Teams */
 EnumList("Team", "Human", "Alien")
 
@@ -75,6 +86,9 @@ EnumList("Ammo", "Pistol", "SMG", "Rifle", "Shotgun", "Battery")
 
 /* GMOD Teams */
 EnumList("GTeam", "Players", "Spectators")
+
+/* Morbus Chay Types */
+EnumList("Chat", "Local", "Global", "Alien", "Spectator")
 
 team.SetUp(eGTeamPlayers, "Players", Color(200, 200, 200), true)
 team.SetUp(eGTeamSpectators, "Spectators", Color(255, 125, 0), true)

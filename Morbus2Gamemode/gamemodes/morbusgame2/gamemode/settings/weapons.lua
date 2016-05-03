@@ -118,4 +118,4 @@ function Settings:FillWeaponStats(enumName, swepTable)
   swepTable.Primary.Automatic = wep.Automatic
 end
 
-Settings:DefaultWeaponStats()
+Settings:DefaultWeapons()

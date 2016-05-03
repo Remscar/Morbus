@@ -10,3 +10,7 @@ end
 function GM:PlayerSelectSpawn(ply)
   return ply
 end
+
+function Morbus:GetSpawnEnts(shuffle, all)
+  return {}
+end
