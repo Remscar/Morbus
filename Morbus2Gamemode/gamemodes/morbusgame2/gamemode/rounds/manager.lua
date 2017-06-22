@@ -17,7 +17,7 @@ function RoundEngine:ChangeState(newState)
   local oldState = self.CurrentState
 
   if not newState then
-    print("invalid state?   newState = "..tostring(newState))
+    print("invalid state?   newState = " .. tostring(newState))
     return
   end
 
@@ -25,15 +25,13 @@ function RoundEngine:ChangeState(newState)
   local newTable = self:GetStateTable(newState)
 
   -- Exit out of our old state if we have one
-  if oldState then
-    if oldTable.OnExit then
+  if oldState and oldTable.OnExit then
       oldTable:OnExit(newState)
-    end
   end
 
   self.CurrentState = newState
 
-  print("Changing state to "..EnumRound[newState])
+  print("Changing state to " .. EnumRound[newState])
 
   if newTable.OnEnter then
     newTable:OnEnter(oldState)
@@ -85,7 +83,7 @@ function RoundEngine:DeclareWinner(winner)
   Morbus.GameData.State.RoundWinner = winner
   Morbus.GameData:Updated()
 
-  Morbus.Comms:GameMsg(EnumWin[winner].."s win!")
+  Morbus.Comms:GameMsg(EnumWin[winner] .. "s win!")
 
   self:ChangeState(eRoundPost)
 end

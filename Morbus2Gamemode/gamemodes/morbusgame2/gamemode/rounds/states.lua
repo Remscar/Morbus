@@ -15,7 +15,7 @@ local RoundEngine = Morbus.RoundEngine
 
 function RoundEngine:GetStateTable(enum)
   if not enum then return nil end
-  
+
   if not Morbus.RoundStates[enum] then
     Morbus.RoundStates[enum] = {}
   else

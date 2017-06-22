@@ -17,7 +17,7 @@ function Settings:DefaultWeapons()
   local weps = self.Weapons
 
   /* Do a pass through every enum entry and default it */
-  for i=1, eWeaponCount do
+  for i = 1, eWeaponCount do
     weps[i] = {} -- Should I really remake the table every time?
     DefaultWeapon(weps[i], i)
   end
@@ -32,7 +32,7 @@ function Settings:GetWeapon(nameOrIdx)
     return self.Weapons[nameOrIdx]
   end
 
-  return self.Weapons[_G["eWeapon"..nameOrIdx]]
+  return self.Weapons[_G["eWeapon" .. nameOrIdx]]
 end
 
 function Settings:SetWeaponStats(name, defFunc, dmg, rpm, cone, recoil, clip, weight)

@@ -9,11 +9,11 @@ local Comms = Morbus.Comms
 local Arming = Morbus.Arming
 
 local GameData = Morbus.GameData
-local TeamData = Morbus.TeamState
+--local TeamData = Morbus.TeamState
 
 local Settings = Morbus.Settings
 
-local Mutators = Morbus.Mutators
+--local Mutators = Morbus.Mutators
 
 local PrepState = RoundEngine:GetStateTable(eRoundPrep)
 
@@ -31,6 +31,7 @@ function PrepState:OnEnter(lastState)
     Morbus.NotFirstRound = true
   end
 
+  -- Setup GameData and send to clients
   GameData.State.RoundEnd = CurTime() + prepTime
   GameData.State.RoundWinner = eWinNone
   GameData:Updated()
@@ -38,8 +39,9 @@ function PrepState:OnEnter(lastState)
   --Mutators:Check()
   --Mutators:Prep()
 
-  Comms:GameMsg("Round will start in "..prepTime.." seconds.")
+  Comms:GameMsg("Round will start in " .. prepTime .. " seconds.")
 
+  -- Jank way of delaying this until the next frame
   timer.Simple(0.01,
     function()
       Arming:ArmMap()

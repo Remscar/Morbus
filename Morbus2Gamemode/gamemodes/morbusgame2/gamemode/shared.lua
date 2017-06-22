@@ -26,26 +26,26 @@ Morbus.Folder = GM.Folder:gsub("gamemodes/", "")
 
 /* Enum Helper */
 local function Enum(type, name, reset)
-  local typeCounter = "enum"..type.."counter"
+  local typeCounter = "enum" .. type .. "counter"
   if not _G[typeCounter] or reset then
     _G[typeCounter] = 1
-    _G["Enum"..type] = {}
+    _G["Enum" .. type] = {}
   else
     _G[typeCounter] = _G[typeCounter] + 1
   end
 
-  _G["e"..type..name] = _G[typeCounter]
-  _G["e"..type.."Count"] = _G[typeCounter]
+  _G["e" .. type .. name] = _G[typeCounter]
+  _G["e" .. type .. "Count"] = _G[typeCounter]
 
-  _G["Enum"..type][_G[typeCounter]] = name
+  _G["Enum" .. type][_G[typeCounter]] = name
 end
 
 local function EnumList(type, ...)
   local enumList = {...}
-  local typeCounter = "enum"..type.."counter"
+  local typeCounter = "enum" .. type .. "counter"
 
   _G[typeCounter] = 0
-  _G["Enum"..type] = {}
+  _G["Enum" .. type] = {}
 
   for i, v in ipairs(enumList) do
     Enum(type, v)
@@ -100,7 +100,7 @@ EnumList("Weapon",
 
 
 function IncludeFolder(path, func)
-  local files, folders = file.Find(Morbus.Folder .. "/gamemode/".. path .. "/*", "LUA")
+  local files, folders = file.Find(Morbus.Folder .. "/gamemode/" ..  path .. "/*", "LUA")
 
   for _, f in pairs(files) do
     include(path .. "/" .. f)

@@ -28,7 +28,7 @@ function META:IsRole(role) return self:GetRole() == role end
 
 function META:MorbusName(real)
   if real then
-    return "("..self:Nick()..") "..self:GetNWString("MorbusName", "")
+    return "(" .. self:Nick() .. ") " .. self:GetNWString("MorbusName", "")
   else
     return self:GetNWString("MorbusName", "")
   end
@@ -80,13 +80,13 @@ function META:CanCarryWeapon(wep)
   return self:GetWeight() + wep.Weight <= Settings.Player.WeightLimit
 end
 
-
-
 function META:GetGameSanity()
   return self:GetNWFloat("MorbusSanity", 1000)
 end
 
 
+
+/* Networking for Variables */
 if SERVER then
 
   util.AddNetworkString("Morbus_PlySendRole")
@@ -94,7 +94,7 @@ if SERVER then
     net.Start("Morbus_PlySendRole")
     net.WriteInt(self:GetRole(), 8)
     net.Send(self)
-    
+
   end
 
   util.AddNetworkString("Morbus_PlyTellRole")
@@ -112,7 +112,6 @@ if SERVER then
     net.WriteInt(self:GetNeedTime(), 24)
     net.Send(self)
   end
-
 
 else
 

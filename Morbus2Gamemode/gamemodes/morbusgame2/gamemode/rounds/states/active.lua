@@ -7,7 +7,7 @@ local Settings = MorbusTable("Settings")
 local RoundEngine = MorbusTable("RoundEngine")
 local GameData = MorbusTable("GameData")
 local TeamState = MorbusTable("TeamState")
-local Mutators = MorbusTable("Mutators")
+--local Mutators = MorbusTable("Mutators")
 local Players = MorbusTable("Players")
 local Aliens = MorbusTable("Aliens")
 local Comms = MorbusTable("Comms")
@@ -27,7 +27,7 @@ function ActiveState:OnEnter(lastState)
   Aliens:ResetTeamState()
 
   -- Setup Round History Stuff
-  //Logging:Reset()
+  --Logging:Reset()
 
   -- Spawn Players
   Arming:SpawnPlayers(true)
@@ -42,16 +42,16 @@ function ActiveState:OnEnter(lastState)
   TeamState[eTeamAlien].SwarmLives = Settings.Team[eTeamAlien].InitialSwarmLives
 
   -- Mutators
-  //Mutators:Check()
-  //Mutators:Start()
+  --Mutators:Check()
+  --Mutators:Start()
 
   -- Data Collection Reset
-  //DataTracking:Reset()
+  --DataTracking:Reset()
 
   -- Update Load outs
-  //Morbus.Players:UpdateLoadouts()
+  --Morbus.Players:UpdateLoadouts()
 
-  Comms:GameMsg("Round will end in "..math.floor(Settings.Game.RoundTime / 60).." minutes.")
+  Comms:GameMsg("Round will end in " .. math.floor(Settings.Game.RoundTime / 60) .. " minutes.")
 
   timer.Start("Morbus_WinCheck", 1, 0, function() self:WinCheck() end)
 end
@@ -85,8 +85,8 @@ function ActiveState:Think()
   local now = CurTime()
 
   if now > GameData.State.RoundEnd then
-    --if evac map then goto evac mode
-    --else
+    -- if evac map then goto evac mode
+    -- otherwise, humans win by default
     RoundEngine:DeclareWinner(eWinHuman)
   end
 end

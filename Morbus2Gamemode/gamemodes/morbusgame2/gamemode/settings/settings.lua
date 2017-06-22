@@ -52,7 +52,7 @@ function Settings:DefaultRole()
   local brood = self.Role[eRoleBrood]
   brood.DefaultJump = 200
   brood.RunSpeed = 330
-  brood.SprintSpeed = 270 
+  brood.SprintSpeed = 270
 
   brood.FirstPerkPoints = 5
   brood.NewPerkPoints = 1
@@ -87,7 +87,7 @@ function Settings:DefaultTeam()
 end
 
 function Settings:DefaultGame()
-  /* Game */ 
+  /* Game */
   self.Game.NumberRounds = 8
   self.Game.RoundTime = 5
   self.Game.PlayerRequirement = 2
@@ -111,26 +111,24 @@ function Settings:DefaultGame()
 end
 
 function Settings:DefaultPlayer()
-
   self.Player.WeaponTypeLimit = {}
-  local limitTable = self.Player.WeaponTypeLimit
+  local wepLimits = self.Player.WeaponTypeLimit
 
   -- Default all to 1
-  for i=1, eWTypeCount do limitTable[i] = 1 end
-  limitTable[eWTypeMisc] = 2
+  for i = 1, eWTypeCount do wepLimits[i] = 1 end
+  wepLimits[eWTypeMisc] = 2
 
 
   self.Player.AmmoTypeLimit = {}
-  local limitTable = self.Player.AmmoTypeLimit
-  limitTable[eAmmoPistol] = 45
-  limitTable[eAmmoSMG] = 60
-  limitTable[eAmmoRifle] = 60
-  limitTable[eAmmoShotgun] = 16
-  limitTable[eAmmoBattery] = 30
+  local ammoLimits = self.Player.AmmoTypeLimit
+  ammoLimits[eAmmoPistol] = 45
+  ammoLimits[eAmmoSMG] = 60
+  ammoLimits[eAmmoRifle] = 60
+  ammoLimits[eAmmoShotgun] = 16
+  ammoLimits[eAmmoBattery] = 30
 
 
   self.Player.WeightLimit = 100
-
 end
 
 include("weapons.lua")
@@ -197,5 +195,3 @@ else
   net.Receive("MorbusSettings", function(len) Settings:_GetSettings(len) end)
 
 end
-
-

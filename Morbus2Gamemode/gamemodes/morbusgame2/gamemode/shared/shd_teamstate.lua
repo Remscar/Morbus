@@ -51,7 +51,7 @@ if SERVER then
       if v:IsPlayer() then self:SendStateToPlayer(v) end
     end
   end
-  
+
   function TeamState:SendIfReady()
     if not self.ShouldSend then return end
 
