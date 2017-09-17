@@ -1,14 +1,14 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
-/* GMOD Gamemode Data */
+--[[ GMOD Gamemode Data ]]
 GM.Name = "Morbus 2"
 GM.Author = "Zachary Nawar"
 GM.Website = "http://morbus.remscar.com"
 
-/* Morbus Global Data */
+--[[ Morbus Global Data ]]
 if not Morbus then
   Morbus = {}
 end
@@ -18,13 +18,13 @@ function MorbusTable(name)
   return Morbus[name]
 end
 
-/* Version data */
+--[[ Version data ]]
 Morbus.Version = "2.0.0"
 Morbus.VersionNumber = 200
 Morbus.Folder = GM.Folder:gsub("gamemodes/", "")
 
 
-/* Enum Helper */
+--[[ Enum Helper ]]
 local function Enum(type, name, reset)
   local typeCounter = "enum" .. type .. "counter"
   if not _G[typeCounter] or reset then
@@ -54,40 +54,40 @@ end
 
 
 
-/* Morbus Round Enums */
+--[[ Morbus Round Enums ]]
 EnumList("Round", "Wait", "Prep", "Active", "Evac", "Post")
 
-/* Morbus Gender Enums */
+--[[ Morbus Gender Enums ]]
 EnumList("Gender", "Male", "Female")
 
-/* Morbus Role Enums */
+--[[ Morbus Role Enums ]]
 EnumList("Role", "Human", "Brood", "Swarm", "None")
 
-/* Morbus Need Enums */
+--[[ Morbus Need Enums ]]
 EnumList("Need", "None", "Sleep", "Eat", "Clean", "Bathroom")
 
-/* Morbus Status Enums */
+--[[ Morbus Status Enums ]]
 EnumList("Status", "Hatred", "Insanity", "Love", "Fear", "Guilt")
 
-/* Morbus Speciality Enum */
+--[[ Morbus Speciality Enum ]]
 EnumList("Spec", "None", "Mechanic", "Captain", "Scientist", "Physician", "Security")
 
-/* Morbus Teams */
+--[[ Morbus Teams ]]
 EnumList("Team", "Human", "Alien")
 
-/* Morbus Win Types */
+--[[ Morbus Win Types ]]
 EnumList("Win", "None", "Human", "Alien")
 
-/* Morbus Weapon Types */
+--[[ Morbus Weapon Types ]]
 EnumList("WType", "Melee", "Handgun", "Light", "Rifle", "Heavy", "Misc", "Role", "Mission")
 
-/* Morbus Ammo Types */
+--[[ Morbus Ammo Types ]]
 EnumList("Ammo", "Pistol", "SMG", "Rifle", "Shotgun", "Battery")
 
-/* GMOD Teams */
+--[[ GMOD Teams ]]
 EnumList("GTeam", "Players", "Spectators")
 
-/* Morbus Chay Types */
+--[[ Morbus Chay Types ]]
 EnumList("Chat", "Local", "Global", "Alien", "Spectator")
 
 team.SetUp(eGTeamPlayers, "Players", Color(200, 200, 200), true)
@@ -100,7 +100,7 @@ EnumList("Weapon",
 
 
 function IncludeFolder(path, func)
-  local files, folders = file.Find(Morbus.Folder .. "/gamemode/" ..  path .. "/*", "LUA")
+  local files, folders = file.Find(Morbus.Folder .. "/gamemode/" ..  path .. "--[[", "LUA")
 
   for _, f in pairs(files) do
     include(path .. "/" .. f)

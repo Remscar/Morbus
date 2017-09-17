@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 local Settings = MorbusTable("Settings")
 local RoundEngine = MorbusTable("RoundEngine")

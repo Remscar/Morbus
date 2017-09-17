@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 include("shared.lua")
 AddCSLuaFile("shared.lua")
@@ -23,3 +23,4 @@ end
 function GM:Think()
   Morbus.RoundEngine:Think()
 end
+

@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 function GM:IsSpawnpointSuitable(ply, spwn, force, rigged)
   return true

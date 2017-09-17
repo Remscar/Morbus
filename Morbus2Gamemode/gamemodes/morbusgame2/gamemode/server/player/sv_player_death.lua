@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 local Settings = MorbusTable("Settings")
 local RoundEngine = MorbusTable("RoundEngine")
@@ -108,7 +108,7 @@ function GM:PlayerDeath(victim, inflictor, killer)
 
   if victim:IsSpec() then return end
 
-  /* Player died and was infected */
+  -- Player died and was infected
   if victim:IsHuman() and victim.InfectTime then
     if victim.InfectTime > CurTime() and victim.Infector then
       killer = victim.Infector

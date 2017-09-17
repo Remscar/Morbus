@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 local META = FindMetaTable("Player")
 if not META then return end
@@ -86,7 +86,7 @@ end
 
 
 
-/* Networking for Variables */
+-- Networking for Variables 
 if SERVER then
 
   util.AddNetworkString("Morbus_PlySendRole")

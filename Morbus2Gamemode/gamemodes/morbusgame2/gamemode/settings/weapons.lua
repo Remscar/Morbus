@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 local Settings = Morbus.Settings
 
@@ -16,13 +16,13 @@ end
 function Settings:DefaultWeapons()
   local weps = self.Weapons
 
-  /* Do a pass through every enum entry and default it */
+  -- Do a pass through every enum entry and default it 
   for i = 1, eWeaponCount do
     weps[i] = {} -- Should I really remake the table every time?
     DefaultWeapon(weps[i], i)
   end
 
-  /* Fill in the stats */
+  -- Fill in the stats 
   self:DefaultWeaponStats()
 end
 
@@ -52,7 +52,7 @@ function Settings:SetWeaponStats(name, defFunc, dmg, rpm, cone, recoil, clip, we
   return wep
 end
 
-/* Helpers for basic weapons */
+-- Helpers for basic weapons 
 local function DefaultPistol(wep)
   wep.HoldType = "pistol"
   wep.AmmoType = eAmmoPistol

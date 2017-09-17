@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 if not Morbus.Settings then
   Morbus.Settings = {}
@@ -37,7 +37,7 @@ function Settings:Default()
 end
 
 function Settings:DefaultRole()
-  /* Human */
+  -- Human 
   local human = self.Role[eRoleHuman]
   human.DefaultJump = 200
   human.RunSpeed = 270
@@ -48,7 +48,7 @@ function Settings:DefaultRole()
   human.BatteryMult = 0.3
   human.BatterySize = 35
 
-  /* Brood */
+  -- Brood 
   local brood = self.Role[eRoleBrood]
   brood.DefaultJump = 200
   brood.RunSpeed = 330
@@ -61,7 +61,7 @@ function Settings:DefaultRole()
 
   brood.TransformCooldown = 10
 
-  /* Swarm */
+  -- Swarm 
   local swarm = self.Role[eRoleSwarm]
   swarm.DefaultJump = 200
   swarm.RunSpeed = 250
@@ -70,7 +70,7 @@ function Settings:DefaultRole()
 end
 
 function Settings:DefaultTeam()
-  /* Human */
+  -- Human 
   local human = self.Team[eTeamHuman]
   human.NeedEntities = {}
   human.NeedEntities[eNeedNone] = {}
@@ -79,7 +79,7 @@ function Settings:DefaultTeam()
   human.NeedEntities[eNeedClean] = {"need_wash", "need_shower"}
   human.NeedEntities[eNeedBathroom] = {"need_piss", "need_toilet"}
 
-  /* Alien */
+  -- Alien 
   local alien = self.Team[eTeamAlien]
   alien.InitialSwarmLives = 5
   alien.SwarmLivesPerInfect = 3
@@ -87,7 +87,7 @@ function Settings:DefaultTeam()
 end
 
 function Settings:DefaultGame()
-  /* Game */
+  -- Game 
   self.Game.NumberRounds = 8
   self.Game.RoundTime = 5
   self.Game.PlayerRequirement = 2
@@ -134,7 +134,7 @@ end
 include("weapons.lua")
 include("items.lua")
 
-/* Only default settings the first run of the file */
+-- Only default settings the first run of the file 
 if Settings._first then
   Settings:Default()
   Settings._first = false

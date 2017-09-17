@@ -1,7 +1,7 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 if not Morbus.RoundEngine then
   Morbus.RoundEngine = {}
@@ -28,7 +28,7 @@ function RoundEngine:GetStateTable(enum)
 
   // local newStateMeta = {}
 
-  /* Search inside of NetData to see if it exists first */
+  -- Search inside of NetData to see if it exists first 
   // function newStateMeta:__index(key)
   //   if self.NetData[key] then
   //     return self.NetData[key]

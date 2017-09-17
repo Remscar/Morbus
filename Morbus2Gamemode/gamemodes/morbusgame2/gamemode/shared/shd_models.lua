@@ -1,13 +1,13 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
 if not Morbus.Models then
   Morbus.Models = {}
 end
 
-/* ===== ===== Human Models ===== ===== */
+-- ===== ===== Human Models ===== ===== 
 if not Morbus.Models[eRoleHuman] then
   Morbus.Models[eRoleHuman] = {}
 end
@@ -43,7 +43,7 @@ Morbus.Models[eRoleHuman][eGenderFemale] = {
 "models/player/mossman.mdl",
 }
 
-/* ===== ===== Alien Models ===== ===== */
+-- ===== ===== Alien Models ===== ===== 
 Morbus.Models[eRoleBrood] = "models/player/verdugo/verdugo.mdl"
 Morbus.Models[eRoleSwarm] = "models/morbus/swarm/enhancedslasher.mdl"
 

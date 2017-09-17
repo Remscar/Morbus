@@ -1,13 +1,13 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
-/*
+--[[
 Round State data is intended to be sent whenever the round
 changes (prep->active->post ect)
 
-*/
+]]
 
 if not Morbus.GameData then
   Morbus.GameData = {}

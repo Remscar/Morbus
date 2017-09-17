@@ -1,9 +1,9 @@
-/*------------------------------------
+--[[------------------------------------
   Morbus 2
   Zachary Nawar - zachary.nawar.org
-  ------------------------------------*/
+  ------------------------------------]]
 
-/* Still heavily based on TTT */
+-- Still heavily based on TTT 
 
 local Settings = Morbus.Settings
 
