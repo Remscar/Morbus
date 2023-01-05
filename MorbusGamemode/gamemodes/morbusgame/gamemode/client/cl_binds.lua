@@ -68,7 +68,7 @@ function GM:KeyPress(ply, key)
    if not ValidEntity(ply) or ply != LocalPlayer() then return end
 
    if key == IN_ZOOM and ply:IsActiveAlien() then
-      timer.Simple(0.05, function() RunConsoleCommand("+voicerecord") end)
+      timer.Simple(0.05, function() permissions.EnableVoiceChat( true ) end)
    end
 end
 
@@ -77,6 +77,6 @@ function GM:KeyRelease(ply, key)
    if not ValidEntity(ply) or ply != LocalPlayer() then return end
 
    if key == IN_ZOOM and ply:IsActiveAlien() then
-      timer.Simple(0.05, function() RunConsoleCommand("-voicerecord") end)
+      timer.Simple(0.05, function() permissions.EnableVoiceChat( false ) end)
    end
 end
