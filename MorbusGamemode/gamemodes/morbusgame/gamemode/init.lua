@@ -68,8 +68,11 @@ CreateConVar("morbus_mission_time_min", "120", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_next_time_max", "80", FCVAR_NOTIFY)
 CreateConVar("morbus_mission_next_time_min", "220", FCVAR_NOTIFY)
 
-
 CreateConVar("morbus_rpnames_optional", "0", FCVAR_NOTIFY)
+
+--This cvar sets the time swarms are spawn protected for after spawning
+CreateConVar("morbus_swarm_protection_time", "3", FCVAR_NOTIFY)
+
 -----------------------------------------------
 
 util.AddNetworkString("RoundLog")
