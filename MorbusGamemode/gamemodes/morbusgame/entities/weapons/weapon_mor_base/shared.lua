@@ -183,11 +183,7 @@ end
 Think
 ---------------------------------------------------------*/
 function SWEP:Think()
-	if (self.Weapon:GetNetworkedBool("Reloading")) then
-		self.Weapon:SetNWBool( "IsLaserOn", false )
-	else
-		self.Weapon:SetNWBool( "IsLaserOn", true )
-	end
+	self.Weapon:SetNWBool("IsLaserOn", !self.Weapon:GetNetworkedBool("Reloading"))
 
 	self:IronSight()
 

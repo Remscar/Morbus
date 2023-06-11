@@ -69,19 +69,19 @@ function PANEL:Init()
     self.CurrentTab = 1
     self.Tab[2]:SetVisible(false)
     self.Tab[1]:SetVisible(true)
-    self.Tab[1]:OpenURL("http://remscar.com/morbus/ingame/guide.html")
+    self.Tab[1]:OpenURL("https://www.google.com")
   end
 
   self.Tab[1] = vgui.Create("HTML",self)
   self.Tab[1]:SetPos(4,34)
   self.Tab[1]:SetSize(850-6,750-38)
-  self.Tab[1]:OpenURL("http://remscar.com/morbus/ingame/guide.html")
+  self.Tab[1]:OpenURL("https://afterhoursgaming.gg")
   self.Tab[1]:SetVisible(false)
 
   
   self.Tab[2] = vgui.Create("HTML",self)
   self.Tab[2].Slide = 1
-  self.Tab[2]:OpenURL("http://remscar.com/morbus/ingame/guide_mini.html")
+  self.Tab[2]:OpenURL("https://www.amazon.com")
   self.Tab[2]:SetPos(4,34)
   self.Tab[2]:SetSize(850-6,500-38)
 
