@@ -40,7 +40,7 @@ function GM:PlayerInitialSpawn(ply)
    ply:InitSanity()
    ply:SetNWInt("Mute_Status",0)
 
-
+   ply.SpawnProtected = false
 
    --ply:SetForceRPName( 0 ) -- 0 = no, 1 = yes
    --ply:SetForceGender( 0 ) -- 0 = don't force, 1 = male, 2 = female
@@ -213,6 +213,20 @@ function GM:PlayerSpawn(ply)
       ply:SetRole(ROLE_HUMAN)
       ply:SetTeam(TEAM_GAME)
 
+   end
+
+   if ply:IsSwarm() then
+		ply:PrintMessage(HUD_PRINTTALK, "Spawn protection activated!")
+
+		ply.SpawnProtected = true
+
+		local ProtectionTime = GetConVar("morbus_swarm_protection_time"):GetInt()
+		timer.Simple(ProtectionTime , function() 
+			if IsValid(ply) && ply:IsGame() then 
+				ply.SpawnProtected = false 
+            ply:PrintMessage(HUD_PRINTTALK, "Spawn protection de-activated!")
+			end 
+		end)	
    end
 
 	ply:ResetViewRoll()
