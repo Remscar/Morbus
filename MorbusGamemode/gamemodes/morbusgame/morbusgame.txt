@@ -1,10 +1,10 @@
 "morbusgame"
 {
 	"base"		"base"
-	"title"		"MORBUS"
+	"title"		"MORBUS RENAISSANCE"
 	"maps"		"^mor_"
+	"category"	"other"
 	"menusystem"	"1"
-	"workshopid"		"139263490"
 
 	"settings"
 	{

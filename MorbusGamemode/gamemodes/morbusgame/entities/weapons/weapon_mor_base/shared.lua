@@ -183,14 +183,9 @@ end
 Think
 ---------------------------------------------------------*/
 function SWEP:Think()
-	if (self.Weapon:GetNetworkedBool("Reloading")) then
-		self.Weapon:SetNWBool( "IsLaserOn", false )
-	else
-		self.Weapon:SetNWBool( "IsLaserOn", true )
-	end
+	self.Weapon:SetNWBool("IsLaserOn", !self.Weapon:GetNetworkedBool("Reloading"))
 
 	self:IronSight()
-
 end
 
 
@@ -261,7 +256,7 @@ function SWEP:Reload()
 		-- Zoom = 0
 		self:SetIronsights(false)
 		-- Set the ironsight to false
-		self.Weapon:SetNetworkedBool("Reloading", true)
+		self.Weapon:SetNWBool("Reloading", true)
 	end
 	local waitdammit = (self.Owner:GetViewModel():SequenceDuration())
 	timer.Simple(waitdammit + .1, 
