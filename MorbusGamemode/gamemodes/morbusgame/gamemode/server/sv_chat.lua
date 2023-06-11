@@ -68,10 +68,10 @@ function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit
   --ToDo: REDO THIS
    if not ValidEntity(ply) then return end
 
-  --Checks ULX gag and blocks chatting if true
-  if ply:GetNWBool("ulx_gagged", false) then return "" end
+  --Checks ULX mute and blocks chatting if true
+  if ply:GetNWBool("ulx_muted", false) then return "" end
 
-   if ply.Gagged then return "" end -- for later use
+   --if ply.Gagged then return "" end -- for later use
 
    to_all = !to_all
 
@@ -218,7 +218,7 @@ end
 function GM:PlayerCanHearPlayersVoice(listener, speaker)
  
   --Checks ULX gag and blocks speaking if true
-  if (mute_all || speaker:GetNWBool("ulx_muted", false)) then
+  if (mute_all || speaker:GetNWBool("ulx_gagged", false)) then
     return false,false
   end
  
