@@ -5,22 +5,19 @@
 ENT.Type = "anim"  
 
 if SERVER then   
-AddCSLuaFile("shared.lua")
+	AddCSLuaFile("shared.lua")
 
-function ENT:Initialize()   
-	self:SetMoveType( MOVETYPE_NONE )
-	self:SetSolid( SOLID_NONE )
-	self:SetCollisionGroup( COLLISION_GROUP_NONE )
-	self:DrawShadow(false)
-	self:SetModel("models/weapons/w_eq_fraggrenade.mdl")
-	
-end
-	function ENT:Think()
+	function ENT:Initialize()   
+		self:SetMoveType( MOVETYPE_NONE )
+		self:SetSolid( SOLID_NONE )
+		self:SetCollisionGroup( COLLISION_GROUP_NONE )
+		self:DrawShadow(false)
+		self:SetModel("models/weapons/w_eq_fraggrenade.mdl")
+		
 		local player = self:GetOwner() 
 		self:SetColor(player:GetColor())
-		self:SetMaterial(player:GetMaterial())
-end
-
+		self:SetMaterial(player:GetMaterial())	
+	end
 end  
   
 if CLIENT then  
@@ -46,10 +43,10 @@ if CLIENT then
             self:SetPos(position + x + y + z)  
             self:SetAngles(angles)  
         end  
-		local eyepos = EyePos()  
-		local eyepos2 = LocalPlayer():EyePos()  
-		if  eyepos:Distance(eyepos2) > 5 or LocalPlayer() != self:GetOwner() then
-			self:DrawModel()
-		end
+	local eyepos = EyePos()  
+	local eyepos2 = LocalPlayer():EyePos()  
+	if  eyepos:Distance(eyepos2) > 5 or LocalPlayer() != self:GetOwner() then
+		self:DrawModel()
+	end
     end
-end  
+end
