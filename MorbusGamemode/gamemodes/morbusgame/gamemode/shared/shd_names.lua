@@ -628,7 +628,6 @@ NAMES.LAST = {
 "Collins",
 "Cook",
 "Cool",
-"Coon",
 "Cooper",
 "Craig",
 "Crocker",
