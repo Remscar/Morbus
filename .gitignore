@@ -221,3 +221,7 @@ MorbusMaps2/maps/mor_horizon_v2_re.bsp
 MorbusMaps2/maps/mor_lorica_v2.bsp
 MorbusMaps3/maps/mor_horizon_v2_re.bsp
 MorbusMaps3/maps/mor_lorica_v2.bsp
+
+# MOTD stuff
+**/node_modules/
+**/build/

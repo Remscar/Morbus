@@ -140,7 +140,6 @@ Models.Male = {
 "models/player/combine_soldier.mdl",
 "models/player/police.mdl",
 "models/player/marine/marine.mdl",
-"models/ez2models/combine_soldier_bloody.mdl",
 "models/ez2models/humans/group05b/male_01.mdl",
 "models/ez2models/humans/group05b/male_02.mdl",
 "models/ez2models/humans/group05b/male_03.mdl",
@@ -168,8 +167,8 @@ Models.Female = {
 }
 
 
-Models.Brood = "models/player/verdugo/verdugo.mdl"
-Models.Swarm = "models/morbus/swarm/enhancedslasher.mdl"
+Models.Brood = "models/player/stalker/packboy.mdl"
+Models.Swarm = "models/player/avp2/predalien.mdl"
 util.PrecacheModel(Models.Brood)
 util.PrecacheModel(Models.Swarm)
 

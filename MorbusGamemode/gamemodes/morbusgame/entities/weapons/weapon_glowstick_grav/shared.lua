@@ -82,9 +82,11 @@ function SWEP:PrimaryAttack()
 		ent:Spawn()
 				
 		local phys = ent:GetPhysicsObject()
-		phys:SetVelocity(self.Owner:GetAimVector() * 300)
-		phys:AddAngleVelocity(Vector(math.random(-100,100),math.random(-100,100),math.random(-100,100)))
-        phys:EnableGravity( false )
+		if IsValid(phys) then
+			phys:SetVelocity(self.Owner:GetAimVector() * 300)
+			phys:AddAngleVelocity(Vector(math.random(-100,100),math.random(-100,100),math.random(-100,100)))
+			phys:EnableGravity( false )
+		end
 	end
 	self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 	if self.Weapon:Clip1() < 1 && SERVER then
