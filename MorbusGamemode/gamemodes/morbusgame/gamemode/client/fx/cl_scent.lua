@@ -115,7 +115,11 @@ function B(ent)
   else
     -- Humans should only have 100 max HP so this function should be okay
     -- Lerp between pure Green (100 hp) and pure Red (0 hp)
-    HP = Color(255-(HP*2.55),HP*2.55,0)
+    if ent:IsAndroid() then
+      HP = Color(150, 210, 250)
+    else
+      HP = Color(255-(HP*2.55),HP*2.55,0)
+    end
   end
 
   render.SetColorModulation(HP.r/255,HP.g/255,HP.b/255) -- 0-1 scale ):

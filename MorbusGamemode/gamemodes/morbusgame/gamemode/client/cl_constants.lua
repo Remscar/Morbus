@@ -40,6 +40,10 @@ Mission = {
 {
 	"Kill",
 	"Hunt down the humans and infect them"
+},
+{
+	"Contain",
+	"Contain and eliminate parasitic infestation"
 }
 }
 
@@ -62,6 +66,7 @@ ICON_WEIGHT = surface.GetTextureID("vgui/poids")
 RING = surface.GetTextureID( "redring" )
 VEINS = surface.GetTextureID( "veins" )
 ICON_KILL = surface.GetTextureID("vgui/killneed")
+ICON_CONTAIN = surface.GetTextureID("vgui/killneed")
 ICON_WASH = surface.GetTextureID("vgui/wash")
 ICON_PISS = surface.GetTextureID("vgui/wc")
 ICON_EAT = surface.GetTextureID("vgui/eat")
@@ -70,7 +75,7 @@ ICON_WAIT = surface.GetTextureID("vgui/waitneed")
 ICON_NEED = surface.GetTextureID("vgui/need_target")
 
 MissionIcon = {
-	ICON_WAIT, ICON_SLEEP, ICON_EAT, ICON_WASH, ICON_PISS, ICON_KILL
+	ICON_WAIT, ICON_SLEEP, ICON_EAT, ICON_WASH, ICON_PISS, ICON_KILL, ICON_CONTAIN
 }
 
 surface.CreateFont( "DSMass", {

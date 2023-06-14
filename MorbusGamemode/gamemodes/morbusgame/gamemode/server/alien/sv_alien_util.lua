@@ -17,6 +17,13 @@ function RevealAll()
 
 end
 
+function RevealAllAndroids()
+   local androids = GetAndroidList()
+   for k,v in pairs(androids) do
+      SendOtherPlayerRole(ROLE_ANDROID,v,PlayerFilter())
+   end
+end
+
 function UpdateAliens()
 	local brood = GetBroodList()
 	local swarm = GetSwarmList()
@@ -116,7 +123,13 @@ function HumanFilter()
   return GetPlayerFilter(function(p) return !p:IsAlien() end )
 end
 
-
+function AndroidFilter()
+   return GetPlayerFilter(function(p) return p:IsAndroid() end )
+ end
+ 
+ function PlayerFilter()
+      return GetPlayerFilter(function(p) return IsValid(p) end )
+ end
 
 
 function GetAlienList()
@@ -135,6 +148,15 @@ function GetHumanList()
    end
 
    return trs
+end
+
+function GetAndroidList()
+   local var = {}
+   for k,v in ipairs(player.GetAll()) do
+      if v:IsAndroid() and v:IsGame() then table.insert(var, v) end
+   end
+
+   return var
 end
 
 function GetSpectatorList()

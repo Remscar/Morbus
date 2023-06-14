@@ -9,7 +9,7 @@ Mission stuff
 function CheckMission()
 	if GetRoundState()!=ROUND_ACTIVE then return end
 	for k,v in pairs(player.GetAll()) do
-		if v:Alive() && !v:IsAlien() then
+		if v:Alive() && !v:IsAlien() && !v:IsAndroid() then
 			if v.Mission_Doing then
 
 				if v.Mission_Complete <= CurTime() then -- If completed mission
@@ -56,7 +56,7 @@ end
 function DoMission(ply,cmd,args)
 	if !ValidEntity(ply) then return end
 	if !ply:Alive() then return end
-	if ply.Mission == MISSION_NONE || ply.Mission == MISSION_KILL then return end
+	if ply.Mission == MISSION_NONE || ply.Mission == MISSION_KILL || ply.Mission == MISSION_CONTAIN then return end
 	if ply.Mission_Doing == true then return end
 
 	if ply.Touching != MISSION_NONE && ply.Touching == ply.Mission then

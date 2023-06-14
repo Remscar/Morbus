@@ -145,15 +145,19 @@ function GM:PlayerSay(ply, text, to_all) -- Shitty chat shit
     if text == "/yes" then
       if ply.Gender == GENDER_FEMALE then
         ply:EmitSound(table.Random(Response.Female.Yes),100,100)
-      else
+      elseif ply:GetGender() == GENDER_MALE then
         ply:EmitSound(table.Random(Response.Male.Yes),100,100)
+      elseif ply:GetGender() == GENDER_ANDROID then
+        ply:EmitSound(table.Random(Response.Android.Yes),100,100)
       end
       return ""
     elseif text == "/taunt" then
       if ply.Gender == GENDER_FEMALE then
         ply:EmitSound(table.Random(Tuants.Female),100,100)
-      else
-        ply:EmitSound(table.Random(Tuants.Male),100,100)
+      elseif ply:GetGender() == GENDER_MALE then
+        ply:EmitSound(table.Random(Taunts.Male),100,100)
+      elseif ply:GetGender() == GENDER_ANDROID then
+        ply:EmitSound(table.Random(Taunts.Android),100,100)
       end
       return ""
     end

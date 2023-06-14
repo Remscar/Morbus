@@ -55,6 +55,9 @@ function CheckForWin()
 			if v:IsHuman() then
 				human_alive = true -- if they are a human and alive
 			end
+			if v:IsAndroid() then
+				human_alive = true
+			end
 		end
 
 		if brood_alive and human_alive then

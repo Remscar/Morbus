@@ -78,7 +78,7 @@ function IMPULSE.LIGHT(k,v)
 end
 
 function IMPULSE.NEED(k,v) --s
-	if v:Alive() && v:Team() == TEAM_GAME && !(v:IsAlien()) then
+	if v:Alive() && v:Team() == TEAM_GAME && !(v:IsAlien()) && !(v:IsAndroid()) then
 		if (v.Mission_End < CurTime()) && (v.Mission != MISSION_NONE) && (v.Mission_Doing == false) then
 			v:SetHealth(v:Health()-1)
 

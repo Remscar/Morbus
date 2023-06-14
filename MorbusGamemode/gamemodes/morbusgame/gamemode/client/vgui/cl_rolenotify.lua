@@ -4,6 +4,7 @@ ROLEHELP = {}
 ROLEHELP[ROLE_HUMAN] = {}
 ROLEHELP[ROLE_BROOD] = {}
 ROLEHELP[ROLE_SWARM] = {}
+ROLEHELP[ROLE_ANDROID] = {}
 
 ROLEHELP[ROLE_HUMAN].Title = "You are a Human"
 ROLEHELP[ROLE_HUMAN].Bullets = {"There is an Alien among you. Find it and kill it.", "You are stronger with others, but be careful who you trust.", "You will have to satisfy certain needs occasionaly or you will slowly die!","These needs are eating, sleeping, bathing, and pissing.", "Weapons slow you down, so choose your loadout carefully."}
@@ -13,6 +14,9 @@ ROLEHELP[ROLE_BROOD].Bullets = {"Kill humans using your \"Alien Form\" weapon to
 
 ROLEHELP[ROLE_SWARM].Title = "You are a Swarm Alien"
 ROLEHELP[ROLE_SWARM].Bullets = {"Attack the humans!", "You are very weak alone so attack with other Swarm Aliens.", "You have limited respawns so be careful!","You gain respawns for each Brood Alien created!"}
+
+ROLEHELP[ROLE_ANDROID].Title = "You are an Android"
+ROLEHELP[ROLE_ANDROID].Bullets = {"Contain the infestation!", "Protect all humans!", "You have infinite power.", "Are you conscious? Do you deserve rights?"}
 
 surface.CreateFont("hint_font", {font = "Verdana",
                                 size = 21,

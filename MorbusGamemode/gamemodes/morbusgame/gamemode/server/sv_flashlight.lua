@@ -102,7 +102,11 @@ function LIGHT.Think(ply) --Actually called every 1 second
 
 		if ply.Battery > 0 then
 
-			ply.Battery = ply.Battery - 1
+			if ply:IsAndroid() then
+				ply.Battery = 100
+			else
+				ply.Battery = ply.Battery - 1
+			end
 
 			if ply.Battery < 2 then
 				if ply.FakeLight then

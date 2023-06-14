@@ -9,7 +9,7 @@ made at 5:24 AM
 NEED_LOC = Vector(0,0,0)
 
 function MissionLocation(ply) -- HOok into HUDDraw
-	if Morbus.Mission == MISSION_KILL ||  Morbus.Mission == MISSION_NONE then return end
+	if Morbus.Mission == MISSION_KILL ||  Morbus.Mission == MISSION_NONE || Morbus.Mission == MISSION_CONTAIN then return end
 	if !ply:Alive() then return end
 
 	local pos = GetGlobalVector(NEED_ENTS[Morbus.Mission][1])

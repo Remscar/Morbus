@@ -6,6 +6,7 @@ local IMPULSE = {}
 
 function IMPULSE.SECOND4()
 	IMPULSE.LOCATIONS()
+	IMPULSE.ANDROID_DROP()
 	for k,v in pairs(player.GetAll()) do
 		IMPULSE.SWARM(k,v)
 	end
@@ -42,5 +43,25 @@ end
 function IMPULSE.SWARM(k,v)
 	if v:IsSwarm() && v:Team() == TEAM_GAME && v:Alive() then
 		v:EmitSound(table.Random(Sounds.Swarm.Normal),400,100)
+	end
+end
+
+
+function IMPULSE.ANDROID_DROP()
+	local chance = math.random( 0, 999 )
+	if chance < 45 then
+		for k, v in pairs(player.GetAll()) do
+			if v:IsAndroid() && v:Alive() then
+			   local box = ents.Create("item_ammo_battery_mor")
+			   if not IsValid(box) then box:Remove() end
+
+			   box:SetPos(v:GetPos() + Vector( 0, 0, 25 ))
+			   box:Spawn()
+
+			   box:PhysWake()
+
+			   box.AmmoAmount = 15
+			end
+		end
 	end
 end

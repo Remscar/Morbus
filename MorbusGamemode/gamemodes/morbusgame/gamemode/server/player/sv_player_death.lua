@@ -147,12 +147,12 @@ function GM:PlayerDeath( victim, weapon, killer )
     -- Infection timer
     if !victim:IsAlien() && victim.BroodInfect then
         if victim.BroodInfect > CurTime() && victim.BroodHit then
+            print("VICTIM  HAS BEEN INFECTED")
             LogInfect(victim.BroodHit,victim," Brood ")
             Death_Brood_Infect(victim,weapon,victim.BroodHit)
             return
         end
     end
-
 
     if not killer:IsPlayer() then
 
@@ -165,6 +165,11 @@ function GM:PlayerDeath( victim, weapon, killer )
         -- The player killed themselves
         LogDeath(victim," Suicide ")
         Death_Suicide(victim,weapon,killer)
+
+    elseif victim:IsAndroid() then
+        print("ANDROID HAS BEEN KILLED")
+        LogDeath(victim," Android Killed ")
+        Death_Normal(victim,weapon,killer)
 
     elseif killer:GetActiveWeapon():GetClass() == "weapon_mor_swarm" && !victim:IsAlien() then
 
@@ -216,6 +221,8 @@ end
 
 
 function Death_Normal(ply,weapon,killer)
+
+    print("NORMAL DEATH DETECTED")
 
     if ply:IsSwarm() then
         Death_Swarm(ply,weapon,killer)

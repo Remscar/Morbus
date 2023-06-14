@@ -52,6 +52,8 @@ local function CleanUp()
 
 	game.CleanUpMap()
 
+	SetGlobalInt("total_androids", 0)
+
 	et.SetReplaceChecking(not et.CanImportEntities(game.GetMap()))
 	et.FixParentedPreCleanup()
 	et.FixParentedPostCleanup()

@@ -192,6 +192,10 @@ function MainPlayerHud()
                surface.SetDrawColor( HumanR, HumanG, HumanB, ftrans-20 )
                surface.SetTexture( tex2 );
                surface.DrawTexturedRect(x+1,y+1,w-2,h-2)
+
+               if LocalPlayer():IsAndroid() then
+                  draw.SimpleTextOutlined( "INFINITE", "DSSmall", x+125, y+10, Color(0,0,0,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 5, Color(155,255,155,155) )
+               end
             end
          end
 
@@ -311,6 +315,8 @@ function MainPlayerHud()
             surface.SetTexture( MissionIcon[Morbus.Mission+1]);
             surface.DrawTexturedRect( x,y, w, h );
          end
+
+         
 
       else
          w = 220

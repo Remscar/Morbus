@@ -38,18 +38,24 @@ ROUND_TEXT[5] = "Evacuation"
 
 GENDER_FEMALE = 1
 GENDER_MALE = 2
+GENDER_ANDROID = 3
 
 ROLE_HUMAN = 1
 ROLE_BROOD = 2
 ROLE_SWARM = 3
+ROLE_ANDROID = 4
 ROLE_NONE = ROLE_SWARM
 
 MISSION_NONE = 0
+--Human Missions
 MISSION_SLEEP = 1
 MISSION_EAT = 2
 MISSION_CLEAN = 3
 MISSION_BATHROOM = 4
+--Alien Missions
 MISSION_KILL = 5
+--Android Missions
+MISSION_CONTAIN = 6 
 
 WIN_NONE = 1
 WIN_HUMAN = 2
@@ -100,12 +106,13 @@ NEED_ENTS[MISSION_CLEAN] = {"need_wash","need_shower"}
 NEED_ENTS[MISSION_BATHROOM] = {"need_piss","need_toilet"}
 
 /*-----------------------------
-COSNTANTS
+CONSTANTS
 ------------------------------*/
 BROOD_SPEED = 330
 BROOD_SPRINT = 390
 SWARM_SPEED = 250
 HUMAN_SPEED = 270
+ANDROID_SPEED = 225
 
 TTC_MISSION = 8
 --FIRST_SPAWN = true
@@ -118,26 +125,20 @@ aka humanss
 ---------------------------------------------------*/
 Models = {}
 Models.Male = {
--- "models/player/group01/male_01.mdl",
--- "models/player/group01/male_02.mdl",
--- "models/player/group01/male_03.mdl",
--- "models/player/group01/male_04.mdl",
--- "models/player/group01/male_05.mdl",
--- "models/player/group01/male_06.mdl",
--- "models/player/group01/male_07.mdl",
--- "models/player/group01/male_08.mdl",
--- "models/player/group01/male_09.mdl",
--- "models/player/monk.mdl",
--- "models/player/odessa.mdl",
--- "models/player/Kleiner.mdl",
--- "models/player/breen.mdl",
--- "models/player/Barney.mdl",
--- "models/player/Hostage/hostage_01.mdl",
--- "models/player/Hostage/hostage_02.mdl",
--- "models/player/Hostage/hostage_03.mdl",
--- "models/player/Hostage/hostage_04.mdl",
-"models/player/combine_soldier_prisonguard.mdl",
-"models/player/combine_soldier.mdl",
+"models/player/group01/male_01.mdl",
+"models/player/group01/male_02.mdl",
+"models/player/group01/male_03.mdl",
+"models/player/group01/male_04.mdl",
+"models/player/group01/male_05.mdl",
+"models/player/group01/male_06.mdl",
+"models/player/group01/male_07.mdl",
+"models/player/group01/male_08.mdl",
+"models/player/group01/male_09.mdl",
+"models/player/monk.mdl",
+"models/player/odessa.mdl",
+"models/player/Kleiner.mdl",
+"models/player/breen.mdl",
+"models/player/Barney.mdl",
 "models/player/police.mdl",
 "models/player/marine/marine.mdl",
 "models/ez2models/humans/group05b/male_01.mdl",
@@ -149,21 +150,29 @@ Models.Male = {
 "models/ez2models/humans/group05b/male_09.mdl",
 "models/player/marine/marine.mdl",
 "models/bloo_ltcom/citizens/male_09.mdl",
-"models/player/deadspace2023/dsrisaaclv3.mdl",
 "models/ez2models/radioguy.mdl",
+"models/player/deadspace2023/dsrisaaclv3.mdl",
 }
 
 
 Models.Female = {
--- "models/player/group01/female_01.mdl",
--- "models/player/group01/female_02.mdl",
--- "models/player/group01/female_03.mdl",
--- "models/player/group01/female_04.mdl",
--- "models/player/group01/female_06.mdl",
+"models/player/group01/female_01.mdl",
+"models/player/group01/female_02.mdl",
+"models/player/group01/female_03.mdl",
+"models/player/group01/female_04.mdl",
+"models/player/group01/female_06.mdl",
 "models/player/alyx.mdl",
 "models/player/mossman.mdl",
 "models/player/police_fem.mdl",
 "models/ez2models/mossman_young.mdl",
+}
+
+
+Models.Android = {
+"models/player/soldier_stripped.mdl",
+"models/ez2models/clone_cop.mdl",
+"models/ez2models/bad_cop.mdl",
+"models/player/combine_super_soldier.mdl",
 }
 
 
@@ -179,6 +188,5 @@ local function LoadModels(tab)
 end
 LoadModels(Models.Male)
 LoadModels(Models.Female)
+LoadModels(Models.Android)
 
-
-//I removed my little monologue here because it was pretty dumb

@@ -91,8 +91,38 @@ Tuants.Male = {
 "vo/npc/male01/vanswer11.wav",
 "vo/npc/male01/vanswer12.wav",
 "vo/npc/male01/vanswer13.wav",
-"vo/npc/male01/vanswer14.wav"
+"vo/npc/male01/vanswer14.wav",
 }
+-- Tuants.Android = {
+-- "npc/combine_soldier/vo/teamdeployedandscanning.wav",
+-- "npc/combine_soldier/vo/weareinaninfestationzone.wav",
+-- "npc/combine_soldier/vo/wehavefreeparasites.wav",
+-- "npc/combine_soldier/vo/wehavenontaggedviromes.wav",
+-- "npc/combine_soldier/vo/stayalertreportsightlines.wav",
+-- "npc/combine_soldier/vo/stabilizationteamhassector.wav",
+-- "npc/combine_soldier/vo/skyshieldreportslostcontact.wav",
+-- "npc/combine_soldier/vo/sectorissecurenovison.wav",
+-- "npc/combine_soldier/vo/prison_soldier_activatecentral.wav",
+-- "npc/combine_soldier/vo/prison_soldier_boomersinbound.wav",
+-- "npc/combine_soldier/vo/prison_soldier_bunker1.wav",
+-- "npc/combine_soldier/vo/prison_soldier_bunker2.wav",
+-- "npc/combine_soldier/vo/prison_soldier_bunker3.wav",
+-- "npc/combine_soldier/vo/prison_soldier_containD8.wav",
+-- "npc/combine_soldier/vo/prison_soldier_fallback_b4.wav",
+-- "npc/combine_soldier/vo/prison_soldier_freeman_antlions.wav",
+-- "npc/combine_soldier/vo/prison_soldier_fullbioticoverrun.wav",
+-- "npc/combine_soldier/vo/prison_soldier_leader9dead.wav",
+-- "npc/combine_soldier/vo/prison_soldier_negativecontainment.wav",
+-- "npc/combine_soldier/vo/prison_soldier_prosecuteD7.wav",
+-- "npc/combine_soldier/vo/prison_soldier_sundown3dead.wav",
+-- "npc/combine_soldier/vo/prison_soldier_tohighpoints.wav",
+-- "npc/combine_soldier/vo/prison_soldier_visceratorsA5.wav",
+-- "npc/combine_soldier/vo/swarmoutbreakinsector.wav",
+-- "npc/combine_soldier/vo/reportallpositionsclear.wav",
+-- "npc/combine_soldier/vo/isfieldpromoted.wav",
+-- "npc/combine_soldier/vo/isfinalteamunitbackup.wav",
+-- "npc/combine_soldier/vo/callcontactparasitics.wav",
+-- }
 
 /*------------------------------------------------
 VOICE RESPONSES
@@ -100,6 +130,7 @@ VOICE RESPONSES
 Response = {}
 Response.Male = {}
 Response.Female = {}
+Response.Android = {}
 Response.Male.Yes = {
 "vo/npc/male01/fantastic01.wav",
 "vo/npc/male01/yeah02.wav",
@@ -196,6 +227,19 @@ Response.Female.Yes = {
 "vo/npc/female01/answer38.wav",
 "vo/npc/female01/answer39.wav",
 "vo/npc/female01/answer40.wav"
+}
+
+Response.Android.Yes = {
+"npc/combine_soldier/vo/cleaned.wav",
+"npc/combine_soldier/vo/affirmative.wav",
+"npc/combine_soldier/vo/affirmative2.wav",
+"npc/combine_soldier/vo/affirmativewegothimnow.wav",
+"npc/combine_soldier/vo/copy.wav",
+"npc/combine_soldier/vo/copythat.wav",
+"npc/combine_soldier/vo/engaging.wav",
+"npc/combine_soldier/vo/contact.wav",
+"npc/combine_soldier/vo/contactconfim.wav",
+"npc/combine_soldier/vo/target.wav"
 }
 
 
@@ -437,6 +481,87 @@ for k,v in pairs(dfale) do
     sound =             v
    })
    table.insert(Sounds.Female.Death,Sound("female_death."..k))
+end
+
+
+// =======================================================================
+// ANDROID PAIN
+// =======================================================================
+
+Sounds.Android = {}
+Sounds.Android.Pain = {
+}
+
+local cpain = {
+"npc/combine_soldier/pain1.wav",
+"npc/combine_soldier/pain2.wav",
+"npc/combine_soldier/pain3.wav",
+"npc/combine_soldier/die1.wav",
+"npc/combine_soldier/die2.wav",
+"npc/combine_soldier/die3.wav"
+}
+
+for k,v in pairs(cpain) do
+    sound.Add({
+    name =          "android_pain"..k,
+    channel =       CHAN_USER_BASE+10,
+    volume =        0.7,
+    sound =             v
+    })
+    table.insert(Sounds.Android.Pain,Sound("android_pain"..k))
+end
+
+// =======================================================================
+// ANDROID KILL ALIEN
+// =======================================================================
+
+Sounds.Android.KillAlien = {
+}
+
+local ckalien = {
+    "npc/combine_soldier/vo/cleaned.wav",
+    "npc/combine_soldier/vo/affirmative.wav",
+    "npc/combine_soldier/vo/affirmative2.wav",
+    "npc/combine_soldier/vo/affirmativewegothimnow.wav",
+    "npc/combine_soldier/vo/copy.wav",
+    "npc/combine_soldier/vo/copythat.wav",
+    "npc/combine_soldier/vo/engaging.wav",
+    "npc/combine_soldier/vo/contact.wav",
+    "npc/combine_soldier/vo/contactconfim.wav",
+    "npc/combine_soldier/vo/target.wav"
+}
+
+for k,v in pairs(ckalien) do
+    sound.Add({
+    name =          "android_kill_alien."..k,
+    channel =       CHAN_USER_BASE+2,
+    volume =        0.7,
+    sound =             v
+    })
+    table.insert(Sounds.Android.KillAlien,Sound("android_kill_alien."..k))
+end
+
+
+// =======================================================================
+// ANDROID DEATH
+// =======================================================================
+
+Sounds.Android.Death = {
+}
+
+local dandroid = {
+"ambient/energy/weld1.wav",
+"ambient/energy/weld2.wav"
+}
+
+for k,v in pairs(dandroid) do
+   sound.Add({
+    name =          "android_death."..k,
+    channel =       CHAN_USER_BASE+1,
+    volume =        1.0,
+    sound =             v
+   })
+   table.insert(Sounds.Android.Death,Sound("android_death."..k))
 end
 
 

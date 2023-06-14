@@ -119,7 +119,9 @@ end
 function GetRoleName(role)
   if (role == 1) then return "HUMAN"
   elseif (role == 2) then return "BROOD ALIEN"
-  elseif (role == 3) then return "SWARM ALIEN" end
+  elseif (role == 3) then return "SWARM ALIEN"
+  elseif (role == 4) then return "ANDROID" 
+  end
 
   return ""
 end

@@ -15,6 +15,7 @@ AccessorFunc(plymeta, "role", "Role", FORCE_NUMBER)
 function plymeta:GetBrood() return self:GetRole() == ROLE_BROOD end
 function plymeta:GetSwarm() return self:GetRole() == ROLE_SWARM end
 function plymeta:GetHuman() return self:GetRole() == ROLE_HUMAN end
+function plymeta:GetAndroid() return self:GetRole() == ROLE_ANDROID end
 function plymeta:GetAlien()
 	if (self:GetRole() == ROLE_SWARM || self:GetRole() == ROLE_BROOD || self:Team() == TEAM_SPEC) then
 		return true
@@ -27,6 +28,7 @@ plymeta.IsAlien = plymeta.GetAlien
 plymeta.IsBrood = plymeta.GetBrood
 plymeta.IsHuman = plymeta.GetHuman
 plymeta.IsSwarm = plymeta.GetSwarm
+plymeta.IsAndroid = plymeta.GetAndroid
 
 function plymeta:IsSpecial() return self:GetRole() != ROLE_HUMAN end
 
@@ -37,6 +39,7 @@ function plymeta:IsActiveSwarm() return self:IsActiveRole(ROLE_SWARM) end
 function plymeta:IsActiveSpecial() return self:IsSpecial() and (GetRoundState() == ROUND_ACTIVE) end
 function plymeta:IsActiveAlien() return self:IsActiveRole(ROLE_BROOD) or self:IsActiveRole(ROLE_SWARM) end
 function plymeta:IsActiveHuman() return self:IsActiveRole(ROLE_HUMAN) end
+function plymeta:IsActiveAndroid() return self:IsActiveRole(ROLE_ANDROID) end
 
 function plymeta:SetWeight(number)
    self.Weight = number

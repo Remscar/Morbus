@@ -75,6 +75,18 @@ function SelectRoles()
    	end
    end
 
+   local npick = math.random(1,#choices)
+   local nply = choices[npick]
+   -- Rare Android Selection
+   -- local cs = math.random(0,5)
+   -- if cs >= 3 then
+      if !nply:IsBrood() then
+         if #player.GetAll() >= 5 then
+            print(nply)
+            nply:Androidify()
+         end
+      end
+   -- end
 
    LAST_ALIEN = table.Copy(la)
 

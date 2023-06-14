@@ -131,6 +131,7 @@ function GM:Initialize()
 	SetGlobalInt("morbus_rounds_left", GetConVar("morbus_rounds"):GetInt())
 	SetGlobalInt("alien_wins", 0)
 	SetGlobalInt("human_wins", 0)
+	SetGlobalInt("total_androids", 0)
 	SetGlobalFloat("morbus_round_time", GetConVar("morbus_roundtime"):GetInt())
 
 	SetGlobalBool("morbus_rpnames_optional", GetConVar("morbus_rpnames_optional"):GetBool())

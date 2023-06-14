@@ -132,6 +132,7 @@ end
 
 function plymeta:CalcWeight()
    if self:IsSwarm() then return end
+   if self:IsAndroid() then return end
    local Weight = 0
    for k,v in pairs(self:GetWeapons()) do
       Weight = Weight + (v.KGWeight*2.3)
@@ -176,16 +177,20 @@ function plymeta:DeathSound() -- TO DO
       sound.Play(table.Random(Sounds.Swarm.Death), self:GetPos(), 300, 100)
    elseif self.Gender == GENDER_FEMALE then
       sound.Play(table.Random(Sounds.Female.Death), self:GetPos(), 300, 100)
-   else
+   elseif self.Gender == GENDER_MALE then
       sound.Play(table.Random(Sounds.Male.Death), self:GetPos(), 300, 100)
+   elseif self.Gender == GENDER_ANDROID then
+      sound.Play(table.Random(Sounds.Android.Death), self:GetPos(), 300, 100)
    end
 end
 
 function plymeta:KilledAlien()
    if self.Gender == GENDER_FEMALE then
       self:EmitSound(table.Random(Sounds.Female.KillAlien),100,100)
-   else
+   elseif self.Gender == GENDER_MALE then
       self:EmitSound(table.Random(Sounds.Male.KillAlien),100,100)
+   elseif self.Gender == GENDER_ANDROID then
+      self:EmitSound(table.Random(Sounds.Android.KillAlien),100,100)
    end
 end
 
@@ -259,6 +264,10 @@ function plymeta:SelectName()
 
    name = name.." "..table.Random(NAMES.LAST)
 
+   if gen == GENDER_ANDROID then
+      name = table.Random(NAMES.ANDROIDFIRST) .. " " .. table.Random(NAMES.ANDROIDLAST)
+   end
+
    if self.ForceName then
       name = self.ForceName // Donator
    end
@@ -269,14 +278,20 @@ end
 function plymeta:SelectModel()
    local gender = self.Gender
 
+   print(self.Gender)
+
    if (self:IsSwarm()) then return Models.Swarm end
 
    if (gender == GENDER_MALE) then
       self:SetHardGender( 1 )
       return table.Random(Models.Male)
-   else
+   elseif (gender == GENDER_FEMALE) then
       self:SetHardGender( 2 )
       return table.Random(Models.Female)
+   elseif (gender == GENDER_ANDROID) then
+      self:SetHardGender( 3 )
+      print("Gender is GENDER_ANDROID")
+      return table.Random(Models.Android)
    end
 
 end
@@ -288,7 +303,40 @@ function plymeta:SetupPlayer()
 end
 
 
+function plymeta:Androidify()
+   SetGlobalInt("total_androids", GetGlobalInt("total_androids") + 1 )
 
+   self.Gender = 3
+   self:SetModel( self:SelectModel() )
+   self:SetNWString("fakename",self:SelectName())
+
+   self:SetTeam(TEAM_GAME)
+
+   GAMEMODE:SetPlayerSpeed(self,ANDROID_SPEED,ANDROID_SPEED) 
+   self:SetJumpPower(300)
+   self:SetHealth(100)
+
+   self:SetRole(ROLE_ANDROID)
+   self.Mission = MISSION_CONTAIN
+   self:SendMission()
+
+   self:SetSkin(math.random(1,3))
+
+   SendPlayerRole(self:GetRole(), self)
+   RevealAllAndroids()
+
+   GameMsg(self:GetFName() .. " is now an Android.")
+
+   timer.Simple(3,function()
+      for k,v in pairs(player.GetAll()) do
+         if v:IsAlien() then
+            v.Evo_Points = v.Evo_Points + 3
+            v:SendEvoPoints()
+            v:PrintMessage(HUD_PRINTTALK,"You got +3 extra Evolution points to help battle against the Android!")
+         end
+      end
+   end)
+end
 
 
 /*-------------------------------------------

@@ -306,6 +306,7 @@ function GM:Tick()
       ply = plys[i]
       tm = ply:Team()
       if tm == TEAM_GAME and ply:Alive() then
+         if ply:IsAndroid() then return end
          -- Drowning
          if ply:WaterLevel() == 3 then
             if ply:IsOnFire() then
@@ -405,6 +406,8 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
          end
 
       elseif ply:IsSwarm() then
+         dmg:SetDamage(1)
+      elseif ply:IsAndroid() then
          dmg:SetDamage(1)
       else
          dmg:SetDamage(damage * 0.8)

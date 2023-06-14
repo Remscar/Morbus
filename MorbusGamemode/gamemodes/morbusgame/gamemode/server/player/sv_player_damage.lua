@@ -34,14 +34,23 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 
    if att:IsPlayer() then
 
+      local rd = 0
+      rd = math.random(1,3)
+      if rd == 3 then
+         if ent:IsAndroid() then
+            ParticleEffect("l_delta_imp_b",ent:GetPos()+Vector(0,0,32),Angle(0,0,0),nil)
+            ent:EmitSound("ambient/energy/weld".. math.random(1,2) ..".wav",100,150)
+         end
+      end
+
       // Infection timer
-      if att:IsSwarm() && !ent:IsAlien() then
+      if att:IsSwarm() && !ent:IsAlien() && !ent:IsAndroid() then
          ent.BroodInfect = CurTime() + 5
          ent.BroodHit = att
       end
 
-      // Brood Alien Need-Reduction poison
-      if att:IsBrood() && att:GetNWBool("alienform",false) && (infl:GetClass() == "weapon_mor_brood") then
+      // Brood Alien Need-Reduction poison, on humans only (NOT Androids)
+      if att:IsBrood() && att:GetNWBool("alienform",false) && (infl:GetClass() == "weapon_mor_brood") && !ent:IsAndroid() then
          ent.BroodInfect = CurTime() + 5
          ent.BroodHit = att
          if att.Upgrades[UPGRADE.EXHAUST] then
@@ -126,8 +135,12 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 
       if gender == GENDER_MALE then
          ent:EmitSound(table.Random(Sounds.Male.Pain),200,100)
-      else
+      end
+      if gender == GENDER_FEMALE && swarm == false then
          ent:EmitSound(table.Random(Sounds.Female.Pain),200,100)
+      end
+      if gender == GENDER_ANDROID && swarm == false then
+         ent:EmitSound(table.Random(Sounds.Android.Pain),200,100)      
       end
 
       util.StartBleeding(ent, dmginfo:GetDamage(), 10)
@@ -184,6 +197,10 @@ function GM:ScalePlayerDamage(ply, hitgroup, dmginfo, real)
 
    if ply:IsSwarm() == true then
       dmginfo:ScaleDamage(1+mult)
+   end
+
+   if ply:IsAndroid() == true then
+      dmginfo:ScaleDamage(0.5)
    end
 
    if atkr:IsPlayer() then

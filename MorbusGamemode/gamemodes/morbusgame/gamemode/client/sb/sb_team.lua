@@ -84,6 +84,16 @@ function PANEL:Paint()
    surface.SetTextColor(255,115,115,255)
    surface.DrawText("[Alien Wins]: " .. GetGlobalInt("alien_wins"))
 
+   -- Shadow Text
+   surface.SetTextPos(451, 11 - h/2)
+   surface.SetTextColor(0,0,0,255)
+   surface.DrawText("[Androids]: " .. GetGlobalInt("total_androids"))
+
+   -- Text
+   surface.SetTextPos(450, 10 - h/2)
+   surface.SetTextColor(155,215,255,255)
+   surface.DrawText("[Androids]: " .. GetGlobalInt("total_androids"))
+
    end
 
 
